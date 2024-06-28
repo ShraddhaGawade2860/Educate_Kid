@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2A5080;
+  color: #fff;
+  margin: 0;
+  padding: 0 20px;
+  height: 80px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  height: 50px;
+  margin-right: 1rem;
+}
+
+.navbar-brand h1 {
+  margin: 0;
+}
+
+.menu-icon {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-icon-bar {
+  width: 25px;
+  height: 3px;
+  background-color: #000;
+  margin: 4px 0;
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu-icon.open .menu-icon-bar:nth-child(1) {
+  transform: translateY(9px) rotate(-45deg);
+}
+
+.menu-icon.open .menu-icon-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-icon.open .menu-icon-bar:nth-child(3) {
+  transform: translateY(-9px) rotate(45deg);
+}
+
+.navbar-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links.show {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.navbar-links li {
+  margin-right: 1rem;
+}
+
+.navbar-links a {
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Rubik', sans-serif;
+  font-size: 16px; /* Adjust as needed */
+  font-weight: 400; /* Adjust as needed */
+}
+
+.navbar-links a:hover {
+  color: #ccc;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: row;
+    height: auto;
+  }
+
+  .navbar-brand {
+    order: 1;
+  }
+
+  .menu-icon {
+    display: block;
+    order: 2;
+  }
+
+  .navbar-links {
+    display: none;
+    order: 3;
+  }
+
+  .navbar-links.show {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .navbar-links.show li {
+    margin: 10px 0;
+  }
+}

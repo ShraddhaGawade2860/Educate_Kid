@@ -1,0 +1,286 @@
+/* adminhome.css */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.admin-dashboard {
+  display: flex;
+}
+
+.menu-container {
+  width: 60px;
+  height: 100vh;
+  background-color: #2A5080;
+  color: #fff;
+  padding: 20px 10px;
+  box-sizing: border-box;
+  position: fixed;
+  transition: width 0.3s, border-radius 0.3s;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.menu-container.expanded {
+  width: 200px;
+  border-radius: 0;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.app-logo {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.app-name {
+  font-size: 1.5rem;
+}
+
+.menu-options {
+  margin-top: 20px;
+}
+
+.menu-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu-item {
+  padding: 20px 0;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu-item:hover {
+  background-color: #555;
+}
+
+.menu-item.logout {
+  color: white;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  margin-left: 60px;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.menu-expanded {
+  margin-left: 200px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icons {
+  display: flex;
+  gap: 10px;
+}
+
+.icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: #007bff;
+}
+
+.welcome {
+  font-size: 24px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.stats-boxes1 {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.boxi {
+  background-color: #f1f1f1;
+  padding: 5px;
+  border-radius: 8px;
+  flex: 1;
+  text-align: left;
+  height: 80px;
+}
+
+.boxi h3 {
+  margin: 0;
+  margin-bottom: 5px;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 17px;
+}
+
+.boxi p {
+  margin: 0;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.content-row {
+  display: flex;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.graph {
+  width: 45%;
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  margin-top: 15px;
+}
+
+.graph-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+}
+
+.pending-students {
+  flex: 1;
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  margin-top: 15px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.student-list-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.student-list-header p {
+  flex: 1;
+  margin: 0;
+  font-weight: bold;
+}
+
+.student-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.student-box {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.student-box p {
+  flex: 1;
+  margin: 0;
+}
+
+.student-box button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.student-box button:hover {
+  background-color: #0056b3;
+}
+
+.recent-institute {
+  margin-top: 20px;
+}
+
+.recent-institute h4{
+  margin-top: 40px;
+}
+
+.institute-container {
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+}
+
+.institute-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  width: 450px;
+  height: 150px;
+}
+
+.institute {
+  flex: 1;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.institute p {
+  margin: 20px 0;
+}
+
+.view-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.view-button:hover {
+  background-color: #0056b3;
+}
