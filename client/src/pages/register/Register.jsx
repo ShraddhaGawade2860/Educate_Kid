@@ -162,8 +162,6 @@ const Signup = () => {
             </div>
         </div>
     );
-
-    //waste
 };
 
 export default Signup;
