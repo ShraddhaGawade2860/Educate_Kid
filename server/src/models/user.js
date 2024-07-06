@@ -3,13 +3,14 @@ const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    email: { type: String, unique: true, sparse: true },
     contactnumber: { type: String, required: true },
     password: { type: String, required: true },
-    role: { type: Number, required: true }, // 1 for institute
-    state: { type: String },
-    institutename: { type: String },
-    verified: { type: Boolean, default: false } // Verification status
+    role: { type: Number, required: true }, // 0 for user, 1 for institute, 2 for admin
+    state: { type: String }, // Only required for institutes and admin
+    institutecode: { type: String }, // Only required for institutes
+    verified: { type: Boolean, default: false }, // Verification status
+    rejected: { type: Boolean, default: false } // Rejection status
 });
 
 UserSchema.pre('save', async function(next) {

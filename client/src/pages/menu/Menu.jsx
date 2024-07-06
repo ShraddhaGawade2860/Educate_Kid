@@ -1,22 +1,52 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import './menu.css';
 import logo from "../../pages/image/logo.png";
 
 const Menu = ({ isExpanded, toggleMenu }) => {
   const navigate = useNavigate();
+  const { state } = useParams(); // Get the state from URL params
+  const location = useLocation();
 
   const handleLogout = () => {
-    // Perform any necessary logout logic here (e.g., clearing authentication tokens)
     navigate('/login');
   };
 
   const handleAddScholarship = () => {
-    navigate('/addscholarship');
+    navigate(`/addscholarship/${state}`);
   };
 
   const handleInstituteVerification = () => {
     navigate('/instituteverification');
+  };
+
+  const handleInstituteList = () => {
+    navigate('/institutelist');
+  };
+
+  const isAdminPage = () => {
+    const adminPaths = [
+      '/adminhome',
+      '/addscholarship',
+      '/scholarshiplist',
+      '/studenthistory',
+      '/studentlist',
+      '/instituteverification',
+      '/institutelist'
+    ];
+    return adminPaths.some(path => location.pathname.startsWith(path));
+  };
+
+  const isInstitutePage = () => {
+    const institutePaths = [
+      '/institutehome',
+      '/editprofile',
+      '/terms',
+      '/studentrecord',
+      '/studentverification',
+      '/privacy'
+    ];
+    return institutePaths.some(path => location.pathname.startsWith(path));
   };
 
   return (
@@ -27,13 +57,27 @@ const Menu = ({ isExpanded, toggleMenu }) => {
       </div>
       <div className="menu-options">
         <ul className="menu-list">
-          <li className="menu-item" onClick={handleAddScholarship}>Add Scholarship</li>
-          <li className="menu-item">Scholarship List</li>
-          <li className="menu-item">Student History</li>
-          <li className="menu-item">Student List</li>
-          <li className="menu-item" onClick={handleInstituteVerification}>Institute Verification</li>
-          <li className="menu-item">Institute List</li>
-          <li className="menu-item logout" onClick={handleLogout}>Logout</li>
+          {isAdminPage() && (
+            <>
+              <li className="menu-item" onClick={handleAddScholarship}>Add Scholarship</li>
+              <li className="menu-item" onClick={() => navigate(`/scholarshiplist/${state}`)}>Scholarship List</li>
+              <li className="menu-item" onClick={() => navigate(`/studenthistory/${state}`)}>Student History</li>
+              <li className="menu-item" onClick={() => navigate(`/studentlist/${state}`)}>Student List</li>
+              <li className="menu-item" onClick={handleInstituteVerification}>Institute Verification</li>
+              <li className="menu-item" onClick={handleInstituteList}>Institute List</li>
+              <li className="menu-item logout" onClick={handleLogout}>Logout</li>
+            </>
+          )}
+          {isInstitutePage() && (
+            <>
+              <li className="menu-item" onClick={() => navigate('/studentrecord')}>Student Record</li>
+              <li className="menu-item" onClick={() => navigate('/studentverification')}>Student Verification</li>
+              <li className="menu-item" onClick={() => navigate('/editprofile')}>Edit Profile</li>
+              <li className="menu-item" onClick={() => navigate('/terms')}>Terms and Conditions</li>
+              <li className="menu-item" onClick={() => navigate('/privacy')}>Privacy Policy</li>
+              <li className="menu-item logout" onClick={handleLogout}>Logout</li>
+            </>
+          )}
         </ul>
       </div>
     </div>

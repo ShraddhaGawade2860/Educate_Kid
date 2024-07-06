@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 import Menu from '../menu/Menu';
 import './addscholarship.css';
+import { AuthContext } from '../context/Authcontext'; // Assuming you have an AuthContext
 
 const AddScholarship = () => {
+  const { state } = useParams(); // Get state from URL
+  const { user } = useContext(AuthContext); // Get user from context
   const [menuOpen, setMenuOpen] = useState(false);
   const [scholarship, setScholarship] = useState({
     name: '',
@@ -15,7 +18,7 @@ const AddScholarship = () => {
     applyProcess: '',
     class: '',
     gender: '',
-    state: ''
+    state: state || user?.state || '' // Set state from URL or user context, default to empty string if undefined
   });
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
@@ -25,7 +28,7 @@ const AddScholarship = () => {
   };
 
   const goToHome = () => {
-    navigate('/adminhome');
+    navigate(`/adminhome/${state || user?.state || ''}`);
   };
 
   const handleChange = (e) => {
@@ -46,7 +49,7 @@ const AddScholarship = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage(data); // Assuming backend sends 'Scholarship added successfully' as response
+        setMessage(data.message); // Assuming backend sends a 'message' field in the response
         setScholarship({
           name: '',
           description: '',
@@ -56,10 +59,10 @@ const AddScholarship = () => {
           applyProcess: '',
           class: '',
           gender: '',
-          state: ''
+          state: state || user?.state || ''
         });
       } else {
-        setMessage(data); // Assuming backend sends 'Failed to add scholarship' as response
+        setMessage(data.message);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -92,7 +95,7 @@ const AddScholarship = () => {
               </div>
               <div className="input-group">
                 <h3>State</h3>
-                <input type="text" name="state" value={scholarship.state} onChange={handleChange} />
+                <input type="text" name="state" value={scholarship.state} onChange={handleChange} readOnly />
               </div>
             </div>
 
