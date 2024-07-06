@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './adminhome.css';
 import Menu from '../menu/Menu';
 import { FaHome } from 'react-icons/fa';
+import Chart from 'chart.js/auto';
+import { CategoryScale } from 'chart.js';
+
+Chart.register(CategoryScale);
 
 const AdminHome = () => {
+  const { state } = useParams(); // Access state parameter from URL
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -14,9 +19,8 @@ const AdminHome = () => {
   };
 
   const goToHome = () => {
-    navigate('/adminhome');
+    navigate(`/adminhome/${state}`); // Ensure state parameter is passed correctly
   };
-
 
   const chartData = {
     labels: ['Scholarship A', 'Scholarship B', 'Scholarship C', 'Scholarship D', 'Scholarship E'],
@@ -64,7 +68,7 @@ const AdminHome = () => {
       <div className={`main-content ${menuOpen ? 'menu-expanded' : ''}`}>
         <div className="top-bar">
           <div className="welcome">
-            Welcome to the Admin Dashboard
+            Welcome to {state} Admin Dashboard
           </div>
           <div className="icons">
             <FaHome className="icon" onClick={goToHome} />

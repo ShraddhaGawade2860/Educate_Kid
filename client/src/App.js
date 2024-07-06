@@ -16,7 +16,8 @@ import Menu from './pages/menu/Menu';
 import AddScholarship from './pages/addscholarship/Addscholarship';
 import Scholarshiphistory from './pages/scholarshiphistory/Scholarshiphistory'; // Ensure correct import path
 import Instituteverification from './pages/instituteverification/Instituteverification';
-// Wrapper component for routes with Header
+import InstituteList from './pages/institutelist/Institutelist'; // Import InstituteList component
+
 const HeaderLayout = ({ children }) => (
   <>
     <Header />
@@ -36,15 +37,15 @@ function App() {
         <Route path="/register" element={<HeaderLayout><Register /></HeaderLayout>} />
         <Route path="/apply" element={<HeaderLayout><Apply /></HeaderLayout>} />
         <Route path="/view" element={<HeaderLayout><View /></HeaderLayout>} />
-        <Route path="/scholarship-history" element={<HeaderLayout><Scholarshiphistory /></HeaderLayout>} /> {/* Ensure correct path */}
+        <Route path="/scholarship-history" element={<HeaderLayout><Scholarshiphistory /></HeaderLayout>} />
         <Route path="/instituteHome" element={<><Menu /><InstituteHome /></>} />
-        <Route path="/adminHome" element={<><Menu /><AdminHome /></>} />
-        <Route path="/addscholarship" element={<><Menu /><AddScholarship /></>} /> {/* Add route for AddScholarship */}
-        <Route path="/instituteverification" element={<><Menu /><Instituteverification /></>} /> 
+        <Route path="/adminhome/:state" element={<><Menu /><AdminHome /></>} />
+        <Route path="/addscholarship/:state" element={<><Menu /><AddScholarship /></>} />
+        <Route path="/instituteverification" element={<><Menu /><Instituteverification /></>} />
+        <Route path="/institutelist" element={<><Menu /><InstituteList /></>} /> {/* Add route for InstituteList */}
       </Routes>
     </AuthProvider>
   );
 }
 
 export default App;
- 

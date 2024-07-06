@@ -3,25 +3,28 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Menu from '../menu/Menu';
 import { FaHome } from 'react-icons/fa';
-import './instituteverification.module.css'; // Reuse the same styles
+import './instituteverification.module.css';
 
 const InstituteVerification = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-    const [institutes, setInstitutes] = useState([]);
+    const [verificationRequests, setVerificationRequests] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchInstitutes = async () => {
+        const state = localStorage.getItem('state'); // Fetch state from localStorage
+
+        const fetchVerificationRequests = async () => {
             try {
-                const url = 'http://localhost:5000/api/users/admin/institutes';
-                const response = await axios.get(url);
-                setInstitutes(response.data);
+                const response = await axios.get('http://localhost:5000/api/admin/verification/requests', {
+                    params: { state: state }
+                });
+                setVerificationRequests(response.data);
             } catch (error) {
-                console.error('Error fetching institutes:', error);
+                console.error('Error fetching verification requests:', error);
             }
         };
 
-        fetchInstitutes();
+        fetchVerificationRequests();
     }, []);
 
     const toggleMenu = () => {
@@ -29,19 +32,29 @@ const InstituteVerification = () => {
     };
 
     const goToHome = () => {
-        navigate('/adminhome');
+        const state = localStorage.getItem('state'); // Fetch state from localStorage
+        navigate(`/adminhome/${state}`);
     };
 
     const approveInstitute = async (id) => {
         try {
-            const url = `http://localhost:5000/api/users/admin/approve/${id}`;
-            await axios.put(url);
+            await axios.put(`http://localhost:5000/api/admin/approve/${id}`);
             alert('Institute approved successfully!');
-            // Refresh institutes list after approval
-            const updatedInstitutes = institutes.filter(inst => inst._id !== id);
-            setInstitutes(updatedInstitutes);
+            // Refresh verification requests list after approval
+            setVerificationRequests((prevRequests) => prevRequests.filter(req => req._id !== id));
         } catch (error) {
             console.error('Error approving institute:', error);
+        }
+    };
+
+    const rejectInstitute = async (id) => {
+        try {
+            await axios.put(`http://localhost:5000/api/admin/reject/${id}`);
+            alert('Institute rejected successfully!');
+            // Refresh verification requests list after rejection
+            setVerificationRequests((prevRequests) => prevRequests.filter(req => req._id !== id));
+        } catch (error) {
+            console.error('Error rejecting institute:', error);
         }
     };
 
@@ -57,18 +70,19 @@ const InstituteVerification = () => {
                         <FaHome className="icon" onClick={goToHome} />
                     </div>
                 </div>
-                <div className="institutes-list">
-                    {institutes.length === 0 ? (
-                        <p>No pending institute requests.</p>
+                <div className="verification-requests-list">
+                    {verificationRequests.length === 0 ? (
+                        <p>No pending verification requests.</p>
                     ) : (
-                        institutes.map((inst) => (
-                            <div key={inst._id} className="institute-box">
-                                <p><strong>Name:</strong> {inst.name}</p>
-                                <p><strong>Email:</strong> {inst.email}</p>
-                                <p><strong>Contact Number:</strong> {inst.contactnumber}</p>
-                                <p><strong>State:</strong> {inst.state}</p>
-                                <p><strong>Institute Name:</strong> {inst.institutename}</p>
-                                <button onClick={() => approveInstitute(inst._id)}>Approve</button>
+                        verificationRequests.map((req) => (
+                            <div key={req._id} className="verification-request-box">
+                                <p><strong>Name:</strong> {req.name}</p>
+                                <p><strong>Email:</strong> {req.email}</p>
+                                <p><strong>Contact Number:</strong> {req.contactnumber}</p>
+                                <p><strong>State:</strong> {req.state}</p>
+                                <p><strong>Institute Code:</strong> {req.institutecode}</p>
+                                <button onClick={() => approveInstitute(req._id)}>Approve</button>
+                                <button onClick={() => rejectInstitute(req._id)}>Reject</button>
                             </div>
                         ))
                     )}

@@ -10,11 +10,11 @@ const Signup = () => {
         contactnumber: '',
         password: '',
         confirmpassword: '',
-        state: '', // New field for institute
-        institutename: '', // New field for institute name
+        state: '',
+        institutecode: '',
     });
     const [error, setError] = useState('');
-    const [formType, setFormType] = useState('user'); // user or institute
+    const [formType, setFormType] = useState('user');
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -32,7 +32,8 @@ const Signup = () => {
             const url = 'http://localhost:5000/api/users/register';
             const data = {
                 ...formData,
-                role: formType === 'user' ? 0 : 1, // Set role based on form type
+                role: formType === 'user' ? 0 : 1,
+                verified: formType === 'user' ? true : false, // Automatically verify users but not institutes
             };
 
             const response = await axios.post(url, data);
@@ -45,7 +46,6 @@ const Signup = () => {
 
     const toggleFormType = (type) => {
         setFormType(type);
-        // Clear form data when toggling
         setFormData({
             name: '',
             email: '',
@@ -53,7 +53,7 @@ const Signup = () => {
             password: '',
             confirmpassword: '',
             state: '',
-            institutename: '', // Clear institute name when toggling
+            institutecode: '',
         });
         setError('');
     };
@@ -126,10 +126,10 @@ const Signup = () => {
                                 />
                                 <input
                                     type="text"
-                                    placeholder="Institute Name"
-                                    name="institutename"
+                                    placeholder="Institute Code"
+                                    name="institutecode"
                                     onChange={handleChange}
-                                    value={formData.institutename}
+                                    value={formData.institutecode}
                                     required
                                     className={styles.input}
                                 />

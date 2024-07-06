@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 import { AuthContext } from '../context/Authcontext';
 
 const Login = () => {
-    const [data, setData] = useState({ email: "", password: "" });
+    const [data, setData] = useState({ identifier: "", password: "" });
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const { login } = useContext(AuthContext);
@@ -21,7 +21,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!data.email || !data.password) {
+        if (!data.identifier || !data.password) {
             setError("Please fill out all fields.");
             return;
         } else {
@@ -34,10 +34,16 @@ const Login = () => {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ email: data.email, password: data.password })
+                    body: JSON.stringify({ identifier: data.identifier, password: data.password })
                 });
                 const result = await response.json();
                 if (response.ok) {
+                    if (result.role === 1 && !result.verified) {
+                        setError(result.rejected ? 
+                                 "Admin rejected your form, please register again with correct information." : 
+                                 "Your account is pending admin approval. Please wait for verification.");
+                        return;
+                    }
                     login(result);
                     toast.success("Login successful!");
                     setTimeout(() => {
@@ -46,7 +52,8 @@ const Login = () => {
                         } else if (result.role === 1) {
                             navigate('/institutehome');
                         } else if (result.role === 2) {
-                            navigate('/adminhome');
+                            localStorage.setItem('state', result.state);
+                            navigate(`/adminhome/${result.state}`); // Redirect to adminhome with state parameter
                         }
                     }, 2000);
                 } else {
@@ -66,11 +73,11 @@ const Login = () => {
                     <form className={styles.form_container} onSubmit={handleSubmit}>
                         <h1>Login</h1>
                         <input
-                            type="email1"
-                            placeholder="Email"
-                            name="email"
+                            type="text"
+                            placeholder="Email or State"
+                            name="identifier"
                             onChange={handleChange}
-                            value={data.email}
+                            value={data.identifier}
                             required
                             className={styles.input}
                         />

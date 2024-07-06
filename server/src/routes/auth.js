@@ -1,63 +1,68 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 
-// Register
 router.post('/register', async (req, res) => {
-    const { name, email, contactnumber, password, state, institutename } = req.body;
     try {
-        if (!name || !email || !contactnumber || !password) {
-            return res.status(400).json({ msg: 'All fields are required' });
-        }
+        const { name, email, contactnumber, password, role, state, institutecode, verified } = req.body;
 
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ msg: 'Email already in use' });
-        }
+        let user = await User.findOne({ email });
+        if (user) return res.status(400).json({ msg: "User already exists" });
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({
+        user = new User({
             name,
             email,
             contactnumber,
-            password: hashedPassword,
-            role: 1, // Role 1 for institute
+            password,
+            role,
             state,
-            institutename,
-            verified: false // New field for verification status
+            institutecode,
+            verified,
         });
+
         await user.save();
-        res.status(201).json({ msg: 'Institute registration request sent for verification' });
+        res.status(201).json({ msg: "User registered successfully" });
     } catch (error) {
-        res.status(400).json({ msg: error.message });
+        res.status(500).json({ error: error.message });
     }
 });
 
-// Admin - Get all institute requests
-router.get('/admin/institutes', async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
-        const institutes = await User.find({ role: 1, verified: false }).select('-password');
-        res.json(institutes);
-    } catch (error) {
-        res.status(500).json({ msg: 'Server error' });
-    }
-});
-
-// Admin - Approve institute request
-router.put('/admin/approve/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const user = await User.findById(id);
-        if (!user) {
-            return res.status(404).json({ msg: 'Institute not found' });
+        const { identifier, password } = req.body;
+        let user;
+        if (identifier.includes('@')) {
+            user = await User.findOne({ email: identifier });
+        } else {
+            user = await User.findOne({ state: identifier, role: 2 });
         }
-        user.verified = true;
-        await user.save();
-        res.json({ msg: 'Institute approved' });
+
+        if (!user) return res.status(400).json({ msg: "User does not exist" });
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
+
+        if (user.role === 1 && !user.verified) {
+            return res.status(400).json({ msg: user.rejected ? 
+                                         "Admin rejected your form, please register again with correct information." :
+                                         "Your account is pending admin approval. Please wait for verification." });
+        }
+
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+        res.status(200).json({
+            token,
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            contactnumber: user.contactnumber,
+            role: user.role,
+            verified: user.verified,
+            state: user.state, 
+        });
     } catch (error) {
-        res.status(500).json({ msg: 'Server error' });
+        res.status(500).json({ error: error.message });
     }
 });
 
