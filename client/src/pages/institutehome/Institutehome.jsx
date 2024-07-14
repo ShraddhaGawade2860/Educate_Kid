@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { useNavigate, useParams } from 'react-router-dom';
 import './institutehome.css';
@@ -13,6 +13,15 @@ const InstituteHome = () => {
   const { state } = useParams();
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const [instituteName, setInstituteName] = useState('');
+
+  useEffect(() => {
+    // Assuming user information is stored in local storage after login
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      setInstituteName(user.name);
+    }
+  }, []);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -57,7 +66,7 @@ const InstituteHome = () => {
       <div className={`main-content ${menuOpen ? 'menu-expanded' : ''}`}>
         <div className="top-bar">
           <div className="welcome">
-            Welcome to Institute Home Page
+            Welcome to {instituteName} Dashboard
           </div>
           <div className="icons">
             <FaHome className="icon" onClick={goToHome} />

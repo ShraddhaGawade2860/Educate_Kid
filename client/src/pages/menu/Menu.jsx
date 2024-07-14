@@ -44,7 +44,8 @@ const Menu = ({ isExpanded, toggleMenu }) => {
       '/terms',
       '/studentrecord',
       '/studentverification',
-      '/privacy'
+      '/privacy',
+       '/availablescholarship'
     ];
     return institutePaths.some(path => location.pathname.startsWith(path));
   };
@@ -72,6 +73,7 @@ const Menu = ({ isExpanded, toggleMenu }) => {
             <>
               <li className="menu-item" onClick={() => navigate('/studentrecord')}>Student Record</li>
               <li className="menu-item" onClick={() => navigate('/studentverification')}>Student Verification</li>
+              <li className="menu-item" onClick={() => navigate('/availablescholarship')}>Available Scholarship</li>
               <li className="menu-item" onClick={() => navigate('/editprofile')}>Edit Profile</li>
               <li className="menu-item" onClick={() => navigate('/terms')}>Terms and Conditions</li>
               <li className="menu-item" onClick={() => navigate('/privacy')}>Privacy Policy</li>

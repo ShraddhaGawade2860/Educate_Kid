@@ -73,6 +73,7 @@ const Home = () => {
                       <option value="class11">Class 11</option>
                       <option value="class12">Class 12</option>
                       <option value="class8">8</option>
+                      <option value="All class">All class</option>
                     </select>
                   </div>
                   <div className="dropdown">
@@ -82,6 +83,7 @@ const Home = () => {
                       <option value="male">male</option>
                       <option value="female">female</option>
                       <option value="other">other</option>
+                      <option value="all">all</option>
                     </select>
                   </div>
                 </div>
@@ -89,10 +91,34 @@ const Home = () => {
                   <label>Select State</label>
                   <select onChange={(e) => setStateSelection(e.target.value)}>
                     <option value="">Select State</option>
-                    <option value="state1">State 1</option>
-                    <option value="state2">State 2</option>
-                    <option value="state3">State 3</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
                     <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="TamilNadu">TamilNadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
                   </select>
                 </div>
               </div>

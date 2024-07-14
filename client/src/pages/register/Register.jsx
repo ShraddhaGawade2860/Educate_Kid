@@ -13,12 +13,21 @@ const Signup = () => {
         state: '',
         institutecode: '',
     });
+    const [files, setFiles] = useState({
+        instituteCertificate: null,
+        accreditationCertificate: null,
+        affiliationCertificate: null,
+    });
     const [error, setError] = useState('');
     const [formType, setFormType] = useState('user');
     const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleFileChange = (e) => {
+        setFiles({ ...files, [e.target.name]: e.target.files[0] });
     };
 
     const handleSubmit = async (e) => {
@@ -30,13 +39,21 @@ const Signup = () => {
 
         try {
             const url = 'http://localhost:5000/api/users/register';
-            const data = {
-                ...formData,
-                role: formType === 'user' ? 0 : 1,
-                verified: formType === 'user' ? true : false, // Automatically verify users but not institutes
-            };
+            const data = new FormData();
+            Object.keys(formData).forEach((key) => {
+                data.append(key, formData[key]);
+            });
+            Object.keys(files).forEach((key) => {
+                data.append(key, files[key]);
+            });
+            data.append('role', formType === 'user' ? 0 : 1);
+            data.append('verified', formType === 'user' ? true : false);
 
-            const response = await axios.post(url, data);
+            const response = await axios.post(url, data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
             alert('Registration successful! Please log in.');
             navigate("/login");
         } catch (error) {
@@ -54,6 +71,11 @@ const Signup = () => {
             confirmpassword: '',
             state: '',
             institutecode: '',
+        });
+        setFiles({
+            instituteCertificate: null,
+            accreditationCertificate: null,
+            affiliationCertificate: null,
         });
         setError('');
     };
@@ -130,6 +152,27 @@ const Signup = () => {
                                     name="institutecode"
                                     onChange={handleChange}
                                     value={formData.institutecode}
+                                    required
+                                    className={styles.input}
+                                />
+                                <input
+                                    type="file"
+                                    name="instituteCertificate"
+                                    onChange={handleFileChange}
+                                    required
+                                    className={styles.input}
+                                />
+                                <input
+                                    type="file"
+                                    name="accreditationCertificate"
+                                    onChange={handleFileChange}
+                                    required
+                                    className={styles.input}
+                                />
+                                <input
+                                    type="file"
+                                    name="affiliationCertificate"
+                                    onChange={handleFileChange}
                                     required
                                     className={styles.input}
                                 />

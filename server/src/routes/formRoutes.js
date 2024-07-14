@@ -57,6 +57,33 @@ router.post('/submit', upload.fields([
     }
 });
 
+// Fetch user forms for a specific institute
+router.get('/institute/:instituteName', async (req, res) => {
+    const { instituteName } = req.params;
+    try {
+      const forms = await FormData.find({ institutionName: instituteName });
+      res.status(200).json(forms);
+    } catch (error) {
+      console.error('Error fetching user forms:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+  
+  // Update verification status of a form
+  router.put('/verify/:formId', async (req, res) => {
+    const { formId } = req.params;
+    try {
+      const updatedForm = await FormData.findByIdAndUpdate(formId, { verified: true });
+      if (!updatedForm) {
+        return res.status(404).json({ message: 'Form not found' });
+      }
+      res.status(200).json({ message: 'Form verified successfully' });
+    } catch (error) {
+      console.error('Error verifying form:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+  
 
 
 module.exports = router;
