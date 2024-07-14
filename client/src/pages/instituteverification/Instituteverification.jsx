@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Menu from '../menu/Menu';
 import { FaHome } from 'react-icons/fa';
-import './instituteverification.module.css';
+import styles from './instituteverification.module.css'; // Importing CSS module
 
 const InstituteVerification = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -59,28 +59,40 @@ const InstituteVerification = () => {
     };
 
     return (
-        <div className={`admin-dashboard ${menuOpen ? 'menu-expanded' : ''}`}>
+        <div className={`${styles['admin-dashboard']} ${menuOpen ? styles['menu-expanded'] : ''}`}>
             <Menu isExpanded={menuOpen} toggleMenu={toggleMenu} />
-            <div className={`main-content ${menuOpen ? 'menu-expanded' : ''}`}>
-                <div className="top-bar">
-                    <div className="welcome">
+            <div className={`${styles['main-content']} ${menuOpen ? styles['menu-expanded'] : ''}`}>
+                <div className={styles['top-bar']}>
+                    <div className={styles['welcome']}>
                         Institute Verification Requests
                     </div>
-                    <div className="icons">
-                        <FaHome className="icon" onClick={goToHome} />
+                    <div className={styles['icons']}>
+                        <FaHome className={styles['icon']} onClick={goToHome} />
                     </div>
                 </div>
-                <div className="verification-requests-list">
+                <div className={styles['verification-requests-list']}>
                     {verificationRequests.length === 0 ? (
                         <p>No pending verification requests.</p>
                     ) : (
                         verificationRequests.map((req) => (
-                            <div key={req._id} className="verification-request-box">
+                            <div key={req._id} className={styles['verification-request-box']}>
                                 <p><strong>Name:</strong> {req.name}</p>
                                 <p><strong>Email:</strong> {req.email}</p>
                                 <p><strong>Contact Number:</strong> {req.contactnumber}</p>
                                 <p><strong>State:</strong> {req.state}</p>
                                 <p><strong>Institute Code:</strong> {req.institutecode}</p>
+                                <p>
+                                    <strong>Institute Certificate:</strong> 
+                                    <a href={`http://localhost:5000/${req.instituteCertificate}`} target="_blank" rel="noopener noreferrer">View</a>
+                                </p>
+                                <p>
+                                    <strong>Accreditation Certificate:</strong> 
+                                    <a href={`http://localhost:5000/${req.accreditationCertificate}`} target="_blank" rel="noopener noreferrer">View</a>
+                                </p>
+                                <p>
+                                    <strong>Affiliation Certificate:</strong> 
+                                    <a href={`http://localhost:5000/${req.affiliationCertificate}`} target="_blank" rel="noopener noreferrer">View</a>
+                                </p>
                                 <button onClick={() => approveInstitute(req._id)}>Approve</button>
                                 <button onClick={() => rejectInstitute(req._id)}>Reject</button>
                             </div>

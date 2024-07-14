@@ -48,6 +48,7 @@ const Login = () => {
                     }
                     login(result);
                     toast.success("Login successful!");
+                    localStorage.setItem('user', JSON.stringify(result)); // Save user information in local storage
                     setTimeout(() => {
                         if (result.role === 0) {
                             navigate('/');
@@ -100,7 +101,7 @@ const Login = () => {
                 </div>
                 <div className={styles.right}>
                     <h1>New Here?</h1>
-                    <Link to="/register">
+                    <Link to="/signup">
                         <button type="button" className={styles.white_btn}>
                             Sign Up
                         </button>

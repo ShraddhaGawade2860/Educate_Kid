@@ -41,4 +41,33 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
+// Endpoint to fetch scholarships based on state
+router.get('/', async (req, res) => {
+  const { state } = req.query;
+  try {
+    const scholarships = await Scholarship.find({ state: state });
+    res.status(200).json(scholarships);
+  } catch (error) {
+    console.error('Error fetching scholarships:', error);
+    res.status(500).json('Failed to fetch scholarships');
+  }
+});
+
+
+// Endpoint to fetch scholarships added by a specific state admin
+router.get('/bystate/:state', async (req, res) => {
+  const { state } = req.params;
+  try {
+    const scholarships = await Scholarship.find({ state: state });
+    res.status(200).json(scholarships);
+  } catch (error) {
+    console.error('Error fetching scholarships:', error);
+    res.status(500).json('Failed to fetch scholarships');
+  }
+});
+
+
+
+
 module.exports = router;
