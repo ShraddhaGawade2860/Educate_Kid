@@ -5,7 +5,6 @@ const FormData = require('../models/FormData');
 
 const router = express.Router();
 
-// Configure multer for file uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');
@@ -17,7 +16,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Define the route for form submission
 router.post('/submit', upload.fields([
     { name: 'disabilityCertificate', maxCount: 1 },
     { name: 'xthMarksheet', maxCount: 1 },
@@ -57,7 +55,6 @@ router.post('/submit', upload.fields([
     }
 });
 
-// Fetch user forms for a specific institute
 router.get('/institute/:instituteName', async (req, res) => {
     const { instituteName } = req.params;
     try {
@@ -67,10 +64,9 @@ router.get('/institute/:instituteName', async (req, res) => {
       console.error('Error fetching user forms:', error);
       res.status(500).json({ message: 'Server error' });
     }
-  });
-  
-  // Update verification status of a form
-  router.put('/verify/:formId', async (req, res) => {
+});
+
+router.put('/verify/:formId', async (req, res) => {
     const { formId } = req.params;
     try {
       const updatedForm = await FormData.findByIdAndUpdate(formId, { verified: true });
@@ -82,8 +78,6 @@ router.get('/institute/:instituteName', async (req, res) => {
       console.error('Error verifying form:', error);
       res.status(500).json({ message: 'Server error' });
     }
-  });
-  
-
+});
 
 module.exports = router;
