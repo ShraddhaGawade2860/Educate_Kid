@@ -2,21 +2,21 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaHome } from 'react-icons/fa';
 import Menu from '../menu/Menu';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import './studentverification.css'; // Adjust CSS as per your styling
+import { useNavigate } from 'react-router-dom';
+import './studentverification.css';
 
 const StudentVerification = () => {
   const [userForms, setUserForms] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate(); // Define navigate using useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch user forms specific to the logged-in institute
     const fetchUserForms = async () => {
       try {
         const user = JSON.parse(localStorage.getItem('user'));
-        if (user && user.role === 1) { // Assuming role 1 is for institutes
-          const response = await axios.get(`/api/forms/institute/${user.name}`); // Adjust endpoint based on your backend route
+        if (user && user.role === 1) {
+          const instituteNameEncoded = encodeURIComponent(user.name);
+          const response = await axios.get(`http://localhost:5000/api/forms/institute/${instituteNameEncoded}`);
           setUserForms(response.data);
         }
       } catch (error) {
@@ -32,17 +32,14 @@ const StudentVerification = () => {
   };
 
   const goToHome = () => {
-    // Adjust the navigation path as needed
     navigate(`/institutehome`);
   };
 
   const handleVerify = async (formId) => {
     try {
-      await axios.put(`/api/forms/verify/${formId}`); // Adjust endpoint based on your backend route
-      // Optionally, update state or show a success message
+      await axios.put(`/api/forms/verify/${formId}`);
     } catch (error) {
       console.error('Error verifying form:', error);
-      // Handle error scenarios
     }
   };
 
@@ -77,7 +74,6 @@ const StudentVerification = () => {
                   <td>{form.course}</td>
                   <td>
                     <button onClick={() => handleVerify(form._id)}>Verify</button>
-                    {/* You can add a reject button and other actions as needed */}
                   </td>
                 </tr>
               ))}
