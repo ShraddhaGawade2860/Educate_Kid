@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 router.post('/register', async (req, res) => {
-    try {
+    try {44
         const { name, email, contactnumber, password, role, state, institutecode, verified } = req.body;
 
         let user = await User.findOne({ email });
