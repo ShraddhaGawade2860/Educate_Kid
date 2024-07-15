@@ -1,30 +1,11 @@
-const express = require('express');
+ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const multer = require('multer');
-const path = require('path');
 
-// Configure multer storage
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/');
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-
-const upload = multer({ storage: storage });
-
-// Register route
-router.post('/register', upload.fields([
-    { name: 'instituteCertificate', maxCount: 1 },
-    { name: 'accreditationCertificate', maxCount: 1 },
-    { name: 'affiliationCertificate', maxCount: 1 }
-]), async (req, res) => {
-    try {
+router.post('/register', async (req, res) => {
+    try {44
         const { name, email, contactnumber, password, role, state, institutecode, verified } = req.body;
 
         let user = await User.findOne({ email });
@@ -39,9 +20,6 @@ router.post('/register', upload.fields([
             state,
             institutecode,
             verified,
-            instituteCertificate: req.files.instituteCertificate ? req.files.instituteCertificate[0].path : '',
-            accreditationCertificate: req.files.accreditationCertificate ? req.files.accreditationCertificate[0].path : '',
-            affiliationCertificate: req.files.affiliationCertificate ? req.files.affiliationCertificate[0].path : ''
         });
 
         await user.save();
@@ -51,12 +29,10 @@ router.post('/register', upload.fields([
     }
 });
 
-// Login route
 router.post('/login', async (req, res) => {
     try {
         const { identifier, password } = req.body;
         let user;
-
         if (identifier.includes('@')) {
             user = await User.findOne({ email: identifier });
         } else {
@@ -69,11 +45,9 @@ router.post('/login', async (req, res) => {
         if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
 
         if (user.role === 1 && !user.verified) {
-            return res.status(400).json({
-                msg: user.rejected ?
-                    "Admin rejected your form, please register again with correct information." :
-                    "Your account is pending admin approval. Please wait for verification."
-            });
+            return res.status(400).json({ msg: user.rejected ? 
+                                         "Admin rejected your form, please register again with correct information." :
+                                         "Your account is pending admin approval. Please wait for verification." });
         }
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
@@ -85,15 +59,11 @@ router.post('/login', async (req, res) => {
             contactnumber: user.contactnumber,
             role: user.role,
             verified: user.verified,
-            state: user.state,
+            state: user.state, 
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
-
-
-
-
 
 module.exports = router;
