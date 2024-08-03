@@ -49,7 +49,7 @@
 	font-size: 14px;
 }
 
-.input [type=email1]{
+input[type="text1"]{
 	outline: none;
 	border: none;
 	width: 370px;

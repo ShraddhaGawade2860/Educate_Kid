@@ -12,13 +12,13 @@ const ScholarshipHistory = () => {
       if (user && user.email) {
         try {
           console.log('Fetching data for email:', user.email);
-          const response = await axios.get(`http://localhost:5000/api/form/scholarship-history/${user.email}`);
+          const response = await axios.get(`http://localhost:5000/api/scholarshipHistory/scholarship-history/${user.email}`);
           setApplications(response.data);
         } catch (error) {
           console.error('Error fetching scholarship history:', error.response ? error.response.data : error.message);
         }
       } else {
-        console.error('User email is missing.');
+        console.error('User email is missing.', user);
       }
     };
 
@@ -28,6 +28,7 @@ const ScholarshipHistory = () => {
   return (
     <div className="history_container">
       <h2>Scholarship Application History</h2>
+      
       {applications.length === 0 ? (
         <p>No scholarship applications found.</p>
       ) : (
@@ -39,7 +40,7 @@ const ScholarshipHistory = () => {
             <p><strong>Home State:</strong> {application.homeState}</p>
             <p><strong>Email:</strong> {application.email}</p>
             <p><strong>Course:</strong> {application.course}</p>
-            <p><strong>Verification Status:</strong> {application.verificationStatus || 'Pending'}</p>
+            <p><strong>Verification Status:</strong> {application.finalStatus === 1 ? 'Approved' : application.finalStatus === 2 ? `Rejected: ${application.rejectReason}` : 'Pending'}</p>
           </div>
         ))
       )}

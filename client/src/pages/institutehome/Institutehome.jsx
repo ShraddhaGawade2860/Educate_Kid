@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './institutehome.css';
 import Menu from '../menu/Menu';
 import { FaHome } from 'react-icons/fa';
@@ -10,18 +11,90 @@ import { CategoryScale } from 'chart.js';
 Chart.register(CategoryScale);
 
 const InstituteHome = () => {
-  const { state } = useParams();
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const [instituteName, setInstituteName] = useState('');
+  const [scholarshipCount, setScholarshipCount] = useState(0);
+  const [pendingCount, setPendingCount] = useState(0);
+  const [verifiedCount, setVerifiedCount] = useState(0);
+  const [rejectedCount, setRejectedCount] = useState(0);
+  const [scholarshipData, setScholarshipData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: 'Number of Applications',
+        data: [],
+        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+      },
+    ],
+  });
+  const [pendingForms, setPendingForms] = useState([]);
 
   useEffect(() => {
-    // Assuming user information is stored in local storage after login
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       setInstituteName(user.name);
     }
   }, []);
+
+  useEffect(() => {
+    const fetchCounts = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/institute/${encodeURIComponent(instituteName)}/counts`);
+        setPendingCount(response.data.pending);
+        setVerifiedCount(response.data.verified);
+        setRejectedCount(response.data.rejected);
+      } catch (error) {
+        console.error('Error fetching counts:', error);
+      }
+    };
+
+    if (instituteName) {
+      fetchCounts();
+    }
+  }, [instituteName]);
+
+  useEffect(() => {
+    const fetchScholarshipData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/scholarships/application-counts/${encodeURIComponent(instituteName)}`);
+        const labels = response.data.map(item => item._id);
+        const data = response.data.map(item => item.count);
+
+        setScholarshipData({
+          labels,
+          datasets: [
+            {
+              label: 'Number of Applications',
+              data,
+              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+            },
+          ],
+        });
+      } catch (error) {
+        console.error('Error fetching scholarship application data:', error);
+      }
+    };
+
+    if (instituteName) {
+      fetchScholarshipData();
+    }
+  }, [instituteName]);
+
+  useEffect(() => {
+    const fetchPendingForms = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/forms/institute/${encodeURIComponent(instituteName)}`);
+        setPendingForms(response.data.filter(form => form.instituteVerified === 0));
+      } catch (error) {
+        console.error('Error fetching pending forms:', error);
+      }
+    };
+
+    if (instituteName) {
+      fetchPendingForms();
+    }
+  }, [instituteName]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -31,34 +104,10 @@ const InstituteHome = () => {
     navigate(`/institutehome`);
   };
 
-  const chartData = {
-    labels: ['Scholarship A', 'Scholarship B', 'Scholarship C', 'Scholarship D', 'Scholarship E'],
-    datasets: [
-      {
-        label: 'Number of Applications',
-        data: [12, 19, 3, 5, 2],
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-      },
-    ],
-  };
-
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
   };
-
-  const pendingStudents = [
-    {
-      name: 'John Doe',
-      enrollment: '12345',
-      state: 'NY',
-    },
-    {
-      name: 'Jane Smith',
-      enrollment: '54321',
-      state: 'CA',
-    },
-  ];
 
   return (
     <div className={`institute-dashboard ${menuOpen ? 'menu-expanded' : ''}`}>
@@ -76,26 +125,26 @@ const InstituteHome = () => {
         <div className="stats-boxes">
           <div className="box">
             <h3>Total Scholarships</h3>
-            <p>123</p>
+            <p>{scholarshipCount}</p>
           </div>
           <div className="box">
             <h3>Total Pending Students</h3>
-            <p>45</p>
+            <p>{pendingCount}</p>
           </div>
           <div className="box">
             <h3>Total Verified Students</h3>
-            <p>67</p>
+            <p>{verifiedCount}</p>
           </div>
           <div className="box">
             <h3>Total Rejected Students</h3>
-            <p>8</p>
+            <p>{rejectedCount}</p>
           </div>
         </div>
 
         <div className="graph-section">
           <h4>Mostly Applied Scholarships</h4>
           <div className="graph-container">
-            <Bar data={chartData} options={chartOptions} />
+            <Bar data={scholarshipData} options={chartOptions} />
           </div>
         </div>
 
@@ -113,12 +162,12 @@ const InstituteHome = () => {
           </div>
 
           <div className="student-list">
-            {pendingStudents.map((student, index) => (
+            {pendingForms.map((student, index) => (
               <div className="student-box" key={index}>
                 <p>{student.name}</p>
-                <p>{student.enrollment}</p>
+                <p>{student.enrollmentNo}</p>
                 <p>{student.state}</p>
-                <button>View</button>
+                <button onClick={() => navigate(`/userdata/${student._id}`)}>View</button>
               </div>
             ))}
           </div>

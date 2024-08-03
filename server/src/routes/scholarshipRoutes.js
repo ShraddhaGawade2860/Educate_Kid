@@ -7,6 +7,7 @@ router.post('/', async (req, res) => {
   try {
     const newScholarship = new Scholarship(req.body);
     await newScholarship.save();
+
     res.status(200).json('Scholarship added successfully');
   } catch (error) {
     console.error('Error adding scholarship:', error);
@@ -30,7 +31,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Endpoint to fetch scholarship details by ID
+//Endpoint to fetch scholarship details by ID
 router.get('/:id', async (req, res) => {
   try {
     const scholarship = await Scholarship.findById(req.params.id);
@@ -43,7 +44,7 @@ router.get('/:id', async (req, res) => {
 
 
 // Endpoint to fetch scholarships based on state
-router.get('/', async (req, res) => {
+/*router.get('/', async (req, res) => {
   const { state } = req.query;
   try {
     const scholarships = await Scholarship.find({ state: state });
@@ -52,7 +53,7 @@ router.get('/', async (req, res) => {
     console.error('Error fetching scholarships:', error);
     res.status(500).json('Failed to fetch scholarships');
   }
-});
+});*/
 
 
 // Endpoint to fetch scholarships added by a specific state admin
@@ -67,7 +68,15 @@ router.get('/bystate/:state', async (req, res) => {
   }
 });
 
-
-
-
+router.get('/count', async (req, res) => {
+  try {
+    const count = await Scholarship.countDocuments();
+    console.log(count);
+    res.json({ count });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 module.exports = router;
+
+

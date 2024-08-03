@@ -1,19 +1,35 @@
 .signup_container {
     width: 100%;
-    min-height: 115vh;
+    min-height: 140vh;
     background-color: #f5f5f5;
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Add padding for institute form */
+    padding-top: var(--container-padding-top, 0);
+    padding-bottom: var(--container-padding-bottom, 0);
+}
+
+/* Default padding values for different form types */
+.user_form {
+    height: 600px; /* Height for user form */
+    --container-padding-top: 0;
+    --container-padding-bottom: 0;
+}
+
+.institute_form {
+    height: 750px; /* Height for institute form */
+    --container-padding-top: 50px; /* Space from top */
+    --container-padding-bottom: 50px; /* Space from bottom */
 }
 
 .signup_form_container {
     width: 900px;
-    height: 600px;
     display: flex;
     border-radius: 10px;
     box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
         0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    transition: height 0.3s; /* Smooth transition for height changes */
 }
 
 .left {
@@ -60,25 +76,43 @@
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    width: 50%; /* Optional: Ensure buttons fill the container's width */
 }
 
 .toggle_button {
-    background-color: #ccc;
+    background-color: #f0f0f0;
     color: #333;
-    border: none;
-    padding: 10px 20px;
-    margin: 0 10px;
-    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px; /* Ensures square shape */
+    margin: 0; /* Removes gap between buttons */
+    border-radius: 0; /* Square shape */
     cursor: pointer;
     outline: none;
+    transition: background-color 0.3s, color 0.3s;
+    flex: 1; /* Ensures both buttons have equal width */
+    text-align: center; /* Centers the text inside the button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle_button:hover {
+    background-color: #e0e0e0;
 }
 
 .active_toggle {
     background-color: #142CDC;
     color: white;
+    transition: background-color 0.3s, color 0.3s;
+    flex: 1; /* Ensures the active button maintains equal width */
 }
 
-.input{
+/* Ensures no gap between buttons */
+.toggle_button:first-child {
+    margin-right: 0;
+}
+
+.input {
     outline: none;
     border: none;
     width: 370px;
@@ -87,6 +121,24 @@
     background-color: #edf5f3;
     margin: 5px 0;
     font-size: 14px;
+}
+
+/* Gender Select Dropdown Styling */
+.gender_select {
+    width: 370px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #edf5f3;
+    margin: 5px 0;
+    font-size: 14px;
+    outline: none;
+    border: none;
+    appearance: none; /* Remove default dropdown arrow for custom styling */
+}
+
+/* Optional: Custom dropdown arrow */
+.gender_select::-ms-expand {
+    display: none; /* Hide default dropdown arrow in Internet Explorer */
 }
 
 .error_msg {
@@ -119,3 +171,86 @@
     margin: 20px;
     margin-bottom: 20px;
 }
+
+/* General responsive styles */
+@media (max-width: 1200px) {
+    .signup_form_container {
+      width: 80%; /* Adjust width for medium screens */
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .signup_form_container {
+      width: 90%; /* Adjust width for small screens */
+    }
+  
+    .left h1 {
+      font-size: 28px; /* Adjust font size for smaller screens */
+    }
+  
+    .right .form_container h1 {
+      font-size: 32px; /* Adjust font size for smaller screens */
+    }
+  
+    .input, .gender_select {
+      width: 90%; /* Adjust width of inputs for smaller screens */
+      
+    }
+  
+    .toggle_buttons {
+      width: 50%; /* Ensure toggle buttons fill container width */
+    }
+  
+    .toggle_button {
+      font-size: 14px; /* Adjust font size for smaller screens */
+      padding: 10px; /* Adjust padding for smaller screens */
+    }
+  
+    .error_msg {
+      width: 90%; /* Adjust width for smaller screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .signup_form_container {
+      flex-direction: column; /* Stack the left and right sides vertically */
+      width: 100%; /* Full width for small screens */
+    }
+  
+    .left, .right {
+      width: 100%; /* Full width for both sections */
+      border-radius: 0; /* Remove border-radius for small screens */
+    }
+  
+    .left h1 {
+      font-size: 24px; /* Adjust font size for smaller screens */
+    }
+  
+    .right .form_container h1 {
+      font-size: 28px; /* Adjust font size for smaller screens */
+    }
+  
+    .input, .gender_select {
+      width: 100%; /* Full width for input fields */
+      padding: 10px; /* Adjust padding for smaller screens */
+    }
+  
+    .toggle_buttons {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        width: 50%; 
+        
+    }
+  
+    .toggle_button {
+      margin-bottom: 10px; /* Add space between buttons */
+      width: 50%; /* Full width for toggle buttons */
+      
+    }
+  
+    .error_msg {
+      width: 100%; /* Full width for error messages */
+    }
+  }
+  

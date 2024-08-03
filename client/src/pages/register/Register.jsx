@@ -12,6 +12,7 @@ const Signup = () => {
         confirmpassword: '',
         state: '',
         institutecode: '',
+        gender: '' // Added gender field
     });
     const [files, setFiles] = useState({
         instituteCertificate: null,
@@ -71,6 +72,7 @@ const Signup = () => {
             confirmpassword: '',
             state: '',
             institutecode: '',
+            gender: '' // Reset gender field on form type toggle
         });
         setFiles({
             instituteCertificate: null,
@@ -82,8 +84,8 @@ const Signup = () => {
 
     return (
         <div className={styles.signup_container}>
-            <div className={styles.signup_form_container}>
-                <div className={styles.left}>
+        <div className={`${styles.signup_form_container} ${formType === 'user' ? styles.user_form : styles.institute_form}`}>
+            <div className={styles.left}>
                     <h1>Welcome Back</h1>
                     <Link to="/login">
                         <button type="button" className={styles.white_btn}>
@@ -109,7 +111,7 @@ const Signup = () => {
                     </div>
                     <form className={styles.form_container} onSubmit={handleSubmit}>
                         <input
-                            type="text"
+                            type="text2"
                             placeholder="Name"
                             name="name"
                             onChange={handleChange}
@@ -118,7 +120,7 @@ const Signup = () => {
                             className={styles.input}
                         />
                         <input
-                            type="email"
+                            type="email2"
                             placeholder="Email"
                             name="email"
                             onChange={handleChange}
@@ -127,7 +129,7 @@ const Signup = () => {
                             className={styles.input}
                         />
                         <input
-                            type="text"
+                            type="text2"
                             placeholder="Contact Number"
                             name="contactnumber"
                             onChange={handleChange}
@@ -135,10 +137,24 @@ const Signup = () => {
                             required
                             className={styles.input}
                         />
+                        {formType === 'user' && (
+                            <select
+                                name="gender"
+                                onChange={handleChange}
+                                value={formData.gender}
+                                required
+                                className={styles.input} // Updated class for select input
+                            >
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        )}
                         {formType === 'institute' && (
                             <>
                                 <input
-                                    type="text"
+                                    type="text2"
                                     placeholder="State"
                                     name="state"
                                     onChange={handleChange}
@@ -147,7 +163,7 @@ const Signup = () => {
                                     className={styles.input}
                                 />
                                 <input
-                                    type="text"
+                                    type="text2"
                                     placeholder="Institute Code"
                                     name="institutecode"
                                     onChange={handleChange}

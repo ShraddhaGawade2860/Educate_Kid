@@ -1,4 +1,6 @@
 /* Set basic styles for full-page responsiveness */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
 html, body {
   margin: 0;
   padding: 0;
@@ -23,7 +25,10 @@ video {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: white;
+  color: rgb(109, 6, 6);
+  font-size: 18px;
+  font-family: "Inter",sans-serif;
+  font-weight: bold;
 }
 
 .home-container {
@@ -86,9 +91,10 @@ video {
 }
 
 .dropdown label {
-  font-weight: bold;
-  color: black;
+  color: rgb(255, 255, 255);
   margin-bottom: 10px;
+  font-weight:normal;
+  font-size: 16px;
 }
 
 .dropdown select {
@@ -96,6 +102,8 @@ video {
   width: 100%; /* Adjust width to fill its container */
   padding: 10px; /* Optional: Add padding for better appearance */
   font-size: 16px; /* Optional: Adjust font size */
+  border-radius: 10px;
+  border-color: #000;
 }
 
 /*.buttons {
@@ -117,26 +125,25 @@ video {
 }*/
 
 .buttons4 {
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
 .btn4 {
- 
-
 
   margin-right: 10px;
-  background-color: #142CDC;
-  color: #000;
+  background-color: #3f4997;
+  color: #ffffff;
   border: none;
   padding: 20px 30px;
   border-radius: 30px; 
   cursor: pointer;
-  font-size: 15px;
+  font-size: 16px;
   width: 100px;
+  font-weight:normal;
 }
 
 .btn4:hover {
-  background-color: #142CDC; 
+  background-color: #1f2c91; 
 }
 
 .slider{
@@ -150,7 +157,7 @@ video {
   display: block;
 }
 
-.additional-container {
+.additional-container6 {
   margin-top: 20px;
   margin-left: 60px; 
   margin-right: 60px; 
@@ -165,7 +172,7 @@ video {
     display: flex;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
-    background: #fdfde0;
+    background: #dadaec;
     border-radius: 15px;
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .1607843137);
 }
@@ -235,10 +242,10 @@ video {
   overflow: hidden; 
 }
 
-.scholarship-heading {
+.scholarship-headingi {
   text-align: center;
   font-size: 30px;
-  color: blue;
+  color: rgb(255, 255, 255);
 }
 
 
@@ -249,7 +256,7 @@ video {
   margin-bottom: 20px;
 }
 
-.slider-container {
+.slider-containeri {
   display: flex;
   flex-direction: row; 
   animation: scroll 20s linear infinite;
@@ -271,7 +278,7 @@ video {
   }
 }
 
-.scholarship-box {
+.scholarship-boxe {
   width: 250px;
   border: 1px solid #000;
   border-radius: 5px;
@@ -280,7 +287,7 @@ video {
   margin-top: 10px;
 }
 
-.scholarship-box img {
+.scholarship-boxe img {
   width: 100px;
   height: 100px;
   margin-bottom: 10px;
@@ -296,12 +303,12 @@ video {
   margin-bottom: 10px;
 }
 
-.scholarship-box a {
+.scholarship-boxe a {
   color: blue;
   text-decoration: none;
 }
 
-.scholarship-box a:hover {
+.scholarship-boxe a:hover {
   text-decoration: underline;
 }
 
@@ -318,7 +325,7 @@ video {
   border: 2px solid #ccc; 
   padding: 30px; 
   display: flex;
-  background: #dffff4;
+  background: #aad0f3;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1607843137); 
   margin-left: 0;
   margin-right: 0; 

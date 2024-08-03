@@ -13,7 +13,9 @@ const UserSchema = new mongoose.Schema({
     accreditationCertificate: { type: String }, // File path for accreditation certificate
     affiliationCertificate: { type: String }, // File path for affiliation certificate
     verified: { type: Boolean, default: false }, // Verification status
-    rejected: { type: Boolean, default: false } // Rejection status
+    rejected: { type: Boolean, default: false }, // Rejection status
+    gender: { type: String }, // Gender field
+    profileImage: { type: String } // Profile image field
 });
 
 UserSchema.pre('save', async function(next) {

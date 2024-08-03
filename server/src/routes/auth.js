@@ -25,20 +25,23 @@ router.post('/register', upload.fields([
     { name: 'affiliationCertificate', maxCount: 1 }
 ]), async (req, res) => {
     try {
-        const { name, email, contactnumber, password, role, state, institutecode, verified } = req.body;
+        const { name, email, contactnumber, password, role, state, institutecode, verified, gender } = req.body;
 
         let user = await User.findOne({ email });
         if (user) return res.status(400).json({ msg: "User already exists" });
+
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         user = new User({
             name,
             email,
             contactnumber,
-            password,
+            password: hashedPassword,
             role,
             state,
             institutecode,
             verified,
+            gender, 
             instituteCertificate: req.files.instituteCertificate ? req.files.instituteCertificate[0].path : '',
             accreditationCertificate: req.files.accreditationCertificate ? req.files.accreditationCertificate[0].path : '',
             affiliationCertificate: req.files.affiliationCertificate ? req.files.affiliationCertificate[0].path : ''
@@ -86,14 +89,16 @@ router.post('/login', async (req, res) => {
             role: user.role,
             verified: user.verified,
             state: user.state,
+            gender: user.gender,
+            profileImage: user.profileImage // Include profile image in the response
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
+// auth.js
 
 
 
-
-module.exports = router;
+  module.exports = router;
