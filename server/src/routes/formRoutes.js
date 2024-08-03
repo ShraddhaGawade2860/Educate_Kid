@@ -55,29 +55,23 @@ router.post('/submit', upload.fields([
     }
 });
 
-router.get('/institute/:instituteName', async (req, res) => {
-    const { instituteName } = req.params;
+// Endpoint to get application counts for each scholarship for a specific institute
+router.get('/api/scholarships/application-counts/:instituteName', async (req, res) => {
     try {
-      const forms = await FormData.find({ institutionName: instituteName });
-      res.status(200).json(forms);
+      const instituteName = decodeURIComponent(req.params.instituteName);
+      const counts = await FormData.aggregate([
+        { $match: { institutionName: instituteName } },
+        { $group: { _id: "$scholarshipName", count: { $sum: 1 } } },
+        { $sort: { count: -1 } }
+      ]);
+  
+      console.log('Counts retrieved:', counts); // Debugging line
+      res.json(counts);
     } catch (error) {
-      console.error('Error fetching user forms:', error);
-      res.status(500).json({ message: 'Server error' });
+      console.error('Error fetching scholarship application counts:', error);
+      res.status(500).send('Server Error');
     }
 });
 
-router.put('/verify/:formId', async (req, res) => {
-    const { formId } = req.params;
-    try {
-      const updatedForm = await FormData.findByIdAndUpdate(formId, { verified: true });
-      if (!updatedForm) {
-        return res.status(404).json({ message: 'Form not found' });
-      }
-      res.status(200).json({ message: 'Form verified successfully' });
-    } catch (error) {
-      console.error('Error verifying form:', error);
-      res.status(500).json({ message: 'Server error' });
-    }
-});
 
 module.exports = router;

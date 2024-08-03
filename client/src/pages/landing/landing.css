@@ -6,7 +6,7 @@ html, body {
   height: 100%;
 }
 
-.home-container {
+.landing-container {
   width: 100%;
   height: 100%;
 }
@@ -153,19 +153,19 @@ video {
   display: block;
 }
 
-.additional-container {
+.additional-container1 {
   margin-top: 20px;
   margin-left: 60px; 
   margin-right: 60px; 
   margin-bottom: 20px; 
 }
 
-.box-frame {
+.box-frame0 {
   border: 2px solid #ccc; 
   padding: 20px; 
   display: flex;
   flex-wrap: wrap;
-  background: #fdfde0;
+  background: #dadaec;
   border-radius: 15px;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .1607843137);
 }
@@ -183,7 +183,7 @@ video {
   background-clip: border-box;
   overflow: hidden;
   position: relative; 
-  height: 200px; 
+  height: 300px; 
 }
 
 .notification-list p {
@@ -226,7 +226,7 @@ video {
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
-  color: blue;
+  color: rgb(255, 255, 255);
 }
 
 .right-side {
@@ -239,7 +239,7 @@ video {
 .scholarship-heading {
   text-align: center;
   font-size: 30px;
-  color: blue;
+  color: rgb(255, 255, 255);
 }
 
 .right-side h5 {
@@ -249,13 +249,13 @@ video {
   margin-bottom: 20px;
 }
 
-.slider-container {
+.slider-container1 {
   display: flex;
   flex-direction: row; 
-  animation: scroll 20s linear infinite;
+  animation: scroll 30s linear infinite;
 }
 
-.slider-item {
+.slider-item1 {
   min-width: 200px; 
   background-color: #f0f0f0;
   padding: 10px;
@@ -272,12 +272,13 @@ video {
 }
 
 .scholarship-box {
-  width: 250px;
+  width: 320px;
   border: 1px solid #000;
   border-radius: 5px;
   padding: 10px;
   margin-right: 20px;
   margin-top: 10px;
+  height: 287px;
 }
 
 .scholarship-box img {
@@ -288,12 +289,12 @@ video {
 
 .scholarship-details h6 {
   margin: 0;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 
 .scholarship-details p {
   margin: 0;
-  margin-bottom: 10px;
+  margin-bottom: 45px;
 }
 
 .scholarship-box a {
@@ -318,7 +319,7 @@ video {
   border: 2px solid #ccc; 
   padding: 30px; 
   display: flex;
-  background: #dffff4;
+  background: #aad0f3;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1607843137); 
   margin-left: 0;
   margin-right: 0; 
@@ -467,3 +468,82 @@ video {
     margin-top: 20px; 
   }
 }
+
+/* About Us Slider */
+.about-us-slider {
+  margin: 50px 60px;
+  padding: 20px;
+  background-color: #e2f1ff;
+  border-radius: 15px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  overflow: hidden; /* Ensure content stays within the box */
+}
+
+.about-us-slider h3 {
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.slider-container {
+  display: flex;
+  position: relative;
+  width: 100%; /* Ensure container width fits within the parent box */
+  overflow: hidden; /* Hide overflow */
+}
+
+.slider-container::before, 
+.slider-container::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+}
+
+.slider-container::before {
+  left: 0;
+  background: linear-gradient(to right, #f7f7f7 0%, transparent 100%);
+}
+
+.slider-container::after {
+  right: 0;
+  background: linear-gradient(to left, #f7f7f7 0%, transparent 100%);
+}
+
+.slider-item {
+  flex: 1 0 100%;
+  max-width: 33.33%;
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+  margin: 0; /* Remove margin to avoid overflow */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.slider-item h4 {
+  font-size: 22px;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+.slider-item p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Animation for sliding effect */
+@keyframes scroll1 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-33.33% * 3)); } /* Adjust based on item width */
+}
+
+.slider-container {
+  animation: scroll 30s linear infinite;
+}
+

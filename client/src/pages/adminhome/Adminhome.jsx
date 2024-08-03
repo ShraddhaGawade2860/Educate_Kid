@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { useNavigate, useParams } from 'react-router-dom';
 import './adminhome.css';
@@ -6,20 +6,96 @@ import Menu from '../menu/Menu';
 import { FaHome } from 'react-icons/fa';
 import Chart from 'chart.js/auto';
 import { CategoryScale } from 'chart.js';
+import axios from 'axios';
 
 Chart.register(CategoryScale);
 
 const AdminHome = () => {
-  const { state } = useParams(); // Access state parameter from URL
+  const { state } = useParams();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scholarshipCount, setScholarshipCount] = useState(0);
+  const [pendingCount, setPendingCount] = useState(0);
+  const [verifiedCount, setVerifiedCount] = useState(0);
+  const [rejectedCount, setRejectedCount] = useState(0);
+  const [pendingForms, setPendingForms] = useState([]);
+  const [recentInstitutes, setRecentInstitutes] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchCounts = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/admincount/state/${state}/counts`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setPendingCount(data.pending);
+        setVerifiedCount(data.verified);
+        setRejectedCount(data.rejected);
+      } catch (error) {
+        console.error('Error fetching counts:', error);
+      }
+    };
+
+    fetchCounts();
+  }, [state]);
+
+  useEffect(() => {
+    const fetchPendingForms = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/admincount/state/${state}?status=pending`);
+        setPendingForms(response.data);
+      } catch (error) {
+        console.error('Error fetching pending forms:', error);
+      }
+    };
+
+    fetchPendingForms();
+  }, [state]);
+
+  useEffect(() => {
+    const fetchScholarshipCount = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/scholarshipcount/count');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setScholarshipCount(data.count);
+      } catch (error) {
+        console.error('Error fetching scholarship count:', error);
+      }
+    };
+
+    fetchScholarshipCount();
+  }, []);
+
+  // New effect to fetch recent institutes
+  useEffect(() => {
+    const fetchRecentInstitutes = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/admin/verification/requests`, {
+          params: { state, status: 'pending' }
+        });
+        const instituteData = response.data.map(institute => ({
+          name: institute.name,
+          code: institute.institutecode
+        }));
+        setRecentInstitutes(instituteData);
+      } catch (error) {
+        console.error('Error fetching recent institutes:', error);
+      }
+    };
+
+    fetchRecentInstitutes();
+  }, [state]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   const goToHome = () => {
-    navigate(`/adminhome/${state}`); // Ensure state parameter is passed correctly
+    navigate(`/adminhome/${state}`);
   };
 
   const chartData = {
@@ -38,30 +114,6 @@ const AdminHome = () => {
     maintainAspectRatio: false,
   };
 
-  const pendingStudents = [
-    {
-      name: 'John Doe',
-      enrollment: '12345',
-      state: 'NY',
-    },
-    {
-      name: 'Jane Smith',
-      enrollment: '54321',
-      state: 'CA',
-    },
-  ];
-
-  const recentInstitutes = [
-    {
-      name: 'ABC Institute',
-      code: 'INST123',
-    },
-    {
-      name: 'XYZ Institute',
-      code: 'INST456',
-    },
-  ];
-
   return (
     <div className={`admin-dashboard ${menuOpen ? 'menu-expanded' : ''}`}>
       <Menu isExpanded={menuOpen} toggleMenu={toggleMenu} />
@@ -78,19 +130,19 @@ const AdminHome = () => {
         <div className="stats-boxes1">
           <div className="boxi">
             <h3>Total Scholarships</h3>
-            <p>123</p>
+            <p>{scholarshipCount}</p>
           </div>
           <div className="boxi">
             <h3>Total Pending Students</h3>
-            <p>45</p>
+            <p>{pendingCount}</p>
           </div>
           <div className="boxi">
             <h3>Total Verified Students</h3>
-            <p>67</p>
+            <p>{verifiedCount}</p>
           </div>
           <div className="boxi">
             <h3>Total Rejected Students</h3>
-            <p>8</p>
+            <p>{rejectedCount}</p>
           </div>
         </div>
 
@@ -116,12 +168,12 @@ const AdminHome = () => {
             </div>
 
             <div className="student-list">
-              {pendingStudents.map((student, index) => (
+              {pendingForms.map((student, index) => (
                 <div className="student-box" key={index}>
                   <p>{student.name}</p>
-                  <p>{student.enrollment}</p>
+                  <p>{student.enrollmentNo}</p>
                   <p>{student.state}</p>
-                  <button>View</button>
+                  <button onClick={() => navigate(`/verifyhome/${student._id}`)}>View</button>
                 </div>
               ))}
             </div>
@@ -136,7 +188,12 @@ const AdminHome = () => {
                 <div className="institute" key={index}>
                   <p>Name: {institute.name}</p>
                   <p>Code: {institute.code}</p>
-                  <button className="view-button">View</button>
+                  <button 
+            className="view-button" 
+            onClick={() => navigate(`/instituteverification`)}
+          >
+            View
+          </button>
                 </div>
               ))}
             </div>

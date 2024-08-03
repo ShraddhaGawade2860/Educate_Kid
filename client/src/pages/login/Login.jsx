@@ -1,4 +1,4 @@
- import React, { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,14 +27,12 @@ const Login = () => {
     } else {
       setError("");
       try {
-        const url = 'http://localhost:5000/api/users/login';
-        
-        const response = await fetch(url, {
+        const response = await fetch('http://localhost:5000/api/users/login', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ identifier: data.identifier, password: data.password })
+          body: JSON.stringify(data),
         });
 
         const result = await response.json();
@@ -46,7 +44,8 @@ const Login = () => {
                      "Your account is pending admin approval. Please wait for verification.");
             return;
           }
-          login(result); // Update the AuthContext with the user data
+
+          login(result); // Store user data in AuthContext
           toast.success("Login successful!");
           setTimeout(() => {
             if (result.role === 0) {
@@ -55,11 +54,11 @@ const Login = () => {
               navigate('/institutehome');
             } else if (result.role === 2) {
               localStorage.setItem('state', result.state);
-              navigate(`/adminhome/${result.state}`); // Corrected template literal for dynamic route
+              navigate(`/adminhome/${result.state}`);
             }
           }, 2000);
         } else {
-          setError(result.msg);
+          setError(result.msg || "Invalid credentials");
         }
       } catch (error) {
         console.error('Error:', error);

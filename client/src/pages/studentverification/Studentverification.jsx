@@ -8,6 +8,7 @@ import './studentverification.css';
 const StudentVerification = () => {
   const [userForms, setUserForms] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeList, setActiveList] = useState('pending'); // State to manage active list
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,11 +36,21 @@ const StudentVerification = () => {
     navigate(`/institutehome`);
   };
 
-  const handleVerify = async (formId) => {
-    try {
-      await axios.put(`/api/forms/verify/${formId}`);
-    } catch (error) {
-      console.error('Error verifying form:', error);
+  const handleView = (formId) => {
+    navigate(`/userdata/${formId}`); // Navigate to UserData component with formId
+  };
+
+  // Function to filter forms based on active list type
+  const filteredForms = () => {
+    switch (activeList) {
+      case 'pending':
+        return userForms.filter(form => !form.instituteVerified); // Filter pending forms
+      case 'verified':
+        return userForms.filter(form => form.instituteVerified === 1); // Filter approved forms
+      case 'rejected':
+        return userForms.filter(form => form.instituteVerified === 2); // Filter rejected forms
+      default:
+        return userForms;
     }
   };
 
@@ -55,8 +66,15 @@ const StudentVerification = () => {
             <FaHome className="icon" onClick={goToHome} />
           </div>
         </div>
+        <div className="dropdown-menu">
+          <select value={activeList} onChange={(e) => setActiveList(e.target.value)}>
+            <option value="pending">Pending List</option>
+            <option value="verified">Verified List</option>
+            <option value="rejected">Rejected List</option>
+          </select>
+        </div>
         <h2>Student Verification</h2>
-        {userForms.length > 0 ? (
+        {filteredForms().length > 0 ? (
           <table>
             <thead>
               <tr>
@@ -67,20 +85,20 @@ const StudentVerification = () => {
               </tr>
             </thead>
             <tbody>
-              {userForms.map((form) => (
+              {filteredForms().map((form) => (
                 <tr key={form._id}>
                   <td>{form.name}</td>
                   <td>{form.email}</td>
                   <td>{form.course}</td>
                   <td>
-                    <button onClick={() => handleVerify(form._id)}>Verify</button>
+                    <button onClick={() => handleView(form._id)}>View</button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         ) : (
-          <p>No forms to verify.</p>
+          <p>No forms to display for this list.</p>
         )}
       </div>
     </div>

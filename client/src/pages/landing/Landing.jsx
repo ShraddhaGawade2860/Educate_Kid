@@ -35,7 +35,7 @@ const Landing = () => {
 
   return (
     <div>
-      <div className="home-container">
+      <div className="landing-container">
         <div className="content">
           <div className="video-container">
             <video src={mainVideo} alt="Main Banner" autoPlay loop muted />
@@ -50,9 +50,9 @@ const Landing = () => {
         </div>
       </div>
 
-      <div className="additional-container">
+      <div className="additional-container1">
         <h3 className="centered">Latest News</h3>
-        <div className="box-frame">
+        <div className="box-frame0">
           <div className="left-side">
             <h5>Notice Board</h5>
             <div className="notification-list">
@@ -69,7 +69,7 @@ const Landing = () => {
               <h5>Scholarships</h5>
             </div>
 
-            <div className="slider-container">
+            <div className="slider-container1">
               {/* Scholarship Box 1 */}
               <div className="scholarship-box">
                 <img src={scholarshipLogo} alt="Scholarship Logo" />

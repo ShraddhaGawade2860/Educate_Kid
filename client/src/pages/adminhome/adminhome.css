@@ -192,12 +192,12 @@ html, body {
   background-color: #ddd;
   padding: 10px;
   border-radius: 8px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .student-list-header p {
   flex: 1;
-  margin: 0;
+  margin: 2px;
   font-weight: bold;
 }
 

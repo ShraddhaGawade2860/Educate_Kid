@@ -1,4 +1,3 @@
-// routes/scholarship.js
 const express = require('express');
 const router = express.Router();
 const Scholarship = require('../models/scholarship');
@@ -29,4 +28,4 @@ router.get('/scholarship-history/:email', async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = router;

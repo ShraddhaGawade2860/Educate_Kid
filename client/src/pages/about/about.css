@@ -1,23 +1,21 @@
+/* Styles for all screen sizes */
 .about-container {
     max-width: 100%;
 }
 
-
 .about-content {
-    /* Add styles for the content */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .about-image {
-    /* Add styles for the image */
     width: 100%; /* Adjust image width as needed */
     height: 400px;
     filter: blur(7px);
 }
 
-.image-content1{
+.image-content1 {
     position: absolute;
     top: 45%;
     left: 47%;
@@ -25,8 +23,7 @@
     color: white;
     text-align: center;
     font-size: 30px;
-    font-family: 'Inter',sans-serif;
-   
+    font-family: 'Inter', sans-serif;
 }
 
 .container {
@@ -54,12 +51,14 @@
     font-size: 40px;
     color: brown;
 }
+
 .text-content p {
     margin-bottom: 20px;
     margin-right: 120px;
     color: black;
     font-size: 20px;
 }
+
 .container1 {
     max-width: 100%;
     margin: 0 auto;
@@ -69,7 +68,6 @@
 }
 
 .about-content1 {
-    /* Add styles for the content */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -111,3 +109,37 @@
     transform: scale(1.1); /* Scale the image on hover */
 }
 
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .about-content,
+    .about-content1 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-image,
+    .main-image1 {
+        width: 100%;
+        float: none; /* Reset float for smaller screens */
+        margin: 0;
+        margin-bottom: 20px; /* Add space below images */
+    }
+
+    .text-content,
+    .text-content1 {
+        width: 100%;
+        float: none; /* Reset float for smaller screens */
+        margin: 0;
+        text-align: center;
+    }
+
+    .text-content h1,
+    .text-content1 h1 {
+        font-size: 30px; /* Adjust font size for smaller screens */
+    }
+
+    .text-content p,
+    .text-content1 p {
+        font-size: 18px; /* Adjust font size for smaller screens */
+    }
+}

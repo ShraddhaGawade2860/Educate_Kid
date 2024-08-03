@@ -1,48 +1,69 @@
 const express = require('express');
 const router = express.Router();
-const Form = require('../models/FormData'); // Adjust the model import based on your setup
+const FormData = require('../models/FormData');
 
-// Middleware to get institute information
-const getInstitute = (req, res, next) => {
-  // Assuming you have the user information stored in req.user
-  // You might get this information from a decoded JWT token or session
-  req.instituteName = req.user ? req.user.name : 'InstituteName'; // Replace with the actual way of getting the institute name
-  next();
-};
-
-// Route to fetch forms for institute approval
-router.get('/institute', getInstitute, async (req, res) => {
-  const instituteName = req.instituteName; // Assuming institute name is stored in req.user
+// Fetch forms for a specific institute
+router.get('/institute/:instituteName', async (req, res) => {
   try {
-    const forms = await Form.find({ institutionName: instituteName, status: 'pending' });
-    res.status(200).json(forms);
+    const instituteName = decodeURIComponent(req.params.instituteName);
+    const forms = await FormData.find({ institutionName: instituteName });
+    res.json(forms);
   } catch (error) {
-    console.error('Error fetching forms for institute:', error);
-    res.status(500).json({ message: 'Failed to fetch forms' });
+    res.status(500).json({ message: 'Error fetching forms for the institute' });
   }
 });
 
-// Route to approve a form
-router.put('/approve/:id', async (req, res) => {
-  const formId = req.params.id;
+// Fetch forms for a specific institute
+router.get('/institute/:instituteName', async (req, res) => {
   try {
-    const updatedForm = await Form.findByIdAndUpdate(formId, { status: 'approved' }, { new: true });
-    res.status(200).json(updatedForm);
+    const instituteName = decodeURIComponent(req.params.instituteName);
+    const forms = await FormData.find({ institutionName: instituteName, instituteVerified: 0 });
+    res.json(forms);
   } catch (error) {
-    console.error('Error approving form:', error);
-    res.status(500).json({ message: 'Failed to approve form' });
+    res.status(500).json({ message: 'Error fetching forms for the institute' });
   }
 });
 
-// Route to reject a form
-router.put('/reject/:id', async (req, res) => {
-  const formId = req.params.id;
+// Fetch form by ID
+router.get('/:formId', async (req, res) => {
   try {
-    const updatedForm = await Form.findByIdAndUpdate(formId, { status: 'rejected' }, { new: true });
-    res.status(200).json(updatedForm);
+    const form = await FormData.findById(req.params.formId);
+    res.json(form);
   } catch (error) {
-    console.error('Error rejecting form:', error);
-    res.status(500).json({ message: 'Failed to reject form' });
+    res.status(500).json({ message: 'Error fetching form data' });
+  }
+});
+
+// Approve form
+router.put('/approve/:formId', async (req, res) => {
+  try {
+    const form = await FormData.findByIdAndUpdate(req.params.formId, { instituteVerified: 1 }, { new: true });
+    res.json(form);
+  } catch (error) {
+    res.status(500).json({ message: 'Error approving form' });
+  }
+});
+
+// Reject form
+router.put('/reject/:formId', async (req, res) => {
+  const { rejectReason } = req.body;
+  try {
+    const form = await FormData.findByIdAndUpdate(req.params.formId, { instituteVerified: 2, rejectReason: rejectReason }, { new: true });
+    res.json(form);
+  } catch (error) {
+    res.status(500).json({ message: 'Error rejecting form' });
+  }
+});
+
+
+// Fetch pending forms for a specific institute
+router.get('/api/institute/:name/pending', async (req, res) => {
+  try {
+    const instituteName = decodeURIComponent(req.params.instituteName);
+    const pendingForms = await FormData.find({ institutionName: instituteName, instituteVerified: 0 });
+    res.json(pendingForms);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching pending forms for the institute' });
   }
 });
 

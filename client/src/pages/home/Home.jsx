@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState,  useEffect } from 'react';
 import './home.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
@@ -18,6 +18,8 @@ import chegg from "../image/chegg.jpeg";
 import cappex from "../image/cappex.jpeg";
 import future from "../image/future.png";
 import { AuthContext } from '../context/Authcontext';
+import axios from 'axios';
+
 
 const Home = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -25,6 +27,20 @@ const Home = () => {
   const [classSelection, setClassSelection] = useState("");
   const [genderSelection, setGenderSelection] = useState("");
   const [stateSelection, setStateSelection] = useState("");
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/notifications');
+        setNotifications(response.data);
+      } catch (error) {
+        console.error('Error fetching notifications:', error);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
 
   const handleScholarshipClick = () => {
     if (!isLoggedIn) {
@@ -130,59 +146,60 @@ const Home = () => {
         </div>
       </div>
     
-      <div className="additional-container">
+      <div className="additional-container6">
         <h3 className="centered">Latest News</h3>
         <div className="box-frame">
           <div className="left-side">
-            <h5>Notice Board</h5>
+          <h5>Notice Board</h5>
             <div className="notification-list">
               <ul className="noticeBoard_marquee__2rfdx">
-                <li><p>Notification 1</p></li>
-                <li><p>Notification 2</p></li>
-                <li><p>Notification 3</p></li>
+                {notifications.map((notification, index) => (
+                  <li key={index}><p>{notification.message}</p></li>
+                ))}
               </ul>
             </div>
           </div>
         
+        
           <div className="right-side">
-            <div className="scholarship-heading">
+            <div className="scholarship-headingi">
               <h5>Scholarships</h5>
             </div>
           
-            <div className="slider-container">
+            <div className="slider-containeri">
               {/* Scholarship Box 1 */}
-              <div className="scholarship-box">
+              <div className="scholarship-boxe">
                 <img src={scholarshipLogo} alt="Scholarship Logo" />
                 <div className="scholarship-details">
                   <h6>Scholarship Name 1</h6>
-                  <p>Deadline: June 30, 2024</p>
+                  <p>Description: June 30, 2024</p>
                 </div>
                 <Link to="/apply" onClick={handleLinkClick}>View Details</Link>
               </div>
               {/* Scholarship Box 2 */}
-              <div className="scholarship-box">
+              <div className="scholarship-boxe">
                 <img src={scholarshipLogo} alt="Scholarship Logo" />
                 <div className="scholarship-details">
                   <h6>Scholarship Name 2</h6>
-                  <p>Deadline: July 15, 2024</p>
+                  <p>Discription: July 15, 2024</p>
                 </div>
                 <Link to="/apply" onClick={handleLinkClick}>View Details</Link>
               </div>
               {/* Scholarship Box 3 */}
-              <div className="scholarship-box">
+              <div className="scholarship-boxe">
                 <img src={scholarshipLogo} alt="Scholarship Logo" />
                 <div className="scholarship-details">
                   <h6>Scholarship Name 3</h6>
-                  <p>Deadline: July 15, 2024</p>
+                  <p>Discription: July 15, 2024</p>
                 </div>
                 <Link to="/apply" onClick={handleLinkClick}>View Details</Link>
               </div> 
               {/* Scholarship Box 4 */}
-              <div className="scholarship-box">
+              <div className="scholarship-boxe">
                 <img src={scholarshipLogo} alt="Scholarship Logo" />
                 <div className="scholarship-details">
                   <h6>Scholarship Name 4</h6>
-                  <p>Deadline: July 15, 2024</p>
+                  <p>Discription: July 15, 2024</p>
                 </div>
                 <Link to="/apply" onClick={handleLinkClick}>View Details</Link>
               </div>

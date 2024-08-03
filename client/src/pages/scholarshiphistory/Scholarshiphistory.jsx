@@ -40,7 +40,7 @@ const ScholarshipHistory = () => {
             <p><strong>Home State:</strong> {application.homeState}</p>
             <p><strong>Email:</strong> {application.email}</p>
             <p><strong>Course:</strong> {application.course}</p>
-            <p><strong>Verification Status:</strong> {application.verificationStatus || 'Pending'}</p>
+            <p><strong>Verification Status:</strong> {application.finalStatus === 1 ? 'Approved' : application.finalStatus === 2 ? `Rejected: ${application.rejectReason}` : 'Pending'}</p>
           </div>
         ))
       )}
