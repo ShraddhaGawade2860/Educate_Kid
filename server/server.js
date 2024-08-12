@@ -14,6 +14,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Import the routes
 const authRoutes = require('./src/routes/auth');
+/*const authRoutes = require('./src/routes/auth');*/
 const formRoutes = require('./src/routes/formRoutes');
 const scholarshipRoutes = require('./src/routes/scholarshipRoutes');
 const adminRoutes = require('./src/routes/admin');
@@ -26,12 +27,12 @@ const studenthistory = require('./src/routes/studenthistory');
 const usercountinstitute = require('./src/routes/usercountinstitute');
 const scholarshipcount = require('./src/routes/scholarshipcount');
 const profile = require('./src/routes/profile');
-const notificationRoutes = require('./src/routes/notificationroutes');
 const useradmincount = require('./src/routes/useradmincount');
 
 
 // Use the routes
-app.use('/api/users', authRoutes);
+app.use('/api/users',authRoutes);
+/*app.use('/api/users', authRoutes);*/
 app.use('/api/form', formRoutes);
 app.use('/api/scholarships', scholarshipRoutes);
 app.use('/api/admin', adminRoutes);
@@ -44,7 +45,6 @@ app.use('/api/studenthistory', studenthistory);
 app.use('/api',usercountinstitute);
 app.use('/api/scholarshipcount',scholarshipcount);
 app.use('/api', profile);
-app.use('/api/notifications', notificationRoutes); 
 app.use('/api/admincount',useradmincount);
 
 

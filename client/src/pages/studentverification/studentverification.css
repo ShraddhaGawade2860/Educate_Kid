@@ -1,25 +1,32 @@
-/* Reset default margin and padding */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
+  font-family: Arial, sans-serif;
 }
 
-/* Container for the entire page, including menu and content */
+/* Container for the Student Verification page */
 .student-verification-container {
   display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
 }
 
-/* Menu styling */
+/* Sidebar/menu container */
+.menu-expanded .menu-container {
+  width: 200px;
+}
+
 .menu-container {
   width: 60px;
-  height: 100vh;
   background-color: #2A5080;
   color: #fff;
   padding: 20px 10px;
   box-sizing: border-box;
   position: fixed;
+  height: 100%;
   transition: width 0.3s, border-radius 0.3s;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
@@ -27,68 +34,32 @@ html, body {
   cursor: pointer;
 }
 
-.menu-container.expanded {
-  width: 200px;
-  border-radius: 0;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.app-logo {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-}
-
-.app-name {
-  font-size: 1.5rem;
-}
-
-.menu-options {
-  margin-top: 20px;
-}
-
-.menu-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.menu-item {
-  padding: 20px 0;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.menu-item:hover {
-  background-color: #555;
-}
-
-.menu-item.logout {
-  color: white;
-}
-
-/* Main content styling */
+/* Main content area */
 .main-content {
   flex: 1;
   padding: 20px;
   margin-left: 60px;
   transition: margin-left 0.3s ease;
+  overflow-y: auto;
 }
 
 .main-content.menu-expanded {
   margin-left: 200px;
 }
 
+/* Top bar (header) */
 .top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.welcome {
+  font-size: 24px;
+  color: #333;
 }
 
 .icons {
@@ -99,64 +70,61 @@ html, body {
 .icon {
   font-size: 24px;
   cursor: pointer;
+  color: #555;
 }
 
 .icon:hover {
   color: #007bff;
 }
 
-.welcome {
-  font-size: 24px;
-  margin-bottom: 20px;
-  margin-top: 10px;
-}
-
-/* Specific styling for Student Verification component */
-.student-verification-container h2 {
-  font-size: 2rem;
+/* Dropdown menu styling */
+.dropdown-menu {
   margin-bottom: 20px;
 }
 
-.student-verification-container table {
+.dropdown-menu select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Table styling */
+table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
 
-.student-verification-container th, .student-verification-container td {
-  border: 1px solid #ddd;
-  padding: 8px;
+table th, table td {
+  padding: 12px;
   text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-.student-verification-container th {
-  background-color: #2A5080;
-  color: white;
+table th {
+  background-color: #f4f4f4;
 }
 
-.student-verification-container tr:nth-child(even) {
-  background-color: #f2f2f2;
+table tr:hover {
+  background-color: #f1f1f1;
 }
 
-.student-verification-container tr:hover {
-  background-color: #ddd;
-}
-
-.student-verification-container button {
-  padding: 10px 20px;
+button {
+  padding: 8px 12px;
+  background-color: #007bff;
   color: #fff;
-  background-color: #2A5080;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
 }
 
-.student-verification-container button:hover {
-  background-color: #1e3d66;
+button:hover {
+  background-color: #0056b3;
 }
 
-.student-verification-container p {
-  margin-top: 20px;
-  font-size: 1.2rem;
+/* Message for no forms */
+p {
+  font-size: 18px;
+  color: #666;
 }

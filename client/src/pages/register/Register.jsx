@@ -88,7 +88,7 @@ const Signup = () => {
             <div className={styles.left}>
                     <h1>Welcome Back</h1>
                     <Link to="/login">
-                        <button type="button" className={styles.white_btn}>
+                        <button type="button" className={styles.white_btn1}>
                             Sign in
                         </button>
                     </Link>
@@ -111,7 +111,7 @@ const Signup = () => {
                     </div>
                     <form className={styles.form_container} onSubmit={handleSubmit}>
                         <input
-                            type="text2"
+                            type="texti"
                             placeholder="Name"
                             name="name"
                             onChange={handleChange}
@@ -120,7 +120,7 @@ const Signup = () => {
                             className={styles.input}
                         />
                         <input
-                            type="email2"
+                            type="emaili"
                             placeholder="Email"
                             name="email"
                             onChange={handleChange}
@@ -129,7 +129,7 @@ const Signup = () => {
                             className={styles.input}
                         />
                         <input
-                            type="text2"
+                            type="texti"
                             placeholder="Contact Number"
                             name="contactnumber"
                             onChange={handleChange}
@@ -154,7 +154,7 @@ const Signup = () => {
                         {formType === 'institute' && (
                             <>
                                 <input
-                                    type="text2"
+                                    type="texti"
                                     placeholder="State"
                                     name="state"
                                     onChange={handleChange}
@@ -163,7 +163,7 @@ const Signup = () => {
                                     className={styles.input}
                                 />
                                 <input
-                                    type="text2"
+                                    type="texti"
                                     placeholder="Institute Code"
                                     name="institutecode"
                                     onChange={handleChange}
@@ -195,7 +195,7 @@ const Signup = () => {
                             </>
                         )}
                         <input
-                            type="password"
+                            type="passwordi"
                             placeholder="Password"
                             name="password"
                             onChange={handleChange}
@@ -204,7 +204,7 @@ const Signup = () => {
                             className={styles.input}
                         />
                         <input
-                            type="password"
+                            type="passwordi"
                             placeholder="Confirm Password"
                             name="confirmpassword"
                             onChange={handleChange}

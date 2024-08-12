@@ -15,7 +15,7 @@
     filter: blur(7px);
 }
 
-.image-content1 {
+.image-content2 h2 {
     position: absolute;
     top: 45%;
     left: 47%;
@@ -74,13 +74,14 @@
 }
 
 .main-image1 {
-    width: 110%;
+    width: 100%;
     height: auto;
     float: right; /* Align image to the right */
     margin-left: 50px; /* Add some space between text and image */
     margin-right: 140px; /* Add some space between image and container edge */
     border-radius: 10%;
     transition: transform 0.3s ease;
+    margin-top: 40px;
 }
 
 .text-content1 {
@@ -127,7 +128,7 @@
 
     .text-content,
     .text-content1 {
-        width: 100%;
+        width: 90%;
         float: none; /* Reset float for smaller screens */
         margin: 0;
         text-align: center;

@@ -68,7 +68,7 @@ const VerifyHome = () => {
       <div className={`main-content ${menuOpen ? 'menu-expanded' : ''}`}>
         <div className="top-bar">
           <div className="welcome">
-            {formData ? `Welcome, ${formData.name}` : 'Loading...'}
+            Form Verification
           </div>
           <div className="icons">
             <FaHome className="icon" onClick={goToHome} />
@@ -84,31 +84,31 @@ const VerifyHome = () => {
             <p><strong>Date of Birth:</strong> {new Date(formData.dateOfBirth).toLocaleDateString()}</p>
 
             <h2>Institution Details</h2>
-            <p>Institution Name: {formData.institutionName}</p>
-            <p>State: {formData.state}</p>
-            <p>Course: {formData.course}</p>
-            <p>Year: {formData.year}</p>
-            <p>Enrollment No.: {formData.enrollmentNo}</p>
-            <p>Xth Percentage: {formData.xthPercentage}</p>
-            <p>XIIth Percentage: {formData.xiithPercentage}</p>
-            <p>UG Percentage: {formData.ugPercentage}</p>
+            <p><strong>Institution Name: </strong>{formData.institutionName}</p>
+            <p><strong>State: </strong>{formData.state}</p>
+            <p><strong>Course: </strong>{formData.course}</p>
+            <p><strong>Year: </strong>{formData.year}</p>
+            <p><strong>Enrollment No.: </strong>{formData.enrollmentNo}</p>
+            <p><strong>Xth Percentage: </strong>{formData.xthPercentage}</p>
+            <p><strong>XIIth Percentage: </strong>{formData.xiithPercentage}</p>
+            <p><strong>UG Percentage: </strong>{formData.ugPercentage}</p>
 
             <h2>Address Details</h2>
-            <p>Address: {formData.address}</p>
-            <p>Home State: {formData.homeState}</p>
-            <p>Reason Of Leaving State: {formData.reasonOfLeavingState}</p>
+            <p><strong>Address: </strong>{formData.address}</p>
+            <p><strong>Home State: </strong>{formData.homeState}</p>
+            <p><strong>Reason Of Leaving State: </strong>{formData.reasonOfLeavingState}</p>
 
             <h2>Scholarship Details</h2>
-            <p>Scholarship Name: {formData.scholarshipName}</p>
-            <p>Reason For Denying Scholarship: {formData.reasonForDenyingScholarship}</p>
+            <p><strong>Scholarship Name: </strong>{formData.scholarshipName}</p>
+            <p><strong>Reason For Denying Scholarship: </strong>{formData.reasonForDenyingScholarship}</p>
 
             <h2>Disability Details</h2>
-            <p>Disabilities: {formData.disabilities === 'yes' ? 'Yes' : 'No'}</p>
+            <p><strong>Disabilities: </strong>{formData.disabilities === 'yes' ? 'Yes' : 'No'}</p>
             {formData.disabilities === 'yes' && (
               <>
-                <p>Disability Details: {formData.disabilityDetails}</p>
-                <p>
-                  Disability Certificate:
+                <p><strong>Disability Details: </strong>{formData.disabilityDetails}</p>
+                <p><strong>
+                  Disability Certificate:</strong>
                   <a href={`http://localhost:5000/${formData.disabilityCertificate}`} target="_blank" rel="noopener noreferrer">
                     View Document
                   </a>

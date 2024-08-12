@@ -26,7 +26,9 @@ import StudentList from './pages/studentlist/Studentlist';
 import Verifyhome from './pages/verifyhome/Verifyhome';
 import Verifyother from './pages/verifyother/verifyother';
 import Studentrecord from './pages/studentrecord/Studentrecord';
-import Studenthistory from './pages/studenthistory/Studenthistory'
+import Studenthistory from './pages/studenthistory/Studenthistory';
+import Instituteprofile from './pages/instituteprofile/Instituteprofile';
+import Editinstitute from './pages/editinstitute/Editinstitute';
 
 const HeaderLayout = ({ children }) => (
   <>
@@ -64,6 +66,9 @@ function App() {
         <Route path="/verifyother/:formId" element={<><Menu /><Verifyother /></>} />
         <Route path="/studentrecord" element={<><Menu /><Studentrecord /></>} />
         <Route path="/studenthistory/:state" element={<><Menu /><Studenthistory /></>} />
+        <Route path="/instituteprofile" element={<><Menu /><Instituteprofile /></>} />
+        <Route path="/editinstitute" element={<><Menu /><Editinstitute /></>} />
+
 
       </Routes>
     </AuthProvider>

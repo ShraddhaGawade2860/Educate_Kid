@@ -1,14 +1,14 @@
-/* adminhome.css */
-
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
+  font-family: Arial, sans-serif;
 }
 
 .admin-dashboard {
   display: flex;
+  height: 100vh;
 }
 
 .menu-container {
@@ -24,6 +24,7 @@ html, body {
   border-bottom-right-radius: 30px;
   overflow: hidden;
   cursor: pointer;
+  z-index: 1000; /* Ensure menu stays above other content */
 }
 
 .menu-container.expanded {
@@ -31,52 +32,12 @@ html, body {
   border-radius: 0;
 }
 
-.logo-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.app-logo {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-}
-
-.app-name {
-  font-size: 1.5rem;
-}
-
-.menu-options {
-  margin-top: 20px;
-}
-
-.menu-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.menu-item {
-  padding: 20px 0;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.menu-item:hover {
-  background-color: #555;
-}
-
-.menu-item.logout {
-  color: white;
-}
-
 .main-content {
   flex: 1;
   padding: 20px;
   margin-left: 60px;
   transition: margin-left 0.3s ease;
+  overflow-y: auto; /* Allows scrolling if content exceeds page height */
 }
 
 .main-content.menu-expanded {
@@ -109,6 +70,7 @@ html, body {
   margin-top: 10px;
 }
 
+/* Total Counts Boxes */
 .stats-boxes1 {
   display: flex;
   gap: 10px;
@@ -116,16 +78,40 @@ html, body {
   margin-top: 25px;
 }
 
-.boxi {
-  background-color: #f1f1f1;
+.boxii {
   padding: 5px;
   border-radius: 8px;
   flex: 1;
-  text-align: left;
+  text-align: center;
   height: 80px;
+  color: #fff; /* Text color for better contrast */
+  position: relative; /* For hover effects */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
 }
 
-.boxi h3 {
+.boxii:hover {
+  transform: translateY(-5px); /* Lift the box on hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.boxii:nth-child(1) {
+  background-color: #ff6f61; /* Color for box 1 */
+}
+
+.boxii:nth-child(2) {
+  background-color: #6ab04c; /* Color for box 2 */
+}
+
+.boxii:nth-child(3) {
+  background-color: #f39c12; /* Color for box 3 */
+}
+
+.boxii:nth-child(4) {
+  background-color: #3498db; /* Color for box 4 */
+}
+
+.boxii h3 {
   margin: 0;
   margin-bottom: 5px;
   font-size: 18px;
@@ -133,26 +119,52 @@ html, body {
   margin-top: 17px;
 }
 
-.boxi p {
+.boxii p {
   margin: 0;
   font-size: 16px;
   text-align: center;
   margin-top: 10px;
+  color: white;
+}
+
+.boxii::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.4); /* A subtle highlight at the bottom */
+  border-radius: 0 0 8px 8px;
+}
+
+.boxii:hover::after {
+  height: 6px; /* Increase height on hover */
 }
 
 .content-row {
   display: flex;
   margin-top: 20px;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
+/* Graph Box */
 .graph {
-  width: 45%;
-  background-color: #f1f1f1;
+  width: 100%;
+  max-width: 600px;
+  background-color: #e2e3e4; /* Light Teal */
   padding: 20px;
   border-radius: 8px;
-  border: 2px solid #ccc;
+  border: 2px solid #bbc4c4; /* Teal Border */
   margin-top: 15px;
+  flex-grow: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.graph:hover {
+  transform: translateY(-5px); /* Lift the box on hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
 
 .graph-container {
@@ -163,14 +175,22 @@ html, body {
   height: 300px;
 }
 
+/* Pending Students Box */
 .pending-students {
-  flex: 1;
-  background-color: #f1f1f1;
+  flex-grow: 1;
+  background-color: #f3e4af; /* Light Yellow */
   padding: 20px;
   border-radius: 8px;
-  border: 2px solid #ccc;
+  border: 2px solid #ccc2b1; /* Orange Border */
   margin-top: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.pending-students:hover {
+  transform: translateY(-5px); /* Lift the box on hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
 
 .header {
   display: flex;
@@ -189,7 +209,7 @@ html, body {
 .student-list-header {
   display: flex;
   justify-content: space-between;
-  background-color: #ddd;
+  background-color: #183157;
   padding: 10px;
   border-radius: 8px;
   margin-top: 10px;
@@ -198,7 +218,8 @@ html, body {
 .student-list-header p {
   flex: 1;
   margin: 2px;
-  font-weight: bold;
+  font-weight: normal;
+  color: rgb(255, 255, 255);
 }
 
 .student-list {
@@ -240,32 +261,39 @@ html, body {
   margin-top: 20px;
 }
 
-.recent-institute h4{
+.recent-institute h4 {
   margin-top: 40px;
 }
 
+/* Recently Added Institute Box */
 .institute-container {
-  background-color: #f1f1f1;
+  background-color: #e8daef; /* Light Purple */
   padding: 20px;
   border-radius: 8px;
-  border: 2px solid #ccc;
+  border: 2px solid #daacee; /* Purple Border */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.institute-container:hover {
+  transform: translateY(-5px); /* Lift the box on hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
 
 .institute-row {
   display: flex;
   gap: 10px;
   margin-top: 10px;
-  width: 450px;
-  height: 150px;
+  flex-wrap: wrap;
 }
 
 .institute {
-  flex: 1;
   background-color: #fff;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
   text-align: center;
+  flex: 1 1 45%; /* Adjusts width based on available space */
 }
 
 .institute p {
@@ -284,3 +312,14 @@ html, body {
 .view-button:hover {
   background-color: #0056b3;
 }
+
+/* General Hover Effect */
+.box-shadow-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.box-shadow-hover:hover {
+  transform: translateY(-5px); /* Lift the box on hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+

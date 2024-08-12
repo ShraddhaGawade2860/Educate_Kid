@@ -78,7 +78,7 @@ const StudentList = () => {
           </button>
         </div>
         <div className="status-dropdown">
-          <label htmlFor="statusFilter">Filter by Status: </label>
+          <label htmlFor="statusFilter"></label>
           <select
             id="statusFilter"
             value={statusFilter}
@@ -89,7 +89,6 @@ const StudentList = () => {
             <option value="verified">Verified</option>
           </select>
         </div>
-        <h2>User Forms</h2>
         {userForms.length > 0 ? (
           <table>
             <thead>

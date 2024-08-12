@@ -1,6 +1,6 @@
 import React, { useContext, useState,  useEffect } from 'react';
 import './home.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import mainVideo from "../video/home.mp4"; 
@@ -149,13 +149,13 @@ const Home = () => {
       <div className="additional-container6">
         <h3 className="centered">Latest News</h3>
         <div className="box-frame">
-          <div className="left-side">
-          <h5>Notice Board</h5>
+        <div className="left-side">
+            <h5>Notice Board</h5>
             <div className="notification-list">
               <ul className="noticeBoard_marquee__2rfdx">
-                {notifications.map((notification, index) => (
-                  <li key={index}><p>{notification.message}</p></li>
-                ))}
+                <li><p>Notification 1</p></li>
+                <li><p>Notification 2</p></li>
+                <li><p>Notification 3</p></li>
               </ul>
             </div>
           </div>
@@ -171,37 +171,33 @@ const Home = () => {
               <div className="scholarship-boxe">
                 <img src={scholarshipLogo} alt="Scholarship Logo" />
                 <div className="scholarship-details">
-                  <h6>Scholarship Name 1</h6>
+                  <h6>R. I. M. C. Dehradun Scholarship, Maharashtra</h6>
                   <p>Description: June 30, 2024</p>
                 </div>
-                <Link to="/apply" onClick={handleLinkClick}>View Details</Link>
               </div>
               {/* Scholarship Box 2 */}
               <div className="scholarship-boxe">
                 <img src={scholarshipLogo} alt="Scholarship Logo" />
                 <div className="scholarship-details">
-                  <h6>Scholarship Name 2</h6>
+                  <h6>"R. I. M. C. Dehradun Scholarship, Tamil Nadu</h6>
                   <p>Discription: July 15, 2024</p>
                 </div>
-                <Link to="/apply" onClick={handleLinkClick}>View Details</Link>
               </div>
               {/* Scholarship Box 3 */}
               <div className="scholarship-boxe">
                 <img src={scholarshipLogo} alt="Scholarship Logo" />
                 <div className="scholarship-details">
-                  <h6>Scholarship Name 3</h6>
+                  <h6>Eklavya Scholarship, Maharashtra 2023-24</h6>
                   <p>Discription: July 15, 2024</p>
                 </div>
-                <Link to="/apply" onClick={handleLinkClick}>View Details</Link>
               </div> 
               {/* Scholarship Box 4 */}
               <div className="scholarship-boxe">
                 <img src={scholarshipLogo} alt="Scholarship Logo" />
                 <div className="scholarship-details">
-                  <h6>Scholarship Name 4</h6>
+                  <h6>Cultural Talent Search Scholarship Scheme 2024-25</h6>
                   <p>Discription: July 15, 2024</p>
                 </div>
-                <Link to="/apply" onClick={handleLinkClick}>View Details</Link>
               </div>
             </div>
           </div>
