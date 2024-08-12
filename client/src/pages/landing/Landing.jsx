@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import './landing.css';
-import { Link , Navigate} from 'react-router-dom';
+import { Navigate} from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import mainVideo from "../video/home.mp4"; 
@@ -65,46 +65,42 @@ const Landing = () => {
           </div>
 
           <div className="right-side">
-            <div className="scholarship-heading">
+            <div className="scholarship-headingi">
               <h5>Scholarships</h5>
             </div>
-
-            <div className="slider-container1">
+          
+            <div className="slider-containeri">
               {/* Scholarship Box 1 */}
               <div className="scholarship-box">
                 <img src={scholarshipLogo} alt="Scholarship Logo" />
                 <div className="scholarship-details">
-                  <h6>Scholarship Name 1</h6>
-                  <p>Deadline: June 30, 2024</p>
+                  <h6>R. I. M. C. Dehradun Scholarship, Maharashtra</h6>
+                  <p>Description: June 30, 2024</p>
                 </div>
-                <Link to="/apply" onClick={handleLinkClick}>View Details</Link>
               </div>
               {/* Scholarship Box 2 */}
               <div className="scholarship-box">
                 <img src={scholarshipLogo} alt="Scholarship Logo" />
                 <div className="scholarship-details">
-                  <h6>Scholarship Name 2</h6>
-                  <p>Deadline: July 15, 2024</p>
+                  <h6>"R. I. M. C. Dehradun Scholarship, Tamil Nadu</h6>
+                  <p>Discription: July 15, 2024</p>
                 </div>
-                <Link to="/apply" onClick={handleLinkClick}>View Details</Link>
               </div>
               {/* Scholarship Box 3 */}
               <div className="scholarship-box">
                 <img src={scholarshipLogo} alt="Scholarship Logo" />
                 <div className="scholarship-details">
-                  <h6>Scholarship Name 3</h6>
-                  <p>Deadline: July 15, 2024</p>
+                  <h6>Eklavya Scholarship, Maharashtra 2023-24</h6>
+                  <p>Discription: July 15, 2024</p>
                 </div>
-                <Link to="/apply" onClick={handleLinkClick}>View Details</Link>
               </div> 
               {/* Scholarship Box 4 */}
               <div className="scholarship-box">
                 <img src={scholarshipLogo} alt="Scholarship Logo" />
                 <div className="scholarship-details">
-                  <h6>Scholarship Name 4</h6>
-                  <p>Deadline: July 15, 2024</p>
+                  <h6>Cultural Talent Search Scholarship Scheme 2024-25</h6>
+                  <p>Discription: July 15, 2024</p>
                 </div>
-                <Link to="/apply" onClick={handleLinkClick}>View Details</Link>
               </div>
             </div>
           </div>
@@ -216,6 +212,17 @@ const Landing = () => {
               <p>Future</p>
             </a>
           </div>
+        </div>
+      </div>
+
+         {/* Footer Section */}
+         <div className="footer">
+        <div className="footer-content">
+          <p>&copy; 2024 EducateKid. All Rights Reserved.</p>
+          <div className="footer-links">
+            <a href="/terms">Terms of Service</a>
+            <a href="/privacy">Privacy Policy</a>          
+            </div>
         </div>
       </div>
 

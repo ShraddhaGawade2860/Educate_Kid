@@ -11,6 +11,7 @@ const VerifyOther = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [state, setState] = useState('');
   const [rejectReason, setRejectReason] = useState('');
+  const [showRejectModal, setShowRejectModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -132,22 +133,27 @@ const VerifyOther = () => {
             <p>Fee Receipt: <a href={`http://localhost:5000/${form.feeReceipt}`} target="_blank" rel="noopener noreferrer">
               View Document</a></p>
 
-            <div className="actions">
-              <button onClick={handleApprove}>Approve</button>
-              <button onClick={() => document.getElementById('rejectModal').style.display = 'block'}>Reject</button>
-            </div>
-            <div id="rejectModal" className="modal">
-              <div className="modal-content">
-                <span className="close" onClick={() => document.getElementById('rejectModal').style.display = 'none'}>&times;</span>
-                <h3>Reject Form</h3>
-                <textarea
-                  placeholder="Enter rejection reason"
-                  value={rejectReason}
-                  onChange={(e) => setRejectReason(e.target.value)}
-                />
-                <button onClick={handleReject}>Submit Rejection</button>
+            {form.status === 'pending' && (
+              <div className="actions">
+                <button onClick={handleApprove}>Approve</button>
+                <button onClick={() => setShowRejectModal(true)}>Reject</button>
               </div>
-            </div>
+            )}
+            
+            {showRejectModal && (
+              <div id="rejectModal" className="modal">
+                <div className="modal-content">
+                  <span className="close" onClick={() => setShowRejectModal(false)}>&times;</span>
+                  <h3>Reject Form</h3>
+                  <textarea
+                    placeholder="Enter rejection reason"
+                    value={rejectReason}
+                    onChange={(e) => setRejectReason(e.target.value)}
+                  />
+                  <button onClick={handleReject}>Submit Rejection</button>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <p>Loading form details...</p>

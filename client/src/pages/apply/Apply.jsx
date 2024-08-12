@@ -238,7 +238,8 @@ const Form = ({ scholarshipName }) => {
               <option value="">Select Institute</option>
               <option value="Thakur Polytechnic">Thakur Polytechnic</option>
               <option value="ACS Medical College, TamilNadu">ACS Medical College, TamilNadu</option>
-              <option value="ACS Medical College, TamilNadu">Vellore Institute of Technology, Vellore</option>
+              <option value="Vellore Institute of Technology, Vellore">Vellore Institute of Technology, Vellore</option>
+              <option value="Rayat-Bahra University">Rayat-Bahra University</option>
 
               {/* Add more options as needed */}
             </select>

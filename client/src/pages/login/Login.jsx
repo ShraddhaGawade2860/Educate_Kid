@@ -21,51 +21,60 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(''); // Clear previous errors
+
     if (!data.identifier || !data.password) {
       setError("Please fill out all fields.");
       return;
-    } else {
-      setError("");
-      try {
-        const response = await fetch('http://localhost:5000/api/users/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          if (result.role === 1 && !result.verified) {
-            setError(result.rejected ? 
-                     "Admin rejected your form, please register again with correct information." : 
-                     "Your account is pending admin approval. Please wait for verification.");
-            return;
-          }
-
-          login(result); // Store user data in AuthContext
-          toast.success("Login successful!");
-          setTimeout(() => {
-            if (result.role === 0) {
-              navigate('/');
-            } else if (result.role === 1) {
-              navigate('/institutehome');
-            } else if (result.role === 2) {
-              localStorage.setItem('state', result.state);
-              navigate(`/adminhome/${result.state}`);
-            }
-          }, 2000);
-        } else {
-          setError(result.msg || "Invalid credentials");
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        setError('An error occurred. Please try again.');
-      }
     }
-  };
+    
+    try {
+      console.log('Sending login request with data:', data); // Log request data
+
+      const response = await fetch('http://localhost:5000/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          identifier: data.identifier,
+          password: data.password,
+        }),
+      });
+
+      const result = await response.json();
+
+      console.log('Login response:', result); // Log response data
+
+      if (response.ok) {
+        if (result.role === 1 && !result.verified) {
+          setError(result.rejected ? 
+                   "Admin rejected your form, please register again with correct information." : 
+                   "Your account is pending admin approval. Please wait for verification.");
+          return;
+        }
+
+        login(result); // Store user data in AuthContext
+        toast.success("Login successful!");
+        setTimeout(() => {
+          if (result.role === 0) {
+            navigate('/');
+          } else if (result.role === 1) {
+            navigate('/institutehome');
+          } else if (result.role === 2) {
+            localStorage.setItem('state', result.state);
+            navigate(`/adminhome/${result.state}`);
+          }
+        }, 2000);
+      } else {
+        setError(result.msg || "Invalid credentials");
+      }
+    } catch (error) {
+      console.error('Login error:', error); // Debug statement
+      setError('An error occurred. Please try again.');
+    }
+};
+
 
   return (
     <div className={styles.login_container}>
@@ -74,7 +83,7 @@ const Login = () => {
           <form className={styles.form_container} onSubmit={handleSubmit}>
             <h1>Login</h1>
             <input
-              type="text"
+              type="textii"
               placeholder="Email or State"
               name="identifier"
               onChange={handleChange}
@@ -100,7 +109,7 @@ const Login = () => {
         <div className={styles.right}>
           <h1>New Here?</h1>
           <Link to="/register">
-            <button type="button" className={styles.white_btn}>
+            <button type="button" className={styles.white_btn1}>
               Sign Up
             </button>
           </Link>

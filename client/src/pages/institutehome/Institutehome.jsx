@@ -96,6 +96,19 @@ const InstituteHome = () => {
     }
   }, [instituteName]);
 
+  useEffect(() => {
+    const fetchScholarshipCount = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/scholarshipcount/count');
+        setScholarshipCount(response.data.count);
+      } catch (error) {
+        console.error('Error fetching scholarship count:', error);
+      }
+    };
+
+    fetchScholarshipCount();
+  }, []);
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -123,27 +136,27 @@ const InstituteHome = () => {
         </div>
 
         <div className="stats-boxes">
-          <div className="box">
+          <div className="boxii">
             <h3>Total Scholarships</h3>
             <p>{scholarshipCount}</p>
           </div>
-          <div className="box">
+          <div className="boxii">
             <h3>Total Pending Students</h3>
             <p>{pendingCount}</p>
           </div>
-          <div className="box">
+          <div className="boxii">
             <h3>Total Verified Students</h3>
             <p>{verifiedCount}</p>
           </div>
-          <div className="box">
+          <div className="boxii">
             <h3>Total Rejected Students</h3>
             <p>{rejectedCount}</p>
           </div>
         </div>
 
-        <div className="graph-section">
+        <div className="graph-section1">
           <h4>Mostly Applied Scholarships</h4>
-          <div className="graph-container">
+          <div className="graph-container1">
             <Bar data={scholarshipData} options={chartOptions} />
           </div>
         </div>

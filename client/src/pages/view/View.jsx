@@ -53,7 +53,7 @@ const View = () => {
             scholarships.map((scholarship, index) => (
               <div className="scholarship-box1" key={index}>
                 <img src={scholarship.image || 'path_to_default_image'} alt={`${scholarship.name} Logo`} />
-                <div className="scholarship-details">
+                <div className="scholarship-detailss">
                   <h6>{scholarship.name}</h6>
                   <p><strong>Benefits:</strong> {scholarship.benefits}</p>
                   <p><strong>Eligibility Criteria:</strong> {scholarship.eligibility}</p>

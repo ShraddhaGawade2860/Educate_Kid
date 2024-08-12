@@ -31,6 +31,15 @@ video {
   font-weight: bold;
 }
 
+.video-content p{
+  text-align: center;
+  color: rgb(109, 6, 6);
+  font-size: 18px;
+  font-family: "Inter",sans-serif;
+  font-weight: bold;
+
+}
+
 .home-container {
   width: 100%;
   height: 100%;
@@ -172,7 +181,7 @@ video {
     display: flex;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
-    background: #dadaec;
+    background: #2A5080;
     border-radius: 15px;
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .1607843137);
 }
@@ -186,7 +195,7 @@ video {
   padding: 10px;
   background-color: #fff;
   box-shadow: 0 0 9px -1px rgba(0, 0, 0, .2);
-  border-radius: 8px;
+  border-radius: 8px ;
   background-clip: border-box;
   overflow: hidden;
   position: relative; 
@@ -264,7 +273,7 @@ video {
 
 .slider-item {
   min-width: 200px; 
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   padding: 10px;
   border-radius: 5px;
 }
@@ -280,7 +289,7 @@ video {
 
 .scholarship-boxe {
   width: 250px;
-  border: 1px solid #000;
+  border: 4px solid #fdfdfd;
   border-radius: 5px;
   padding: 10px;
   margin-right: 20px;
@@ -296,21 +305,16 @@ video {
 .scholarship-details h6 {
   margin: 0;
   margin-bottom: 5px;
+  color: #fff;
 }
 
 .scholarship-details p {
   margin: 0;
-  margin-bottom: 10px;
+  margin-bottom: 1px;
+  color: #fff;
 }
 
-.scholarship-boxe a {
-  color: blue;
-  text-decoration: none;
-}
 
-.scholarship-boxe a:hover {
-  text-decoration: underline;
-}
 
 .four-box-container2 {
   margin-left: 0;

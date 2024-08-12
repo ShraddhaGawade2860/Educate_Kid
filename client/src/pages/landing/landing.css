@@ -163,11 +163,14 @@ video {
 .box-frame0 {
   border: 2px solid #ccc; 
   padding: 20px; 
-  display: flex;
-  flex-wrap: wrap;
-  background: #dadaec;
-  border-radius: 15px;
-  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .1607843137);
+  display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    background: #2A5080;
+    border-radius: 15px;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .1607843137);
 }
 
 .left-side {
@@ -273,7 +276,7 @@ video {
 
 .scholarship-box {
   width: 320px;
-  border: 1px solid #000;
+  border: 2px solid #ffffff;
   border-radius: 5px;
   padding: 10px;
   margin-right: 20px;
@@ -295,16 +298,9 @@ video {
 .scholarship-details p {
   margin: 0;
   margin-bottom: 45px;
+  color: white;
 }
 
-.scholarship-box a {
-  color: blue;
-  text-decoration: none;
-}
-
-.scholarship-box a:hover {
-  text-decoration: underline;
-}
 
 .four-box-container5 {
   margin-left: 0;
@@ -317,7 +313,7 @@ video {
 
 .box-frame2 {
   border: 2px solid #ccc; 
-  padding: 30px; 
+padding: 30px; 
   display: flex;
   background: #aad0f3;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1607843137); 
@@ -514,7 +510,7 @@ video {
 }
 
 .slider-item {
-  flex: 1 0 100%;
+  flex: 4 0 100%;
   max-width: 33.33%;
   box-sizing: border-box;
   padding: 20px;
@@ -545,5 +541,37 @@ video {
 
 .slider-container {
   animation: scroll 30s linear infinite;
+}
+
+
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+}
+
+.footer-links {
+  margin-top: 5px;
+  
+}
+
+.footer-links a {
+  color: white;
+  margin: 0 5px;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
 }
 

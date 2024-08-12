@@ -9,6 +9,11 @@ const Menu = ({ isExpanded, toggleMenu }) => {
   const location = useLocation();
 
   const handleLogout = () => {
+    // Clear any authentication data (e.g., token or user info)
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user'); // Assuming you store user data in localStorage
+    
+    // Navigate to the login page
     navigate('/login');
   };
 
@@ -32,7 +37,9 @@ const Menu = ({ isExpanded, toggleMenu }) => {
       '/studenthistory',
       '/studentlist',
       '/instituteverification',
-      '/institutelist'
+      '/institutelist',
+      '/verifyhome',
+      '/verifyother'
     ];
     return adminPaths.some(path => location.pathname.startsWith(path));
   };
@@ -40,12 +47,13 @@ const Menu = ({ isExpanded, toggleMenu }) => {
   const isInstitutePage = () => {
     const institutePaths = [
       '/institutehome',
-      '/editprofile',
+      '/instituteprofile',
       '/terms',
       '/studentrecord',
       '/studentverification',
       '/privacy',
-       '/availablescholarship'
+      '/availablescholarship',
+      '/userdata'
     ];
     return institutePaths.some(path => location.pathname.startsWith(path));
   };
@@ -74,7 +82,7 @@ const Menu = ({ isExpanded, toggleMenu }) => {
               <li className="menu-item" onClick={() => navigate('/studentrecord')}>Student Record</li>
               <li className="menu-item" onClick={() => navigate('/studentverification')}>Student Verification</li>
               <li className="menu-item" onClick={() => navigate('/availablescholarship')}>Available Scholarship</li>
-              <li className="menu-item" onClick={() => navigate('/editprofile')}>Edit Profile</li>
+              <li className="menu-item" onClick={() => navigate('/instituteprofile')}>Edit Profile</li>
               <li className="menu-item" onClick={() => navigate('/terms')}>Terms and Conditions</li>
               <li className="menu-item" onClick={() => navigate('/privacy')}>Privacy Policy</li>
               <li className="menu-item logout" onClick={handleLogout}>Logout</li>

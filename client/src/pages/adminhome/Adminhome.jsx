@@ -70,7 +70,6 @@ const AdminHome = () => {
     fetchScholarshipCount();
   }, []);
 
-  // New effect to fetch recent institutes
   useEffect(() => {
     const fetchRecentInstitutes = async () => {
       try {
@@ -96,6 +95,10 @@ const AdminHome = () => {
 
   const goToHome = () => {
     navigate(`/adminhome/${state}`);
+  };
+
+  const goToStudentList = () => {
+    navigate('/studentlist');
   };
 
   const chartData = {
@@ -127,20 +130,22 @@ const AdminHome = () => {
           </div>
         </div>
 
+        
+
         <div className="stats-boxes1">
-          <div className="boxi">
+          <div className="boxii">
             <h3>Total Scholarships</h3>
             <p>{scholarshipCount}</p>
           </div>
-          <div className="boxi">
+          <div className="boxii">
             <h3>Total Pending Students</h3>
             <p>{pendingCount}</p>
           </div>
-          <div className="boxi">
+          <div className="boxii">
             <h3>Total Verified Students</h3>
             <p>{verifiedCount}</p>
           </div>
-          <div className="boxi">
+          <div className="boxii">
             <h3>Total Rejected Students</h3>
             <p>{rejectedCount}</p>
           </div>
@@ -157,7 +162,7 @@ const AdminHome = () => {
           <div className="pending-students">
             <div className="header">
               <h4>Recently Pending Students</h4>
-              <button className="link-button">View All</button>
+              <button className="link-button" onClick={goToStudentList}>View All</button>
             </div>
 
             <div className="student-list-header">
@@ -189,11 +194,11 @@ const AdminHome = () => {
                   <p>Name: {institute.name}</p>
                   <p>Code: {institute.code}</p>
                   <button 
-            className="view-button" 
-            onClick={() => navigate(`/instituteverification`)}
-          >
-            View
-          </button>
+                    className="view-button" 
+                    onClick={() => navigate(`/instituteverification`)}
+                  >
+                    View
+                  </button>
                 </div>
               ))}
             </div>

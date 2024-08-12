@@ -35,16 +35,5 @@ router.put('/users/:id', upload.single('profileImage'), async (req, res) => {
 });
 
 
-/*router.put('/users/:id', async (req, res) => {
-  console.log('Received PUT request for user ID:', req.params.id); // Debug statement
-  try {
-      const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
-      if (!updatedUser) {
-          return res.status(404).json({ msg: 'User not found' });
-      }
-      res.json(updatedUser);
-  } catch (err) {
-      res.status(500).json({ msg: 'Server error', error: err.message });
-  }
-});*/
+
 module.exports = router;
