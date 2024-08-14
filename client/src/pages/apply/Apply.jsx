@@ -121,6 +121,8 @@ const Form = ({ scholarshipName }) => {
   });
 
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -174,16 +176,26 @@ const Form = ({ scholarshipName }) => {
         }
       });
       if (response.status === 200) {
-        alert('Form submitted successfully');
-        navigate('/apply', { state: { scholarship: { name: scholarshipName } } });
+        setSuccessMessage('Form submitted successfully');
+        setIsFormSubmitted(true);
+
+        // Close form and navigate after showing success message
+        setTimeout(() => {
+          navigate('/apply', { state: { scholarship: { name: scholarshipName } } });
+        }, 2000);
       }
     } catch (error) {
       console.error(error);
     }
   };
 
+  if (isFormSubmitted) {
+    return <div className="success-message">{successMessage}</div>;
+  }
+
+
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
+    <form className="form-containerr" onSubmit={handleSubmit}>
       <h2>Personal Information</h2>
       <div className="form-section">
         <div className="form-row-inline">

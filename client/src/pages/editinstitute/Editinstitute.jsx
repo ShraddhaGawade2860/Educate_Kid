@@ -26,7 +26,7 @@ const EditInstitute = () => {
         contactnumber: user.contactnumber || '',
         profileImage: user.profileImage || ''
       });
-      setImagePreview(user.profileImage || '');
+      setImagePreview(user.profileImage ? `http://localhost:5000/uploads/${user.profileImage}` : '');
     }
   }, [user]);
 
@@ -62,7 +62,7 @@ const EditInstitute = () => {
       });
       login(response.data);
       alert('Profile updated successfully!');
-      navigate('/institutehome');
+      navigate('/instituteprofile'); // Redirect to institute profile page after update
     } catch (error) {
       alert('Update failed: ' + (error.response ? error.response.data.msg : error.message));
     }
@@ -139,7 +139,7 @@ const EditInstitute = () => {
                 required
               />
             </div>
-            <button type="submit2">Update</button>
+            <button type="submit">Update</button>
           </form>
         </div>
       </div>

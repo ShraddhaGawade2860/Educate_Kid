@@ -24,7 +24,19 @@ const Signup = () => {
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+
+        if (name === 'contactnumber' && !/^\d*$/.test(value)) {
+            // Prevent non-digit characters
+            return;
+        }
+
+        setFormData({ ...formData, [name]: value });
+
+        if (name === 'contactnumber' && value.length > 10) {
+            // Limit contact number to 10 digits
+            setFormData({ ...formData, contactnumber: value.slice(0, 10) });
+        }
     };
 
     const handleFileChange = (e) => {
@@ -33,11 +45,16 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (formData.password !== formData.confirmpassword) {
             setError("Passwords do not match");
             return;
         }
 
+        if (formData.contactnumber.length !== 10) {
+            setError("Contact number must be exactly 10 digits");
+            return;
+        }
         try {
             const url = 'http://localhost:5000/api/users/register';
             const data = new FormData();

@@ -56,6 +56,8 @@ const Home = () => {
       state: { classSelection, genderSelection, stateSelection }
     });
   };
+  
+  
 
   const handleLinkClick = (e) => {
     if (!isLoggedIn) {
@@ -153,9 +155,9 @@ const Home = () => {
             <h5>Notice Board</h5>
             <div className="notification-list">
               <ul className="noticeBoard_marquee__2rfdx">
-                <li><p>Notification 1</p></li>
-                <li><p>Notification 2</p></li>
-                <li><p>Notification 3</p></li>
+              <li><p>New Scholarships Added</p></li>
+                <li><p>R. I. M. C. Dehradun Scholarship, Maharashtra added by Maharashtra State</p></li>
+                <li><p>Check for new scholarships and your verification status</p></li>
               </ul>
             </div>
           </div>
@@ -291,6 +293,18 @@ const Home = () => {
     </div>
   </div>
 </div>
+
+      {/* Footer Section */}
+      <div className="footer">
+        <div className="footer-content">
+          <p>&copy; 2024 EducateKid. All Rights Reserved.</p>
+          <div className="footer-links">
+          <a href="/userterms" onClick={handleLinkClick}>Terms of Service</a>
+          <a href="/userprivacy" onClick={handleLinkClick}>Privacy Policy</a>          
+            </div>
+        </div>
+      </div>
+
 <ToastContainer />
 </div>
   );
