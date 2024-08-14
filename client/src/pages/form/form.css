@@ -1,16 +1,16 @@
-.form-container {
+.form-containerr {
   padding: 20px;
-  width: 1010px;
+  width: 1070px;
   margin: 0 auto;
   background-color: #ffffff;
   border: 1px solid #868cb1;
   border-radius: 5px;
 }
 
-.form-container h2 {
+.form-containerr h2 {
   margin-top: 20px;
   text-align: left;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .form-section {
@@ -73,7 +73,7 @@ textarea {
   margin-top: 5px;
 }
 
-.button {
+.button  {
   background-color: #2A5080;
   color: white;
   padding: 10px 20px;
@@ -81,6 +81,7 @@ textarea {
   cursor: pointer;
   margin: 20px auto;
   display: block;
+  align-items: center;
 
 }
 

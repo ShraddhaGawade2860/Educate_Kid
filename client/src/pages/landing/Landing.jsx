@@ -39,12 +39,12 @@ const Landing = () => {
         <div className="content">
           <div className="video-container">
             <video src={mainVideo} alt="Main Banner" autoPlay loop muted />
-            <div className="video-content1">
+            <div className="video-content">
               <p>"Welcome To EducateKid Portal. This is India's Largest<br /> Scholarship Platform."</p>
-              <div className="search-bar">
-                <input type="text" placeholder="Search for scholarships..." />
-                <button>Search</button>
-              </div>
+              <p>Unlock your future with EducaTek Scholarships, where education meets opportunity. 
+                Our platform is dedicated to providing deserving students with financial support to pursue their 
+                dreams and achieve academic excellence.</p>
+             
             </div>
           </div>
         </div>
@@ -57,9 +57,9 @@ const Landing = () => {
             <h5>Notice Board</h5>
             <div className="notification-list">
               <ul className="noticeBoard_marquee__2rfdx">
-                <li><p>Notification 1</p></li>
-                <li><p>Notification 2</p></li>
-                <li><p>Notification 3</p></li>
+                <li><p>New Scholarships Added</p></li>
+                <li><p>R. I. M. C. Dehradun Scholarship, Maharashtra added by Maharashtra State</p></li>
+                <li><p>Check for new scholarships and your verification status</p></li>
               </ul>
             </div>
           </div>
@@ -74,7 +74,7 @@ const Landing = () => {
               <div className="scholarship-box">
                 <img src={scholarshipLogo} alt="Scholarship Logo" />
                 <div className="scholarship-details">
-                  <h6>R. I. M. C. Dehradun Scholarship, Maharashtra</h6>
+                  <h6>R. I. M. C. Scholarship, Maharashtra</h6>
                   <p>Description: June 30, 2024</p>
                 </div>
               </div>
@@ -220,8 +220,8 @@ const Landing = () => {
         <div className="footer-content">
           <p>&copy; 2024 EducateKid. All Rights Reserved.</p>
           <div className="footer-links">
-            <a href="/terms">Terms of Service</a>
-            <a href="/privacy">Privacy Policy</a>          
+          <a href="/userterms" onClick={handleLinkClick}>Terms of Service</a>
+          <a href="/userprivacy" onClick={handleLinkClick}>Privacy Policy</a>           
             </div>
         </div>
       </div>

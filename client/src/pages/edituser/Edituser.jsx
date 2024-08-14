@@ -24,7 +24,7 @@ const EditUser = () => {
         gender: user.gender || '',
         profileImage: user.profileImage || ''
       });
-      setImagePreview(user.profileImage || '');
+      setImagePreview(user.profileImage ? `http://localhost:5000/uploads/${user.profileImage}` : '');
     }
   }, [user]);
 
@@ -127,10 +127,14 @@ const EditUser = () => {
             <option value="other">Other</option>
           </select>
         </div>
-        <button type="submit1">Update</button>
+        <button type="submit" className="update-button">Update</button>
         {error && <div className="error-message">{error}</div>}
       </form>
+
+     
     </div>
+          
+    
   );
 };
 

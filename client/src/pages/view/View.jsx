@@ -52,7 +52,6 @@ const View = () => {
           {scholarships.length > 0 ? (
             scholarships.map((scholarship, index) => (
               <div className="scholarship-box1" key={index}>
-                <img src={scholarship.image || 'path_to_default_image'} alt={`${scholarship.name} Logo`} />
                 <div className="scholarship-detailss">
                   <h6>{scholarship.name}</h6>
                   <p><strong>Benefits:</strong> {scholarship.benefits}</p>
@@ -72,18 +71,24 @@ const View = () => {
           {scholarships.slice(0, 3).map((scholarship, index) => (
             <div className="featured-scholarship-box" key={index}>
               <div className="featured-scholarship-details">
-                <h6>{scholarship.name}</h6>
-                <p><strong>Deadline:</strong> {scholarship.deadline}</p>
+                <p><strong>{scholarship.name}</strong>{scholarship.name}</p>
+                
                 <button className="apply-button" onClick={() => handleApplyClick(scholarship)}>Apply</button>
               </div>
             </div>
           ))}
+
+          
         </div>
+
+        
       </div>
       
       {/* Placeholder for your existing view code to display other sections like latest news, additional scholarships, how it works, etc. */}
       
     </div>
+
+    
   );
 };
 

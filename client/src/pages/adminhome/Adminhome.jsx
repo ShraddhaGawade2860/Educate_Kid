@@ -98,11 +98,11 @@ const AdminHome = () => {
   };
 
   const goToStudentList = () => {
-    navigate('/studentlist');
+    navigate(`/studentlist/${state}`);
   };
 
   const chartData = {
-    labels: ['Scholarship A', 'Scholarship B', 'Scholarship C', 'Scholarship D', 'Scholarship E'],
+    labels: ['R. I. M. C. Maharashtra', 'Eklavya Scholarship Maharashtra', 'Cultural Talent Search Scholarship', 'R. I. M. C.Tamil Nadu'],
     datasets: [
       {
         label: 'Number of Applications',

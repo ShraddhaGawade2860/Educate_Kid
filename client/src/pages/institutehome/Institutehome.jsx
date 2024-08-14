@@ -29,6 +29,16 @@ const InstituteHome = () => {
     ],
   });
   const [pendingForms, setPendingForms] = useState([]);
+  const [verificationData, setVerificationData] = useState({
+    labels: ['Verified Students', 'Rejected Students'],
+    datasets: [
+      {
+        label: 'Student Records',
+        data: [0, 0], // Default values; will be updated later
+        backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)'],
+      },
+    ],
+  });
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -44,6 +54,13 @@ const InstituteHome = () => {
         setPendingCount(response.data.pending);
         setVerifiedCount(response.data.verified);
         setRejectedCount(response.data.rejected);
+        setVerificationData({
+          ...verificationData,
+          datasets: [{
+            ...verificationData.datasets[0],
+            data: [response.data.verified, response.data.rejected],
+          }],
+        });
       } catch (error) {
         console.error('Error fetching counts:', error);
       }
@@ -109,17 +126,23 @@ const InstituteHome = () => {
     fetchScholarshipCount();
   }, []);
 
+  
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   const goToHome = () => {
-    navigate(`/institutehome`);
+    // Navigate to institute home, add your routing logic here
   };
 
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+  };
+
+  const handleViewAllClick = () => {
+    navigate('/studentverification');
   };
 
   return (
@@ -154,17 +177,19 @@ const InstituteHome = () => {
           </div>
         </div>
 
-        <div className="graph-section1">
-          <h4>Mostly Applied Scholarships</h4>
-          <div className="graph-container1">
-            <Bar data={scholarshipData} options={chartOptions} />
+     
+
+        <div className="graph-section2">
+          <h4>Verified vs. Rejected Students</h4>
+          <div className="graph-container2">
+            <Bar data={verificationData} options={chartOptions} />
           </div>
         </div>
 
         <div className="pending-students">
           <div className="header">
             <h4>Recently Pending Students</h4>
-            <button className="link-button">View All</button>
+            <button className="link-button" onClick={handleViewAllClick}>View All</button>
           </div>
 
           <div className="student-list-header">

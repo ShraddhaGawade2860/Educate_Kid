@@ -29,6 +29,10 @@ import Studentrecord from './pages/studentrecord/Studentrecord';
 import Studenthistory from './pages/studenthistory/Studenthistory';
 import Instituteprofile from './pages/instituteprofile/Instituteprofile';
 import Editinstitute from './pages/editinstitute/Editinstitute';
+import Userterms from './pages/userterms/Userterms';
+import Userprivacy from './pages/userprivacy/Userprivacy';
+import Instituteterms from './pages/instituteterms/Instituteterms';
+import Instituteprivacy from './pages/instituteprivacy/Instituteprivacy';
 
 const HeaderLayout = ({ children }) => (
   <>
@@ -43,6 +47,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HeaderLayout><Landing /></HeaderLayout>} />
         <Route path="/home" element={<HeaderLayout><Home /></HeaderLayout>} />
+        <Route path="/userterms" element={<HeaderLayout><Userterms /></HeaderLayout>} />
+        <Route path="/userprivacy" element={<HeaderLayout><Userprivacy /></HeaderLayout>} />
         <Route path="/about" element={<HeaderLayout><About /></HeaderLayout>} />
         <Route path="/profile" element={<HeaderLayout><Profile /></HeaderLayout>} />
         <Route path="/login" element={<HeaderLayout><Login /></HeaderLayout>} />
@@ -53,6 +59,8 @@ function App() {
         <Route path="/edituser" element={<HeaderLayout><Edituser/></HeaderLayout>} />
         <Route path="/scholarship-history" element={<HeaderLayout><Scholarshiphistory /></HeaderLayout>} />
         <Route path="/instituteHome" element={<><Menu /><InstituteHome /></>} />
+        <Route path="/instituteterms" element={<><Menu /><Instituteterms /></>} />
+        <Route path="/instituteprivacy" element={<><Menu /><Instituteprivacy /></>} />
         <Route path="/adminhome/:state" element={<><Menu /><AdminHome /></>} />
         <Route path="/addscholarship/:state" element={<><Menu /><AddScholarship /></>} />
         <Route path="/instituteverification" element={<><Menu /><Instituteverification /></>} />
