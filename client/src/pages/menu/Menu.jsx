@@ -54,7 +54,9 @@ const Menu = ({ isExpanded, toggleMenu }) => {
       '/privacy',
       '/availablescholarship',
       '/userdata',
-      '/editinstitute'
+      '/editinstitute',
+      '/instituteterms',
+      '/instituteprivacy'
     ];
     return institutePaths.some(path => location.pathname.startsWith(path));
   };

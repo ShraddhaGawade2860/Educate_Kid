@@ -3,7 +3,6 @@ import './landing.css';
 import { Navigate} from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import mainVideo from "../video/home.mp4"; 
 import scholarshipLogo from "../image/graduation-cap.png";
 import icon1 from "../image/icon1.jpg";
 import icon2 from "../image/icon2.jpg";
@@ -18,6 +17,7 @@ import chegg from "../image/chegg.jpeg";
 import cappex from "../image/cappex.jpeg";
 import future from "../image/future.png";
 import { AuthContext } from '../context/Authcontext';
+import mainVideo from "../video/home.mp4"; 
 
 const Landing = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -38,9 +38,9 @@ const Landing = () => {
       <div className="landing-container">
         <div className="content">
           <div className="video-container">
-            <video src={mainVideo} alt="Main Banner" autoPlay loop muted />
-            <div className="video-content">
-              <p>"Welcome To EducateKid Portal. This is India's Largest<br /> Scholarship Platform."</p>
+          <video src={mainVideo} alt="Main Banner" autoPlay loop muted />
+            <div className="image-content">
+              <h3>"Welcome To EducateKid Portal. This is India's Largest<br /> Scholarship Platform."</h3>
               <p>Unlock your future with EducaTek Scholarships, where education meets opportunity. 
                 Our platform is dedicated to providing deserving students with financial support to pursue their 
                 dreams and achieve academic excellence.</p>
