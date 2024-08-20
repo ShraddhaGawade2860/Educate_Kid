@@ -25,19 +25,33 @@ html, body {
   overflow: hidden;
 }
 
-video {
+img {
   width: 100%;
   height: auto;
+  height: 120%
 }
 
-.video-content {
-  position: absolute;
+.image-content p{
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center;
+  text-align: left;
+  color: rgb(255, 255, 255);
+  z-index: 10; /* Ensure it's above the video */
+
+}
+
+.image-content h3{
+  position:relative;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: left;
   color: white;
   z-index: 10; /* Ensure it's above the video */
+  margin-bottom: 50px;
+  margin-top: 90px;
 }
 
 .search-bar {
@@ -401,7 +415,7 @@ padding: 30px;
 
 .link-box {
   flex: 1 1 22%;
-  max-width: 20%;
+  max-width: 40%;
   border: 1px solid #0c0c0c;
   border-radius: 10px;
   overflow: hidden;
