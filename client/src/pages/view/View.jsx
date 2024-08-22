@@ -4,7 +4,7 @@ import './view.css';
 
 const View = () => {
   const { state } = useLocation();
-  const { classSelection, genderSelection, stateSelection } = state || {};
+  const { classSelection, genderSelection, stateSelection, typeSelection } = state || {};
   const [scholarships, setScholarships] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const View = () => {
   useEffect(() => {
     const fetchScholarships = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/scholarships?classSelection=${classSelection}&genderSelection=${genderSelection}&stateSelection=${stateSelection}`);
+        const response = await fetch(`http://localhost:5000/api/scholarships?classSelection=${classSelection}&genderSelection=${genderSelection}&stateSelection=${stateSelection}&typeSelection=${typeSelection}`);
         const data = await response.json();
 
         if (response.ok) {
@@ -28,7 +28,7 @@ const View = () => {
     };
 
     fetchScholarships();
-  }, [classSelection, genderSelection, stateSelection]);
+  }, [classSelection, genderSelection, stateSelection, typeSelection]);
 
   const handleApplyClick = (scholarship) => {
     navigate('/apply', { state: { scholarship } });
@@ -46,12 +46,14 @@ const View = () => {
           <p><strong>Class:</strong> {classSelection}</p>
           <p><strong>Gender:</strong> {genderSelection}</p>
           <p><strong>State:</strong> {stateSelection}</p>
+          <p><strong>Scholarship Type:</strong> {typeSelection}</p>
         </div>
         <div className="scholarships-list">
           <h3>Available Scholarships</h3>
           {scholarships.length > 0 ? (
             scholarships.map((scholarship, index) => (
               <div className="scholarship-box1" key={index}>
+                <img src={`http://localhost:5000/${scholarship.logo}`} alt={scholarship.name} className="scholarship-logo" />
                 <div className="scholarship-detailss">
                   <h6>{scholarship.name}</h6>
                   <p><strong>Benefits:</strong> {scholarship.benefits}</p>
@@ -71,24 +73,16 @@ const View = () => {
           {scholarships.slice(0, 3).map((scholarship, index) => (
             <div className="featured-scholarship-box" key={index}>
               <div className="featured-scholarship-details">
-                <p><strong>{scholarship.name}</strong>{scholarship.name}</p>
-                
+                <p><strong>{scholarship.name}</strong></p>
+                <p><strong>Benefits:</strong> {scholarship.benefits}</p>
+
                 <button className="apply-button" onClick={() => handleApplyClick(scholarship)}>Apply</button>
               </div>
             </div>
           ))}
-
-          
         </div>
-
-        
       </div>
-      
-      {/* Placeholder for your existing view code to display other sections like latest news, additional scholarships, how it works, etc. */}
-      
     </div>
-
-    
   );
 };
 

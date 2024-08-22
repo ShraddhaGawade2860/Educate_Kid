@@ -1,28 +1,47 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 const Scholarship = require('../models/scholarship');
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Specify the destination directory for logo uploads
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname); // Generate a unique filename
+  }
+});
+
+const upload = multer({ storage: storage });
+
 // Endpoint to add a new scholarship
-router.post('/', async (req, res) => {
+router.post('/', upload.single('logo'), async (req, res) => {
   try {
-    const newScholarship = new Scholarship(req.body);
+    const scholarshipData = {
+      ...req.body,
+      logo: req.file ? req.file.path : null // Store the path to the uploaded logo
+    };
+
+    const newScholarship = new Scholarship(scholarshipData);
     await newScholarship.save();
 
-    res.status(200).json('Scholarship added successfully');
+    res.status(200).json({ message: 'Scholarship added successfully' });
   } catch (error) {
     console.error('Error adding scholarship:', error);
-    res.status(500).json('Failed to add scholarship');
+    res.status(500).json({ message: 'Failed to add scholarship' });
   }
 });
 
 // Endpoint to fetch scholarships based on criteria
 router.get('/', async (req, res) => {
-  const { classSelection, genderSelection, stateSelection } = req.query;
+  const { classSelection, genderSelection, stateSelection, typeSelection } = req.query;
   try {
     const scholarships = await Scholarship.find({
       class: classSelection,
       gender: genderSelection,
-      state: stateSelection
+      state: stateSelection,
+      type: typeSelection
+
     });
     res.status(200).json(scholarships);
   } catch (error) {

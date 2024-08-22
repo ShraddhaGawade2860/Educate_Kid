@@ -92,7 +92,6 @@ video {
 }
 
 
-
 .dropdown {
   display: flex;
   flex-direction: column;
@@ -147,7 +146,7 @@ video {
   border-radius: 30px; 
   cursor: pointer;
   font-size: 16px;
-  width: 100px;
+  width: 300px;
   font-weight:normal;
 }
 

@@ -10,6 +10,7 @@ const AddScholarship = () => {
   const { user } = useContext(AuthContext); // Get user from context
   const [menuOpen, setMenuOpen] = useState(false);
   const [scholarship, setScholarship] = useState({
+    type: '',
     name: '',
     description: '',
     eligibility: '',
@@ -20,6 +21,7 @@ const AddScholarship = () => {
     gender: '',
     state: state || user?.state || '' // Set state from URL or user context, default to empty string if undefined
   });
+  const [logo, setLogo] = useState(null);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
@@ -36,14 +38,21 @@ const AddScholarship = () => {
     setScholarship({ ...scholarship, [name]: value });
   };
 
+  const handleFileChange = (e) => {
+    setLogo(e.target.files[0]);
+  };
+
   const handleSubmit = async () => {
+    const formData = new FormData();
+    for (const key in scholarship) {
+      formData.append(key, scholarship[key]);
+    }
+    formData.append('logo', logo);
+
     try {
       const response = await fetch('http://localhost:5000/api/scholarships', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(scholarship)
+        body: formData,
       });
 
       const data = await response.json();
@@ -51,6 +60,7 @@ const AddScholarship = () => {
       if (response.ok) {
         setMessage(data.message); // Assuming backend sends a 'message' field in the response
         setScholarship({
+          type: '',
           name: '',
           description: '',
           eligibility: '',
@@ -61,6 +71,7 @@ const AddScholarship = () => {
           gender: '',
           state: state || user?.state || ''
         });
+        setLogo(null);
       } else {
         setMessage(data.message);
       }
@@ -99,6 +110,9 @@ const AddScholarship = () => {
               </div>
             </div>
 
+            <h3>Scholarship Type</h3>
+            <input type="text" name="type" value={scholarship.type} onChange={handleChange} />
+
             <h3>Scholarship Name</h3>
             <input type="text" name="name" value={scholarship.name} onChange={handleChange} />
 
@@ -116,6 +130,9 @@ const AddScholarship = () => {
 
             <h3>How to Apply</h3>
             <textarea name="applyProcess" value={scholarship.applyProcess} onChange={handleChange}></textarea>
+
+            <h3>Scholarship Logo</h3>
+            <input type="file" name="logo" onChange={handleFileChange} />
 
             <button className="apply-button5" onClick={handleSubmit}>
               Add Scholarship
