@@ -39,16 +39,7 @@ const About = () => {
                 </div>
             </div>
 
-            {/* Footer Section */}
-            <div className="footer">
-                <div className="footer-content">
-                    <p>&copy; 2024 EducateKid. All Rights Reserved.</p>
-                    <div className="footer-links">
-                        <a href="/userterms">Terms of Service</a>
-                        <a href="/userprivacy">Privacy Policy</a>
-                    </div>
-                </div>
-            </div>
+        
         </div>
     );
 }

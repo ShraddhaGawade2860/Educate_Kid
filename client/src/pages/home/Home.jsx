@@ -1,4 +1,4 @@
-import React, { useContext, useState,  useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './home.css';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
@@ -20,13 +20,13 @@ import future from "../image/future.png";
 import { AuthContext } from '../context/Authcontext';
 import axios from 'axios';
 
-
 const Home = () => {
   const { isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const [classSelection, setClassSelection] = useState("");
   const [genderSelection, setGenderSelection] = useState("");
   const [stateSelection, setStateSelection] = useState("");
+  const [typeSelection, setTypeSelection] = useState('');
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
@@ -48,16 +48,15 @@ const Home = () => {
       return;
     }
 
-    if (!classSelection || !genderSelection || !stateSelection) {
-      toast.error('Please fill in the class, gender, and state.');
+    if (!classSelection || !genderSelection || !stateSelection || !typeSelection) {
+      toast.error('Please fill in all the required fields.');
       return;
     }
+
     navigate('/view', {
-      state: { classSelection, genderSelection, stateSelection }
+      state: { classSelection, genderSelection, stateSelection, typeSelection }
     });
   };
-  
-  
 
   const handleLinkClick = (e) => {
     if (!isLoggedIn) {
@@ -66,12 +65,10 @@ const Home = () => {
     }
   };
 
-  
   if (!isLoggedIn) {
     navigate('/'); // Redirect to Landing page if not logged in
     return null; // Or render loading spinner/element
   }
-
 
   return (
     <div>
@@ -88,6 +85,7 @@ const Home = () => {
                     <select onChange={(e) => setClassSelection(e.target.value)}>
                       <option value="">Select Class</option>
                       <option value="class10">Class 10</option>
+                      <option value="class9">Class 9</option>
                       <option value="class11">Class 11</option>
                       <option value="class12">Class 12</option>
                       <option value="class8">8</option>
@@ -98,13 +96,14 @@ const Home = () => {
                     <label>Select Gender</label>
                     <select onChange={(e) => setGenderSelection(e.target.value)}>
                       <option value="">Select Gender</option>
-                      <option value="male">male</option>
-                      <option value="female">female</option>
-                      <option value="other">other</option>
-                      <option value="all">all</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                      <option value="all">All</option>
                     </select>
                   </div>
                 </div>
+                <div className="horizontal-dropdowns">
                 <div className="dropdown">
                   <label>Select State</label>
                   <select onChange={(e) => setStateSelection(e.target.value)}>
@@ -131,7 +130,7 @@ const Home = () => {
                     <option value="Punjab">Punjab</option>
                     <option value="Rajasthan">Rajasthan</option>
                     <option value="Sikkim">Sikkim</option>
-                    <option value="TamilNadu">TamilNadu</option>
+                    <option value="TamilNadu">Tamil Nadu</option>
                     <option value="Telangana">Telangana</option>
                     <option value="Tripura">Tripura</option>
                     <option value="Uttar Pradesh">Uttar Pradesh</option>
@@ -139,15 +138,42 @@ const Home = () => {
                     <option value="West Bengal">West Bengal</option>
                   </select>
                 </div>
+                <div className="dropdown">
+                  <label>Select Scholarship Type</label>
+                  <select onChange={(e) => setTypeSelection(e.target.value)}>
+                    <option value="">Select Scholarship Type</option>
+                    <option value="Merit-Based Scholarships">Merit-Based Scholarships</option>
+                    <option value="Need-Based Scholarships">Need-Based Scholarships</option>
+                    <option value="Athletic Scholarships">Athletic Scholarships</option>
+                    <option value="Minority Scholarships">Minority Scholarships</option>
+                    <option value="Subject-Specific Scholarships">Subject-Specific Scholarships</option>
+                    <option value="Community Service Scholarships">Community Service Scholarships</option>
+                    <option value="Creative Scholarships">Creative Scholarships</option>
+                    <option value="Leadership Scholarships">Leadership Scholarships</option>
+                    <option value="Military Scholarships">Military Scholarships</option>
+                    <option value="International Scholarships">International Scholarships</option>
+                    <option value="Research Scholarships">Research Scholarships</option>
+                    <option value="Women’s Scholarships">Women’s Scholarships</option>
+                    <option value="Disability Scholarships">Disability Scholarships</option>
+                    <option value="Employer-Sponsored Scholarships">Employer-Sponsored Scholarships</option>
+                    <option value="University-Specific Scholarships">University-Specific Scholarships</option>
+                    <option value="Government Scholarships">Government Scholarships</option>
+                    <option value="Sports Scholarships">Sports Scholarships</option>
+                    <option value="Cultural Scholarships">Cultural Scholarships</option>
+                    <option value="STEM Scholarships">STEM Scholarships</option>
+                    <option value="Trade or Vocational Scholarships">Trade or Vocational Scholarships</option>
+                  </select>
+                </div>
+                </div>
               </div>
               <div className="buttons4">
-                <button4 className="btn4" onClick={handleScholarshipClick}>Check For Scholarships</button4>
+                <button className="btn4" onClick={handleScholarshipClick}>Check For Scholarships</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    
+
       <div className="additional-container6">
         <h3 className="centered">Latest News</h3>
         <div className="box-frame">
