@@ -2,16 +2,26 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaHome } from 'react-icons/fa';
 import Menu from '../menu/Menu';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import './studentlist.css';
 
 const StudentList = () => {
   const { state } = useParams(); // Get state from URL
   const [userForms, setUserForms] = useState([]);
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [toggle, setToggle] = useState('home'); // Default to home state user
   const [statusFilter, setStatusFilter] = useState('pending'); // Default to pending list
   const navigate = useNavigate();
+
+   // Get toggle value from URL query parameters
+   useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const toggleFromUrl = params.get('toggle');
+    if (toggleFromUrl) {
+      setToggle(toggleFromUrl); // Set toggle to 'other' or 'home' based on URL
+    }
+  }, [location]);
 
   useEffect(() => {
     const fetchUserForms = async () => {
@@ -19,9 +29,9 @@ const StudentList = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user && user.role === 2) { // Assuming role 2 is for state admin
           const stateEncoded = encodeURIComponent(user.state);
-          let url = `http://localhost:5000/api/forms/state/${stateEncoded}?status=${statusFilter}`;
+          let url = `http://192.168.143.199:5000/api/forms/state/${stateEncoded}?status=${statusFilter}`;
           if (toggle === 'other') {
-            url = `http://localhost:5000/api/forms/otherstate/${stateEncoded}?status=${statusFilter}`;
+            url = `http://192.168.143.199:5000/api/forms/otherstate/${stateEncoded}?status=${statusFilter}`;
           }
           const response = await axios.get(url);
           setUserForms(response.data);

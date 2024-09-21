@@ -48,7 +48,7 @@ router.put('/approve/:formId', async (req, res) => {
 router.put('/reject/:formId', async (req, res) => {
   const { rejectReason } = req.body;
   try {
-    const form = await FormData.findByIdAndUpdate(req.params.formId, { instituteVerified: 2, rejectReason: rejectReason }, { new: true });
+    const form = await FormData.findByIdAndUpdate(req.params.formId, { instituteVerified: 2, finalStatus: 2,  rejectReason: rejectReason }, { new: true });
     res.json(form);
   } catch (error) {
     res.status(500).json({ message: 'Error rejecting form' });

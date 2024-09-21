@@ -18,7 +18,7 @@
 }
 
 .institute_form {
-    height: 750px; /* Height for institute form */
+    height: 800px; /* Height for institute form */
     --container-padding-top: 50px; /* Space from top */
     --container-padding-bottom: 50px; /* Space from bottom */
 }
@@ -38,7 +38,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #142CDC;
+    background-color: #2A5080;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
@@ -101,7 +101,7 @@
 }
 
 .active_toggle {
-    background-color: #142CDC;
+    background-color: #2A5080;
     color: white;
     transition: background-color 0.3s, color 0.3s;
     flex: 1; /* Ensures the active button maintains equal width */
@@ -125,7 +125,7 @@
 
 /* Gender Select Dropdown Styling */
 .gender_select {
-    width: 370px;
+    width: 400px;
     padding: 15px;
     border-radius: 10px;
     background-color: #edf5f3;
@@ -133,6 +133,7 @@
     font-size: 14px;
     outline: none;
     border: none;
+    color: #000000;
     appearance: none; /* Remove default dropdown arrow for custom styling */
 }
 
@@ -254,3 +255,63 @@
     }
   }
   
+  .institute_certificate_input {
+    outline: none;
+    border: none;
+    width: 370px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #edf5f3;
+    margin: 5px 10px;
+    font-size: 14px;
+    /* Additional specific styles for institute certificate input */
+}
+
+.accreditation_certificate_input {
+    outline: none;
+    border: none;
+    width: 370px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #edf5f3;
+    margin: 5px 10px;
+    font-size: 14px;
+    /* Additional specific styles for accreditation certificate input */
+}
+
+.affiliation_certificate_input {
+    outline: none;
+    border: none;
+    width: 370px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #edf5f3;
+    margin: 5px 10px;
+    font-size: 14px;
+    /* Additional specific styles for affiliation certificate input */
+}
+
+.sign_in_btn {
+  border: none;
+  outline: none;
+  padding: 12px 0;
+  background-color: #007bff; /* Blue background */
+  border-radius: 20px;
+  width: 180px;
+  font-weight: bold;
+  font-size: 14px;
+  color: white; /* White text */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sign_in_btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.upload_notice {
+  font-size: 12px; /* Small font size */
+  color: #777; /* Light gray color for subtlety */
+  margin-top: -10px; /* Adjust positioning if needed */
+  text-align: center; /* Center align the text */
+}

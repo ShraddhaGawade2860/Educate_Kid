@@ -38,7 +38,7 @@ const InstituteProfile = () => {
           <div className="institute-profile-box">
             <div className="institute-profile-left">
               <img 
-                src={user.profileImage ? `http://localhost:5000/uploads/${user.profileImage}` : "default_image_path"} 
+                src={user.profileImage ? `http://192.168.143.199:5000/uploads/${user.profileImage}` : "default_image_path"} 
                 alt="Profile" 
                 className="institute-profile-image" 
               />

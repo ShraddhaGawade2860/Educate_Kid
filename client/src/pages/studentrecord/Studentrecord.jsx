@@ -16,7 +16,7 @@ const StudentRecord = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user && user.role === 1) {
           const instituteNameEncoded = encodeURIComponent(user.name);
-          const response = await axios.get(`http://localhost:5000/api/forms/institute/${instituteNameEncoded}`);
+          const response = await axios.get(`http://192.168.143.199:5000/api/forms/institute/${instituteNameEncoded}`);
           setUserForms(response.data);
         }
       } catch (error) {
@@ -35,15 +35,34 @@ const StudentRecord = () => {
     navigate(`/institutehome`);
   };
 
-  const getStatusText = (status) => {
+  const getStatusClass = (status) => {
     switch (status) {
       case 1:
-        return 'Approved';
+        return 'approved';
       case 2:
-        return 'Rejected';
+        return 'rejected';
       default:
-        return 'Pending';
+        return 'pending';
     }
+  };
+
+  const getStatusText = (instituteStatus, homeStateStatus, otherStateStatus, rejectReason) => {
+    const statuses = [];
+    if (instituteStatus === 1) statuses.push('Approved by Institute');
+    if (instituteStatus === 2) statuses.push(`Rejected by Institute: ${rejectReason}`);
+    if (homeStateStatus === 1) statuses.push('Approved by Home State');
+    if (homeStateStatus === 2) statuses.push(`Rejected by Home State: ${rejectReason}`);
+    if (otherStateStatus === 1) statuses.push('Approved by Other State');
+    if (otherStateStatus === 2) statuses.push(`Rejected by Other State: ${rejectReason}`);
+
+    // Add pending information based on statuses
+    if (statuses.length === 0) {
+      if (instituteStatus === 0) statuses.push('Pending at Institute');
+      if (homeStateStatus === 0) statuses.push('Pending at Home State');
+      if (otherStateStatus === 0) statuses.push('Pending at Other State');
+    }
+
+    return statuses.length ? statuses.join(' | ') : 'Pending';
   };
 
   return (
@@ -66,7 +85,7 @@ const StudentRecord = () => {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Course</th>
-                <th>Final Status</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -75,7 +94,9 @@ const StudentRecord = () => {
                   <td>{form.name}</td>
                   <td>{form.email}</td>
                   <td>{form.course}</td>
-                  <td>{getStatusText(form.finalStatus)}</td>
+                  <td className={getStatusClass(form.finalStatus)}>
+                    {getStatusText(form.instituteVerified, form.homeStateVerified, form.otherStateVerified, form.rejectReason)}
+                  </td>
                 </tr>
               ))}
             </tbody>

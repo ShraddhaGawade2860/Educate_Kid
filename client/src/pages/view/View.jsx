@@ -12,7 +12,7 @@ const View = () => {
   useEffect(() => {
     const fetchScholarships = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/scholarships?classSelection=${classSelection}&genderSelection=${genderSelection}&stateSelection=${stateSelection}&typeSelection=${typeSelection}`);
+        const response = await fetch(`http://192.168.143.199:5000/api/scholarships?classSelection=${classSelection}&genderSelection=${genderSelection}&stateSelection=${stateSelection}&typeSelection=${typeSelection}`);
         const data = await response.json();
 
         if (response.ok) {
@@ -53,7 +53,7 @@ const View = () => {
           {scholarships.length > 0 ? (
             scholarships.map((scholarship, index) => (
               <div className="scholarship-box1" key={index}>
-                <img src={`http://localhost:5000/${scholarship.logo}`} alt={scholarship.name} className="scholarship-logo" />
+                <img src={`http://192.168.143.199:5000/${scholarship.logo}`} alt={scholarship.name} className="scholarship-logo" />
                 <div className="scholarship-detailss">
                   <h6>{scholarship.name}</h6>
                   <p><strong>Benefits:</strong> {scholarship.benefits}</p>

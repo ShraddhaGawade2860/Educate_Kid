@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Routes, Route, Navigate  } from 'react-router-dom';
 import Header from './components/header/Header';
 import Home from './pages/home/Home';
 import About from './pages/about/About';
@@ -8,7 +8,7 @@ import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import Apply from './pages/apply/Apply';
 import View from './pages/view/View';
-import { AuthProvider } from './pages/context/Authcontext';
+import { AuthProvider, AuthContext } from './pages/context/Authcontext';
 import Landing from './pages/landing/Landing';
 import InstituteHome from './pages/institutehome/Institutehome';
 import AdminHome from './pages/adminhome/Adminhome';
@@ -41,12 +41,22 @@ const HeaderLayout = ({ children }) => (
   </>
 );
 
+const ProtectedRoute = ({ children }) => {
+  const { isLoggedIn } = useContext(AuthContext);
+
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
+
+  return children;
+};
+
 function App() {
   return (
     <AuthProvider>
       <Routes>
         <Route path="/" element={<HeaderLayout><Landing /></HeaderLayout>} />
-        <Route path="/home" element={<HeaderLayout><Home /></HeaderLayout>} />
+        <Route path="/home" element={<ProtectedRoute><HeaderLayout><Home /></HeaderLayout></ProtectedRoute>}  />
         <Route path="/userterms" element={<HeaderLayout><Userterms /></HeaderLayout>} />
         <Route path="/userprivacy" element={<HeaderLayout><Userprivacy /></HeaderLayout>} />
         <Route path="/about" element={<HeaderLayout><About /></HeaderLayout>} />

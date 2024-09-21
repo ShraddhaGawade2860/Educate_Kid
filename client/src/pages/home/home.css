@@ -22,10 +22,10 @@ video {
 .video-content {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 25%;
   transform: translate(-50%, -50%);
-  text-align: center;
-  color: rgb(109, 6, 6);
+  text-align: left;
+  color: rgb(255, 255, 255);
   font-size: 18px;
   font-family: "Inter",sans-serif;
   font-weight: bold;
@@ -37,7 +37,7 @@ video {
   font-size: 18px;
   font-family: "Inter",sans-serif;
   font-weight: bold;
-
+  margin-bottom: 40px;
 }
 
 .home-container {
@@ -84,35 +84,84 @@ video {
   display: flex;
   flex-direction: column;
   gap: 10px;
-
 }
+
 .horizontal-dropdowns {
   display: flex;
+  justify-content: space-between;
   gap: 20px;
 }
-
 
 .dropdown {
   display: flex;
   flex-direction: column;
-  width: 50%; 
+  width: 100%; /* Make it responsive to container width */
 }
 
 .dropdown label {
-  color: rgb(255, 255, 255);
+  color: #ffffff;
   margin-bottom: 10px;
-  font-weight:normal;
+  font-weight: normal;
   font-size: 16px;
 }
 
 .dropdown select {
-  height: 40px; /* Adjust this value as needed */
-  width: 100%; /* Adjust width to fill its container */
-  padding: 10px; /* Optional: Add padding for better appearance */
-  font-size: 16px; /* Optional: Adjust font size */
+  height: 40px;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
   border-radius: 10px;
   border-color: #000;
 }
+
+.dropdownn {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Make it responsive to container width */
+  margin-left: 29px;
+  margin-top: 10px;
+}
+
+.dropdownn label {
+  color: #000000;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.dropdownn select {
+  height: 40px;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border-color: #000;
+}
+
+.dropdowni {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Make it responsive to container width */
+  margin-left: 6px;
+  margin-top: 10px;
+}
+
+.dropdowni label {
+  color: #000000;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.dropdowni select {
+  height: 40px;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border-color: #000;
+}
+
 
 /*.buttons {
   margin-top: 10px;
@@ -137,7 +186,6 @@ video {
 }
 
 .btn4 {
-
   margin-right: 10px;
   background-color: #3f4997;
   color: #ffffff;
@@ -148,6 +196,7 @@ video {
   font-size: 16px;
   width: 300px;
   font-weight:normal;
+  margin-left: 140px;
 }
 
 .btn4:hover {
@@ -198,7 +247,7 @@ video {
   background-clip: border-box;
   overflow: hidden;
   position: relative; 
-  height: 200px; 
+  height: 300px; 
 }
 
 .notification-list p {
@@ -241,9 +290,9 @@ video {
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
-  color: blue;
+  color: rgb(253, 253, 253);
 }
-.right-side {
+.right-side1 {
   flex: 1; 
   min-width: 50%; 
   margin-left: 50px;
@@ -254,6 +303,9 @@ video {
   text-align: center;
   font-size: 30px;
   color: rgb(255, 255, 255);
+  margin-top: -42px;
+  margin-bottom: 30px;
+
 }
 
 
@@ -261,13 +313,15 @@ video {
   margin: 0 auto; 
   text-align: center; 
   font-size: 24px;
-  margin-bottom: 20px;
+  
+  
 }
 
 .slider-containeri {
   display: flex;
   flex-direction: row; 
   animation: scroll 20s linear infinite;
+  margin-top: -30px;
 }
 
 .slider-item {
@@ -297,8 +351,8 @@ video {
 }
 
 .scholarship-boxe img {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   margin-bottom: 10px;
 }
 
@@ -489,7 +543,7 @@ video {
 
 
 .footer {
-  background-color: #333;
+  background-color: #000000;
   color: white;
   padding: 5px;
   text-align: center;

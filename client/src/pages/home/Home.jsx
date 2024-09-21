@@ -19,6 +19,12 @@ import cappex from "../image/cappex.jpeg";
 import future from "../image/future.png";
 import { AuthContext } from '../context/Authcontext';
 import axios from 'axios';
+import rimc from "../image/brambedker.jpg";
+import airtel from "../image/begum.png";
+import eklavya from "../image/brambedker.jpg";
+import cultural from "../image/brambedker.jpg";
+import primary from "../image/brambedker.jpg";
+import home from "../image/home.jpg";
 
 const Home = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -32,7 +38,7 @@ const Home = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/notifications');
+        const response = await axios.get('http://192.168.143.199:5000/api/notifications');
         setNotifications(response.data);
       } catch (error) {
         console.error('Error fetching notifications:', error);
@@ -75,25 +81,70 @@ const Home = () => {
       <div className="home-container">
         <div className="content">
           <div className="video-container">
-            <video src={mainVideo} alt="Main Banner" autoPlay loop muted />
+          <img src={home} alt="home" />
             <div className="video-content">
               <p>"Welcome To EducateKid Portal. This is India's Largest<br /> Scholarship Platform."</p>
               <div className="dropdowns">
-                <div className="horizontal-dropdowns">
+                <div className="horizontal-dropdowns">` 
                   <div className="dropdown">
-                    <label>Select Class</label>
+                  <label>Select Scholarship Type</label>
+                  <select onChange={(e) => setTypeSelection(e.target.value)}>
+                    <option value="">Select Scholarship Type</option>
+                    <option value="Merit-Based Scholarships">Merit-Based Scholarships</option>
+                    <option value="Need-Based Scholarships">Need-Based Scholarships</option>
+                    <option value="Athletic Scholarships">Athletic Scholarships</option>
+                    <option value="Minority Scholarships">Minority Scholarships</option>
+                    <option value="Subject-Specific Scholarships">Subject-Specific Scholarships</option>
+                    <option value="Community Service Scholarships">Community Service Scholarships</option>
+                    <option value="Creative Scholarships">Creative Scholarships</option>
+                    <option value="Leadership Scholarships">Leadership Scholarships</option>
+                    <option value="Military Scholarships">Military Scholarships</option>
+                    <option value="International Scholarships">International Scholarships</option>
+                    <option value="Research Scholarships">Research Scholarships</option>
+                    <option value="Women’s Scholarships">Women’s Scholarships</option>
+                    <option value="Disability Scholarships">Disability Scholarships</option>
+                    <option value="Employer-Sponsored Scholarships">Employer-Sponsored Scholarships</option>
+                    <option value="University-Specific Scholarships">University-Specific Scholarships</option>
+                    <option value="Government Scholarships">Government Scholarships</option>
+                    <option value="Sports Scholarships">Sports Scholarships</option>
+                    <option value="Cultural Scholarships">Cultural Scholarships</option>
+                    <option value="STEM Scholarships">STEM Scholarships</option>
+                    <option value="Trade or Vocational Scholarships">Trade or Vocational Scholarships</option>
+                    <option value="Overseas">Overseas</option>
+
+                  </select>
+                  </div>
+                  <div className="dropdown">
+                  <label>Select Class</label>
                     <select onChange={(e) => setClassSelection(e.target.value)}>
                       <option value="">Select Class</option>
                       <option value="class10">Class 10</option>
                       <option value="class9">Class 9</option>
                       <option value="class11">Class 11</option>
                       <option value="class12">Class 12</option>
-                      <option value="class8">8</option>
-                      <option value="All class">All class</option>
+                      <option value="class8">Class 8</option>
+                      <option value="class1-10">Class 1 to 10</option>
+                      <option value="class11 & above">Class 11 & above</option>
+                      <option value="Post-matric">Post-matric</option>
+                      <option value="Diploma">Diploma</option>
+                      <option value="Btech/BE">Btech/BE</option>
+                      <option value="BSc">BSc</option>
+                      <option value="BBA">BBA</option>
+                      <option value="B.com">B.com</option>
+                      <option value="BA">BA</option>
+                      <option value="Mtech">Mtech</option>
+                      <option value="MSc">MSc</option>
+                      <option value="MBA">MBA</option>
+                      <option value="MA">MA</option>
+                      <option value="PhD">PhD</option>
+                      <option value="PostDoctoral">PostDoctoral</option>
+                       <option value="All class">All class</option>
                     </select>
                   </div>
-                  <div className="dropdown">
-                    <label>Select Gender</label>
+                </div>
+                <div className="horizontal-dropdowns">
+                <div className="dropdownn">
+                <label>Select Gender</label>
                     <select onChange={(e) => setGenderSelection(e.target.value)}>
                       <option value="">Select Gender</option>
                       <option value="male">Male</option>
@@ -101,11 +152,9 @@ const Home = () => {
                       <option value="other">Other</option>
                       <option value="all">All</option>
                     </select>
-                  </div>
                 </div>
-                <div className="horizontal-dropdowns">
-                <div className="dropdown">
-                  <label>Select State</label>
+                <div className="dropdowni">
+                <label>Select State</label>
                   <select onChange={(e) => setStateSelection(e.target.value)}>
                     <option value="">Select State</option>
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -138,32 +187,6 @@ const Home = () => {
                     <option value="West Bengal">West Bengal</option>
                   </select>
                 </div>
-                <div className="dropdown">
-                  <label>Select Scholarship Type</label>
-                  <select onChange={(e) => setTypeSelection(e.target.value)}>
-                    <option value="">Select Scholarship Type</option>
-                    <option value="Merit-Based Scholarships">Merit-Based Scholarships</option>
-                    <option value="Need-Based Scholarships">Need-Based Scholarships</option>
-                    <option value="Athletic Scholarships">Athletic Scholarships</option>
-                    <option value="Minority Scholarships">Minority Scholarships</option>
-                    <option value="Subject-Specific Scholarships">Subject-Specific Scholarships</option>
-                    <option value="Community Service Scholarships">Community Service Scholarships</option>
-                    <option value="Creative Scholarships">Creative Scholarships</option>
-                    <option value="Leadership Scholarships">Leadership Scholarships</option>
-                    <option value="Military Scholarships">Military Scholarships</option>
-                    <option value="International Scholarships">International Scholarships</option>
-                    <option value="Research Scholarships">Research Scholarships</option>
-                    <option value="Women’s Scholarships">Women’s Scholarships</option>
-                    <option value="Disability Scholarships">Disability Scholarships</option>
-                    <option value="Employer-Sponsored Scholarships">Employer-Sponsored Scholarships</option>
-                    <option value="University-Specific Scholarships">University-Specific Scholarships</option>
-                    <option value="Government Scholarships">Government Scholarships</option>
-                    <option value="Sports Scholarships">Sports Scholarships</option>
-                    <option value="Cultural Scholarships">Cultural Scholarships</option>
-                    <option value="STEM Scholarships">STEM Scholarships</option>
-                    <option value="Trade or Vocational Scholarships">Trade or Vocational Scholarships</option>
-                  </select>
-                </div>
                 </div>
               </div>
               <div className="buttons4">
@@ -184,12 +207,13 @@ const Home = () => {
               <li><p>New Scholarships Added</p></li>
                 <li><p>R. I. M. C. Dehradun Scholarship, Maharashtra added by Maharashtra State</p></li>
                 <li><p>Check for new scholarships and your verification status</p></li>
+                <li><p>Kindly check your new scholarships continuously and also check your verification status</p></li>
               </ul>
             </div>
           </div>
         
         
-          <div className="right-side">
+          <div className="right-side1">
             <div className="scholarship-headingi">
               <h5>Scholarships</h5>
             </div>
@@ -197,34 +221,41 @@ const Home = () => {
             <div className="slider-containeri">
               {/* Scholarship Box 1 */}
               <div className="scholarship-boxe">
-                <img src={scholarshipLogo} alt="Scholarship Logo" />
+              <img src={rimc} alt="rimc" />
                 <div className="scholarship-details">
-                  <h6>R. I. M. C. Dehradun Scholarship, Maharashtra</h6>
-                  <p>Description: June 30, 2024</p>
+                  <h6>Dr.B.R.Ambedker Scholarship for EBS, Tripura</h6>
                 </div>
               </div>
               {/* Scholarship Box 2 */}
               <div className="scholarship-boxe">
-                <img src={scholarshipLogo} alt="Scholarship Logo" />
+              <img src={airtel} alt="airtel" />
                 <div className="scholarship-details">
-                  <h6>"R. I. M. C. Dehradun Scholarship, Tamil Nadu</h6>
-                  <p>Discription: July 15, 2024</p>
+                  <h6>"Begum Hazrat Mahal National Scholarship"</h6>
+                 
                 </div>
               </div>
               {/* Scholarship Box 3 */}
               <div className="scholarship-boxe">
-                <img src={scholarshipLogo} alt="Scholarship Logo" />
+              <img src={eklavya} alt="eklavya" />
                 <div className="scholarship-details">
-                  <h6>Eklavya Scholarship, Maharashtra 2023-24</h6>
-                  <p>Discription: July 15, 2024</p>
+                  <h6>"R.I.M.C. Dehradun Scholarship Maharashtra"</h6>
+                 
                 </div>
               </div> 
               {/* Scholarship Box 4 */}
               <div className="scholarship-boxe">
-                <img src={scholarshipLogo} alt="Scholarship Logo" />
+              <img src={cultural} alt="cultural" />
                 <div className="scholarship-details">
                   <h6>Cultural Talent Search Scholarship Scheme 2024-25</h6>
-                  <p>Discription: July 15, 2024</p>
+                  
+                </div>
+              </div>
+               {/* Scholarship Box 5 */}
+               <div className="scholarship-boxe">
+              <img src={primary} alt="primary" />
+                <div className="scholarship-details">
+                  <h6>Scholarship for primary girl students for BC/EBC Families</h6>
+                  
                 </div>
               </div>
             </div>

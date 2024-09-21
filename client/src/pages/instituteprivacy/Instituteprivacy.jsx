@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import Menu from '../menu/Menu';
 import { FaHome } from 'react-icons/fa';
 import './instituteprivacy.css';  // Assuming a similar CSS file for privacy page
+import { useNavigate } from 'react-router-dom';
 
 const InstitutePrivacy = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const navigate= useNavigate();
+ 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   const goToHome = () => {
-    // Navigate to institute home, add your routing logic here
+    navigate('/institutehome');
   };
 
   const handleOkClick = () => {
@@ -36,7 +38,7 @@ const InstitutePrivacy = () => {
         <div className="terms-container">
           <div className="terms-box">
             <h2>Privacy Policy for EducateKid</h2>
-            <p><strong>Effective Date:</strong> [Insert Date]</p>
+            <p><strong>Effective Date</strong> </p>
             <h3>1. Introduction</h3>
             <p>Welcome to EducateKid, a scholarship application platform designed to streamline the registration and management of scholarship opportunities for educational institutes. We are committed to protecting the privacy and security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your information when you use our platform.</p>
             <h3>2. Information We Collect</h3>
@@ -78,7 +80,7 @@ const InstitutePrivacy = () => {
               <li>Request the deletion of your data, subject to legal and contractual obligations.</li>
               <li>Object to or restrict certain processing activities.</li>
             </ul>
-            <p>To exercise these rights, please contact us at [Contact Email].</p>
+            <p>To exercise these rights, please contact us at [educatekid@gmail.com].</p>
             <h3>8. Changes to This Privacy Policy</h3>
             <p>We may update this Privacy Policy from time to time. When we do, we will notify you by updating the "Effective Date" at the top of this policy. We encourage you to review this policy periodically to stay informed about how we are protecting your information.</p>
             <button className="ok-button" onClick={handleOkClick}>

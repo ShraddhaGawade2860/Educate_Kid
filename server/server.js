@@ -49,7 +49,10 @@ app.use('/api/admincount',useradmincount);
 
 
 
+// IP and port setup
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+const host = process.env.HOST || '192.168.143.199';  // Fetch IP from .env file or fallback to 0.0.0.0
+
+app.listen(port, host, () => {
+  console.log(`Server is running on http://${host}:${port}`);
 });

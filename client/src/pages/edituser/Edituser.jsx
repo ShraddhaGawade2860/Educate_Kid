@@ -24,7 +24,7 @@ const EditUser = () => {
         gender: user.gender || '',
         profileImage: user.profileImage || ''
       });
-      setImagePreview(user.profileImage ? `http://localhost:5000/uploads/${user.profileImage}` : '');
+      setImagePreview(user.profileImage ? `http://192.168.143.199:5000/uploads/${user.profileImage}` : '');
     }
   }, [user]);
 
@@ -55,7 +55,7 @@ const EditUser = () => {
     }
 
     try {
-      const response = await axios.put(`http://localhost:5000/api/users/${user.id}`, formDataToSend, {
+      const response = await axios.put(`http://192.168.143.199:5000/api/users/${user.id}`, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -69,6 +69,7 @@ const EditUser = () => {
   };
 
   return (
+    <div className="edituser-form">
     <div className="edituser-container">
       <h1>Edit Profile</h1>
       <form onSubmit={handleSubmit} className="edituser-form">
@@ -133,7 +134,7 @@ const EditUser = () => {
 
      
     </div>
-          
+  </div>    
     
   );
 };

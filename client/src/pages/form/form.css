@@ -88,3 +88,20 @@ textarea {
 button:hover {
   background-color: #45a049;
 }
+
+.submit-button {
+  background-color: #2A5080; /* Different background color */
+  color: white; /* White text color */
+  padding: 10px 24px; /* Slightly larger padding */
+  border: none;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+  font-size: 16px; /* Larger font size */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+.submit-button:hover {
+  background-color: #E64522; /* Hover color */
+}

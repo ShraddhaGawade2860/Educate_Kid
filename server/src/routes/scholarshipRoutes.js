@@ -17,8 +17,23 @@ const upload = multer({ storage: storage });
 // Endpoint to add a new scholarship
 router.post('/', upload.single('logo'), async (req, res) => {
   try {
+    const { type, name, description, eligibility, benefits, documents, applyProcess, class: classField, gender, state } = req.body;
+
+    if (!type || !name || !description || !eligibility || !benefits || !documents || !applyProcess || !classField || !gender || !state) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
     const scholarshipData = {
-      ...req.body,
+      type,
+      name,
+      description,
+      eligibility,
+      benefits,
+      documents,
+      applyProcess,
+      class: classField,
+      gender,
+      state,
       logo: req.file ? req.file.path : null // Store the path to the uploaded logo
     };
 

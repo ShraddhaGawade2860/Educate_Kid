@@ -1,0 +1,55 @@
+.approve-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .reject-button {
+    background-color: #f44336; /* Red */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .approve-button:hover {
+    background-color: #45a049; /* Darker green */
+  }
+  
+  .reject-button:hover {
+    background-color: #e60000; /* Darker red */
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .form-details {
+    margin: 20px 15px;
+  }
+
+  .form-details h2{
+    margin-top: 40px;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .row p {
+    width: 48%; /* This will ensure two columns per row */
+    margin: 0;
+    padding: 0;
+  }
+
+  
+  
