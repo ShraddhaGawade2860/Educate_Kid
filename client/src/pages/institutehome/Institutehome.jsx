@@ -18,16 +18,12 @@ const InstituteHome = () => {
   const [pendingCount, setPendingCount] = useState(0);
   const [verifiedCount, setVerifiedCount] = useState(0);
   const [rejectedCount, setRejectedCount] = useState(0);
-  const [scholarshipData, setScholarshipData] = useState({
-    labels: [],
-    datasets: [
-      {
-        label: 'Number of Applications',
-        data: [],
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-      },
-    ],
-  });
+  const [totalHomePendingStudents, setHomePendingStudents] = useState(0);
+  const [totalHomeApprovedStudents, setHomeApprovedStudents] = useState(0);
+  const [totalHomeRejectedStudents, setHomeRejectedStudents] = useState(0);
+  const [totalOtherPendingStudents, setOtherPendingStudents] = useState(0);
+  const [totalOtherApprovedStudents, setOtherApprovedStudents] = useState(0);
+  const [totalOtherRejectedStudents, setOtherRejectedStudents] = useState(0);
   const [pendingForms, setPendingForms] = useState([]);
   const [verificationData, setVerificationData] = useState({
     labels: ['Verified Students', 'Rejected Students'],
@@ -50,7 +46,7 @@ const InstituteHome = () => {
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/institute/${encodeURIComponent(instituteName)}/counts`);
+        const response = await axios.get(`http://192.168.143.199:5000/api/institute/${encodeURIComponent(instituteName)}/counts`);
         setPendingCount(response.data.pending);
         setVerifiedCount(response.data.verified);
         setRejectedCount(response.data.rejected);
@@ -72,36 +68,9 @@ const InstituteHome = () => {
   }, [instituteName]);
 
   useEffect(() => {
-    const fetchScholarshipData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/api/scholarships/application-counts/${encodeURIComponent(instituteName)}`);
-        const labels = response.data.map(item => item._id);
-        const data = response.data.map(item => item.count);
-
-        setScholarshipData({
-          labels,
-          datasets: [
-            {
-              label: 'Number of Applications',
-              data,
-              backgroundColor: 'rgba(75, 192, 192, 0.6)',
-            },
-          ],
-        });
-      } catch (error) {
-        console.error('Error fetching scholarship application data:', error);
-      }
-    };
-
-    if (instituteName) {
-      fetchScholarshipData();
-    }
-  }, [instituteName]);
-
-  useEffect(() => {
     const fetchPendingForms = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/forms/institute/${encodeURIComponent(instituteName)}`);
+        const response = await axios.get(`http://192.168.143.199:5000/api/forms/institute/${encodeURIComponent(instituteName)}`);
         setPendingForms(response.data.filter(form => form.instituteVerified === 0));
       } catch (error) {
         console.error('Error fetching pending forms:', error);
@@ -114,9 +83,29 @@ const InstituteHome = () => {
   }, [instituteName]);
 
   useEffect(() => {
+    const fetchVerificationDetails = async () => {
+      try {
+        const response = await axios.get(`http://192.168.143.199:5000/api/institute/${encodeURIComponent(instituteName)}/verification-details`);
+        setHomePendingStudents(response.data.homePending);
+        setHomeApprovedStudents(response.data.homeApproved);
+        setHomeRejectedStudents(response.data.homeRejected);
+        setOtherPendingStudents(response.data.otherPending);
+        setOtherApprovedStudents(response.data.otherApproved);
+        setOtherRejectedStudents(response.data.otherRejected);
+      } catch (error) {
+        console.error('Error fetching verification details:', error);
+      }
+    };
+
+    if (instituteName) {
+      fetchVerificationDetails();
+    }
+  }, [instituteName]);
+
+  useEffect(() => {
     const fetchScholarshipCount = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/scholarshipcount/count');
+        const response = await axios.get('http://192.168.143.199:5000/api/scholarshipcount/count');
         setScholarshipCount(response.data.count);
       } catch (error) {
         console.error('Error fetching scholarship count:', error);
@@ -125,8 +114,6 @@ const InstituteHome = () => {
 
     fetchScholarshipCount();
   }, []);
-
-  
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -175,9 +162,31 @@ const InstituteHome = () => {
             <h3>Total Rejected Students</h3>
             <p>{rejectedCount}</p>
           </div>
+          <div className="boxii">
+            <h3>Total Pending Students Home State</h3>
+            <p>{totalHomePendingStudents}</p>
+          </div>
+          <div className="boxii">
+            <h3>Total Approved Students Home State</h3>
+            <p>{totalHomeApprovedStudents}</p>
+          </div>
+          <div className="boxii">
+            <h3>Total Rejected Students Home State</h3>
+            <p>{totalHomeRejectedStudents}</p>
+          </div>
+          <div className="boxii">
+            <h3>Total Pending Students Other State</h3>
+            <p>{totalOtherPendingStudents}</p>
+          </div>
+          <div className="boxii">
+            <h3>Total Approved Students Other State</h3>
+            <p>{totalOtherApprovedStudents}</p>
+          </div>
+          <div className="boxii">
+            <h3>Total Rejected Students Other State</h3>
+            <p>{totalOtherRejectedStudents}</p>
+          </div>
         </div>
-
-     
 
         <div className="graph-section2">
           <h4>Verified vs. Rejected Students</h4>

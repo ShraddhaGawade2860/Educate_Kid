@@ -28,32 +28,35 @@ router.post('/register', upload.fields([
         const { name, email, contactnumber, password, role, state, institutecode, verified, gender } = req.body;
 
         // Check if user already exists
-        let user = await User.findOne({ email });
-        if (user) return res.status(400).json({ msg: "User already exists" });
-
-        // Create new user
-        user = new User({
-            name,
-            email,
-            contactnumber,
-            password, // Save plain text password
-            role,
-            state,
-            institutecode,
-            verified,
-            gender, 
-            instituteCertificate: req.files.instituteCertificate ? req.files.instituteCertificate[0].path : '',
-            accreditationCertificate: req.files.accreditationCertificate ? req.files.accreditationCertificate[0].path : '',
-            affiliationCertificate: req.files.affiliationCertificate ? req.files.affiliationCertificate[0].path : ''
-        });
-
-        await user.save();
-        res.status(201).json({ msg: "User registered successfully" });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
+         // Check if user already exists
+         let user = await User.findOne({ email });
+         if (user) {
+             return res.status(200).json({ statuscode: 2, msg: "User already exists" }); // Return 2 if user exists
+         }
+ 
+         // Create new user
+         user = new User({
+             name,
+             email,
+             contactnumber,
+             password, // Save plain text password
+             role,
+             state,
+             institutecode,
+             verified,
+             gender,
+             instituteCertificate: req.files.instituteCertificate ? req.files.instituteCertificate[0].path : '',
+             accreditationCertificate: req.files.accreditationCertificate ? req.files.accreditationCertificate[0].path : '',
+             affiliationCertificate: req.files.affiliationCertificate ? req.files.affiliationCertificate[0].path : ''
+         });
+ 
+         await user.save();
+         res.status(201).json({ statuscode: 1, msg: "User registered successfully" }); // Return 1 for successful registration
+     } catch (error) {
+         res.status(500).json({ error: error.message });
+     }
+ });
+ 
 
 // Login route
 // Login route

@@ -17,6 +17,12 @@ const AdminHome = () => {
   const [pendingCount, setPendingCount] = useState(0);
   const [verifiedCount, setVerifiedCount] = useState(0);
   const [rejectedCount, setRejectedCount] = useState(0);
+  const [totalInstitutePendingStudents, setInstitutePendingStudents] = useState(0);
+  const [totalInstituteApprovedStudents, setInstituteApprovedStudents] = useState(0);
+  const [totalInstituteRejectedStudents, setInstituteRejectedStudents] = useState(0);
+  const [totalOtherPendingStudents, setOtherPendingStudents] = useState(0);
+  const [totalOtherApprovedStudents, setOtherApprovedStudents] = useState(0);
+  const [totalOtherRejectedStudents, setOtherRejectedStudents] = useState(0);
   const [pendingForms, setPendingForms] = useState([]);
   const [recentInstitutes, setRecentInstitutes] = useState([]);
   const navigate = useNavigate();
@@ -24,14 +30,20 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/admincount/state/${state}/counts`);
+        const response = await fetch(`http://192.168.143.199:5000/api/admincount/state/${state}/counts`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setPendingCount(data.pending);
-        setVerifiedCount(data.verified);
-        setRejectedCount(data.rejected);
+        setPendingCount(data.pendingByHomeState);
+        setVerifiedCount(data.approvedByHomeState);
+        setRejectedCount(data.rejectedByHomeState);
+        setInstitutePendingStudents(data.pendingByInstitute);
+        setInstituteApprovedStudents(data.approvedByInstitute);
+        setInstituteRejectedStudents(data.rejectedByInstitute);
+        setOtherPendingStudents(data.pendingByOtherState);
+        setOtherApprovedStudents(data.approvedByOtherState);
+        setOtherRejectedStudents(data.rejectedByOtherState);
       } catch (error) {
         console.error('Error fetching counts:', error);
       }
@@ -43,7 +55,7 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchPendingForms = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/admincount/state/${state}?status=pending`);
+        const response = await axios.get(`http://192.168.143.199:5000/api/admincount/state/${state}?status=pending`);
         setPendingForms(response.data);
       } catch (error) {
         console.error('Error fetching pending forms:', error);
@@ -56,7 +68,7 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchScholarshipCount = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/scholarshipcount/count');
+        const response = await fetch('http://192.168.143.199:5000/api/scholarshipcount/count');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -73,7 +85,7 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchRecentInstitutes = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/admin/verification/requests`, {
+        const response = await axios.get(`http://192.168.143.199:5000/api/admin/verification/requests`, {
           params: { state, status: 'pending' }
         });
         const instituteData = response.data.map(institute => ({
@@ -148,6 +160,30 @@ const AdminHome = () => {
           <div className="boxii">
             <h3>Total Rejected Students</h3>
             <p>{rejectedCount}</p>
+          </div>
+          <div className="boxii">
+            <h3>Total Pending Students Institute</h3>
+            <p>{totalInstitutePendingStudents}</p>
+          </div>
+          <div className="boxii">
+            <h3>Total Approved Students Institute</h3>
+            <p>{totalInstituteApprovedStudents}</p>
+          </div>
+          <div className="boxii">
+            <h3>Total Rejected Students Institute</h3>
+            <p>{totalInstituteRejectedStudents}</p>
+          </div>
+          <div className="boxii">
+            <h3>Total Pending Students Other State</h3>
+            <p>{totalOtherPendingStudents}</p>
+          </div>
+          <div className="boxii">
+            <h3>Total Approved Students Other State</h3>
+            <p>{totalOtherApprovedStudents}</p>
+          </div>
+          <div className="boxii">
+            <h3>Total Rejected Students Other State</h3>
+            <p>{totalOtherRejectedStudents}</p>
           </div>
         </div>
 

@@ -1,12 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import './userprivacy.css';
 
 const UserPrivacy = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const handleOkClick = () => {
+    navigate('/home'); // Navigate back to the home page
+  };
   return (
     <div className="privacy-container">
       <div className="privacy-box">
         <h2>Privacy Policy</h2>
-        <p><strong>Last Updated: [Date]</strong></p>
+        <p><strong>Newly Updated</strong></p>
 
         <p>
           Thank you for using EducateKid! We respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our scholarship platform (the "App" or "Platform"). Please read this policy carefully.
@@ -83,9 +89,9 @@ const UserPrivacy = () => {
         <p>
           If you have any questions or concerns about this Privacy Policy, please contact us at:
         </p>
-        <p>[Your Contact Information]</p>
+        <p>[educatekid@gmail.com]</p>
 
-        <button className="ok-button">OK</button>
+        <button className="ok-button" onClick={handleOkClick}>OK</button>
       </div>
     </div>
   );

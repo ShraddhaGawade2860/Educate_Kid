@@ -18,6 +18,12 @@ import cappex from "../image/cappex.jpeg";
 import future from "../image/future.png";
 import { AuthContext } from '../context/Authcontext';
 import mainVideo from "../video/home.mp4"; 
+import rimc from "../image/rimc.jpeg";
+import airtel from "../image/airtel.png";
+import eklavya from "../image/eklavya.jpeg";
+import cultural from "../image/cultural.jpeg";
+import landingp from "../image/landingp.avif";
+
 
 const Landing = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -38,10 +44,10 @@ const Landing = () => {
       <div className="landing-container">
         <div className="content">
           <div className="video-container">
-          <video src={mainVideo} alt="Main Banner" autoPlay loop muted />
+          <img src={landingp} alt="landing" />
             <div className="image-content">
               <h3>"Welcome To EducateKid Portal. This is India's Largest<br /> Scholarship Platform."</h3>
-              <p>Unlock your future with EducaTek Scholarships, where education meets opportunity. 
+              <p>Unlock your future with Educatkid Scholarships, where education meets opportunity. 
                 Our platform is dedicated to providing deserving students with financial support to pursue their 
                 dreams and achieve academic excellence.</p>
              
@@ -54,14 +60,7 @@ const Landing = () => {
         <h3 className="centered">Latest News</h3>
         <div className="box-frame0">
           <div className="left-side">
-            <h5>Notice Board</h5>
-            <div className="notification-list">
-              <ul className="noticeBoard_marquee__2rfdx">
-                <li><p>New Scholarships Added</p></li>
-                <li><p>R. I. M. C. Dehradun Scholarship, Maharashtra added by Maharashtra State</p></li>
-                <li><p>Check for new scholarships and your verification status</p></li>
-              </ul>
-            </div>
+            
           </div>
 
           <div className="right-side">
@@ -72,7 +71,7 @@ const Landing = () => {
             <div className="slider-containeri">
               {/* Scholarship Box 1 */}
               <div className="scholarship-box">
-                <img src={scholarshipLogo} alt="Scholarship Logo" />
+                <img src={rimc} alt="rimc" />
                 <div className="scholarship-details">
                   <h6>R. I. M. C. Scholarship, Maharashtra</h6>
                   <p>Description: June 30, 2024</p>
@@ -80,15 +79,15 @@ const Landing = () => {
               </div>
               {/* Scholarship Box 2 */}
               <div className="scholarship-box">
-                <img src={scholarshipLogo} alt="Scholarship Logo" />
+                <img src={airtel} alt="airtel" />
                 <div className="scholarship-details">
-                  <h6>"R. I. M. C. Dehradun Scholarship, Tamil Nadu</h6>
+                  <h6>Airtel axix scholarship</h6>
                   <p>Discription: July 15, 2024</p>
                 </div>
               </div>
               {/* Scholarship Box 3 */}
               <div className="scholarship-box">
-                <img src={scholarshipLogo} alt="Scholarship Logo" />
+              <img src={eklavya} alt="eklavya" />
                 <div className="scholarship-details">
                   <h6>Eklavya Scholarship, Maharashtra 2023-24</h6>
                   <p>Discription: July 15, 2024</p>
@@ -96,7 +95,7 @@ const Landing = () => {
               </div> 
               {/* Scholarship Box 4 */}
               <div className="scholarship-box">
-                <img src={scholarshipLogo} alt="Scholarship Logo" />
+              <img src={cultural} alt="cultural" />
                 <div className="scholarship-details">
                   <h6>Cultural Talent Search Scholarship Scheme 2024-25</h6>
                   <p>Discription: July 15, 2024</p>

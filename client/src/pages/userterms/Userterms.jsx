@@ -1,12 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import './userterms.css';
 
 const UserTerms = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const handleOkClick = () => {
+    navigate('/home'); // Navigate back to the home page
+  };
+
   return (
     <div className="terms-container">
       <div className="terms-box">
         <h2>Terms and Conditions</h2>
-        <p><strong>Last Updated: [Date]</strong></p>
+        <p><strong>Newly Updated</strong></p>
 
         <p>
           Welcome to EducateKid! These terms and conditions ("Terms") govern your use of the EducateKid scholarship platform (the "App" or "Platform"). By accessing or using our services, you agree to be bound by these Terms. Please read them carefully.
@@ -64,15 +71,15 @@ const UserTerms = () => {
 
         <h3>11. Governing Law</h3>
         <p>
-          These Terms are governed by and construed in accordance with the laws of [Your Country/State], without regard to its conflict of law principles. Any disputes arising under these Terms will be resolved in the courts of [Your Country/State].
+          These Terms are governed by and construed in accordance with the laws of [India], without regard to its conflict of law principles. Any disputes arising under these Terms will be resolved in the courts of [Your Country/State].
         </p>
 
         <h3>12. Contact Us</h3>
         <p>
-          If you have any questions or concerns about these Terms, please contact us at [Your Contact Information].
+          If you have any questions or concerns about these Terms, please contact us at [educatekid@gmail.com].
         </p>
 
-        <button className="ok-button">OK</button>
+        <button className="ok-button" onClick={handleOkClick}>OK</button>
       </div>
 
       

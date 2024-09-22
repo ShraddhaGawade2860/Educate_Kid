@@ -26,7 +26,7 @@ const EditInstitute = () => {
         contactnumber: user.contactnumber || '',
         profileImage: user.profileImage || ''
       });
-      setImagePreview(user.profileImage ? `http://localhost:5000/uploads/${user.profileImage}` : '');
+      setImagePreview(user.profileImage ? `http://192.168.143.199:5000/uploads/${user.profileImage}` : '');
     }
   }, [user]);
 
@@ -55,7 +55,7 @@ const EditInstitute = () => {
     }
 
     try {
-      const response = await axios.put(`http://localhost:5000/api/users/${user.id}`, formDataToSend, {
+      const response = await axios.put(`http://192.168.143.199:5000/api/users/${user.id}`, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -139,7 +139,7 @@ const EditInstitute = () => {
                 required
               />
             </div>
-            <button type="submit">Update</button>
+            <button type="submit" className="update-buttoni">Update</button>
           </form>
         </div>
       </div>

@@ -43,6 +43,12 @@ const Signup = () => {
         setFiles({ ...files, [e.target.name]: e.target.files[0] });
     };
 
+    const validateEmail = (email) => {
+        const emailPattern = /^[a-zA-Z][a-zA-Z0-9._%+-]*@gmail\.com$/;
+        return emailPattern.test(email);
+    };
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -55,8 +61,14 @@ const Signup = () => {
             setError("Contact number must be exactly 10 digits");
             return;
         }
+
+        if (!validateEmail(formData.email)) {
+            setError("Invalid email format. It should be in lowercase and end with @gmail.com");
+            return;
+        }
+
         try {
-            const url = 'http://localhost:5000/api/users/register';
+            const url = 'http://192.168.143.199:5000/api/users/register';
             const data = new FormData();
             Object.keys(formData).forEach((key) => {
                 data.append(key, formData[key]);
@@ -72,13 +84,17 @@ const Signup = () => {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            alert('Registration successful! Please log in.');
-            navigate("/login");
+
+            if (response.data.statuscode === 1) {
+                alert('Registration successful! Please log in.');
+                navigate("/login");
+            } else if (response.data.statuscode === 2) {
+                setError("User already exists.");
+            }
         } catch (error) {
             setError('Registration failed: ' + (error.response ? error.response.data.msg : error.message));
         }
     };
-
     const toggleFormType = (type) => {
         setFormType(type);
         setFormData({
@@ -105,13 +121,14 @@ const Signup = () => {
             <div className={styles.left}>
                     <h1>Welcome Back</h1>
                     <Link to="/login">
-                        <button type="button" className={styles.white_btn1}>
+                        <button type="button" className={styles.sign_in_btn}>
                             Sign in
                         </button>
                     </Link>
                 </div>
                 <div className={styles.right}>
                     <h1>Create Account</h1>
+                   
                     <div className={styles.toggle_buttons}>
                         <button
                             className={formType === 'user' ? styles.active_toggle : styles.toggle_button}
@@ -126,6 +143,11 @@ const Signup = () => {
                             Institute
                         </button>
                     </div>
+                    {formType === 'institute' && (
+    <p className={styles.upload_notice}>
+        Please upload the institute certificate, accreditation certificate, and affiliation certificate.
+    </p>
+)}
                     <form className={styles.form_container} onSubmit={handleSubmit}>
                         <input
                             type="texti"
@@ -160,7 +182,7 @@ const Signup = () => {
                                 onChange={handleChange}
                                 value={formData.gender}
                                 required
-                                className={styles.input} // Updated class for select input
+                                className={styles.gender_select} // Updated class for select input
                             >
                                 <option value="">Select Gender</option>
                                 <option value="male">Male</option>
@@ -188,26 +210,28 @@ const Signup = () => {
                                     required
                                     className={styles.input}
                                 />
+                                
                                 <input
                                     type="file"
                                     name="instituteCertificate"
                                     onChange={handleFileChange}
                                     required
-                                    className={styles.input}
+                                    className={styles.institute_certificate_input}  // Changed class name
+
                                 />
                                 <input
                                     type="file"
                                     name="accreditationCertificate"
                                     onChange={handleFileChange}
                                     required
-                                    className={styles.input}
+                                    className={styles.accreditation_certificate_input} 
                                 />
                                 <input
                                     type="file"
                                     name="affiliationCertificate"
                                     onChange={handleFileChange}
                                     required
-                                    className={styles.input}
+                                    className={styles.affiliation_certificate_input}
                                 />
                             </>
                         )}

@@ -21,7 +21,7 @@ const VerifyOther = () => {
 
     const fetchForm = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/forms/${formId}`);
+        const response = await axios.get(`http://192.168.143.199:5000/api/forms/${formId}`);
         setForm(response.data);
       } catch (error) {
         console.error('Error fetching form:', error);
@@ -41,9 +41,9 @@ const VerifyOther = () => {
 
   const handleApprove = async () => {
     try {
-      await axios.put(`http://localhost:5000/api/forms/otherstate/${formId}/approve`);
+      await axios.put(`http://192.168.143.199:5000/api/forms/otherstate/${formId}/approve`);
       alert('Form approved');
-      navigate(`/studentlist/${state}`); // Redirect to student list after approval
+      navigate(`/studentlist/${state}?toggle=other`); // Redirect to student list after approval
     } catch (error) {
       console.error('Error approving form:', error);
     }
@@ -51,9 +51,9 @@ const VerifyOther = () => {
 
   const handleReject = async () => {
     try {
-      await axios.put(`http://localhost:5000/api/forms/otherstate/${formId}/reject`, { rejectReason });
+      await axios.put(`http://192.168.143.199:5000/api/forms/otherstate/${formId}/reject`, { rejectReason });
       alert('Form rejected');
-      navigate(`/studentlist/${state}`); // Redirect to student list after rejection
+      navigate(`/studentlist/${state}?toggle=other`); // Redirect to student list after rejection
     } catch (error) {
       console.error('Error rejecting form:', error);
     }
@@ -73,70 +73,104 @@ const VerifyOther = () => {
         </div>
         {form ? (
           <div className="form-details">
+
+            
             <h2>User Details</h2>
+            <div className="row">
             <p><strong>Name:</strong> {form.name}</p>
             <p><strong>Email:</strong> {form.email}</p>
+            </div>
+            <div className="row">
             <p><strong>Course:</strong> {form.course}</p>
             <p><strong>Institution:</strong> {form.institutionName}</p>
+            </div>
+            <div className="row">
             <p><strong>Date of Birth:</strong> {new Date(form.dateOfBirth).toLocaleDateString()}</p>
+            </div>
 
             <h2>Institution Details</h2>
-            <p>Institution Name: {form.institutionName}</p>
-            <p>State: {form.state}</p>
-            <p>Course: {form.course}</p>
-            <p>Year: {form.year}</p>
-            <p>Enrollment No.: {form.enrollmentNo}</p>
-            <p>Xth Percentage: {form.xthPercentage}</p>
-            <p>XIIth Percentage: {form.xiithPercentage}</p>
-            <p>UG Percentage: {form.ugPercentage}</p>
+            <div className="row">
+            <p><strong>Institution Name: </strong>{form.institutionName}</p>
+            <p><strong>State: </strong>{form.state}</p>
+            </div>
+            <div className="row">
+            <p><strong>Course: </strong>{form.course}</p>
+            <p><strong>Year: </strong>{form.year}</p>
+            </div>
+            <div className="row">
+            <p><strong>Enrollment No.: </strong>{form.enrollmentNo}</p>
+            <p><strong>Xth Percentage: </strong>{form.xthPercentage}</p>
+            </div>
+            <div className="row">
+            <p><strong>XIIth Percentage: </strong>{form.xiithPercentage}</p>
+            <p><strong>UG Percentage:</strong> {form.ugPercentage}</p>
+            </div>
 
             <h2>Address Details</h2>
-            <p>Address: {form.address}</p>
-            <p>Home State: {form.homeState}</p>
-            <p>Reason Of Leaving State: {form.reasonOfLeavingState}</p>
+            <div className="row">
+            <p><strong>Address:</strong> {form.address}</p>
+            <p><strong>Home State: </strong>{form.homeState}</p>
+            </div>
+            <div className="row">
+            <p><strong>Reason Of Leaving State: </strong>{form.reasonOfLeavingState}</p>
+            </div>
 
             <h2>Scholarship Details</h2>
-            <p>Scholarship Name: {form.scholarshipName}</p>
-            <p>Reason For Denying Scholarship: {form.reasonForDenyingScholarship}</p>
+            <div className="row">
+            <p><strong>Scholarship Name: </strong>{form.scholarshipName}</p>
+            <p><strong>Reason For Denying Scholarship: </strong>{form.reasonForDenyingScholarship}</p>
+            </div>
 
             <h2>Disability Details</h2>
-            <p>Disabilities: {form.disabilities === 'yes' ? 'Yes' : 'No'}</p>
+      
+            <p><strong>Disabilities: </strong>{form.disabilities === 'yes' ? 'Yes' : 'No'}</p>
             {form.disabilities === 'yes' && (
               <>
-                <p>Disability Details: {form.disabilityDetails}</p>
-                <p>
-                  Disability Certificate:
-                  <a href={`http://localhost:5000/${form.disabilityCertificate}`} target="_blank" rel="noopener noreferrer">
+                <p><strong>Disability Details: </strong>{form.disabilityDetails}</p>
+                <p><strong>
+                  Disability Certificate:</strong>
+                  <a href={`http://192.168.143.199:5000/${form.disabilityCertificate}`} target="_blank" rel="noopener noreferrer">
                     View Document
                   </a>
                 </p>
+                
               </>
             )}
 
             <h2>Upload Documents</h2>
-            <p>Xth Marksheet: <a href={`http://localhost:5000/${form.xthMarksheet}`} target="_blank" rel="noopener noreferrer">
+            <div className="row">
+            <p><strong>Xth Marksheet:</strong> <a href={`http://192.168.143.199:5000/${form.xthMarksheet}`} target="_blank" rel="noopener noreferrer">
               View Document</a></p>
-            <p>XIIth Marksheet: <a href={`http://localhost:5000/${form.xiithMarksheet}`} target="_blank" rel="noopener noreferrer">
+            <p><strong>XIIth Marksheet: </strong><a href={`http://192.168.143.199:5000/${form.xiithMarksheet}`} target="_blank" rel="noopener noreferrer">
               View Document</a></p>
-            <p>UG Certificate: <a href={`http://localhost:5000/${form.ugCertificate}`} target="_blank" rel="noopener noreferrer">
+              </div>
+              <div className="row">
+            <p><strong>UG Certificate: </strong><a href={`http://192.168.143.199:5000/${form.ugCertificate}`} target="_blank" rel="noopener noreferrer">
               View Document</a></p>
-            <p>PG Certificate: <a href={`http://localhost:5000/${form.pgCertificate}`} target="_blank" rel="noopener noreferrer">
+            <p><strong>PG Certificate: </strong><a href={`http://192.168.143.199:5000/${form.pgCertificate}`} target="_blank" rel="noopener noreferrer">
               View Document</a></p>
-            <p>Birth Certificate: <a href={`http://localhost:5000/${form.birthCertificate}`} target="_blank" rel="noopener noreferrer">
+              </div>
+              <div className="row">
+            <p><strong>Birth Certificate: </strong><a href={`http://192.168.143.199:5000/${form.birthCertificate}`} target="_blank" rel="noopener noreferrer">
               View Document</a></p>
-            <p>Community Certificate: <a href={`http://localhost:5000/${form.communityCertificate}`} target="_blank" rel="noopener noreferrer">
+            <p><strong>Community Certificate: </strong><a href={`http://192.168.143.199:5000/${form.communityCertificate}`} target="_blank" rel="noopener noreferrer">
               View Document</a></p>
-            <p>Aadhar Card: <a href={`http://localhost:5000/${form.aadharCard}`} target="_blank" rel="noopener noreferrer">
+              </div>
+              <div className="row">
+            <p><strong>Aadhar Card: </strong><a href={`http://192.168.143.199:5000/${form.aadharCard}`} target="_blank" rel="noopener noreferrer">
               View Document</a></p>
-            <p>ID Card: <a href={`http://localhost:5000/${form.idCard}`} target="_blank" rel="noopener noreferrer">
+            <p><strong>ID Card: </strong><a href={`http://192.168.143.199:5000/${form.idCard}`} target="_blank" rel="noopener noreferrer">
               View Document</a></p>
-            <p>Fee Receipt: <a href={`http://localhost:5000/${form.feeReceipt}`} target="_blank" rel="noopener noreferrer">
+              </div>
+              <div className="row">
+            <p><strong>Fee Receipt: </strong><a href={`http://192.168.143.199:5000/${form.feeReceipt}`} target="_blank" rel="noopener noreferrer">
               View Document</a></p>
+              </div>
 
-            {form.status === 'pending' && (
-              <div className="actions">
-                <button onClick={handleApprove}>Approve</button>
-                <button onClick={() => setShowRejectModal(true)}>Reject</button>
+              {form.otherStateVerified === 0 && (
+              <div className="form-actions">
+                <button className="approve-button" onClick={handleApprove}>Approve</button>
+                <button className="reject-button" onClick={() => setShowRejectModal(true)}>Reject</button>
               </div>
             )}
             

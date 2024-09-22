@@ -73,21 +73,24 @@ html, body {
 /* Total Counts Boxes */
 .stats-boxes1 {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap; /* Allows boxes to wrap to the next line if there are too many */
+  gap: 20px; /* Space between the boxes */
   margin-bottom: 25px;
   margin-top: 25px;
 }
 
+/* Individual Box Styling */
 .boxii {
-  padding: 5px;
+  padding: 15px;
   border-radius: 8px;
-  flex: 1;
+  flex: 1; /* Grow to fill available space */
   text-align: center;
-  height: 80px;
+  height: 70px; /* Adjust height as needed */
   color: #fff; /* Text color for better contrast */
   position: relative; /* For hover effects */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  min-width: 200px; /* Minimum width of each box */
 }
 
 .boxii:hover {
@@ -111,19 +114,41 @@ html, body {
   background-color: #3498db; /* Color for box 4 */
 }
 
+.boxii:nth-child(5) {
+  background-color: #db34a9; /* Color for box 4 */
+}
+
+.boxii:nth-child(6) {
+  background-color: #a9db34; /* Color for box 4 */
+}
+
+.boxii:nth-child(7) {
+  background-color: #dbd034; /* Color for box 4 */
+}
+
+.boxii:nth-child(8) {
+  background-color: #db3434; /* Color for box 4 */
+}
+
+.boxii:nth-child(9) {
+  background-color: #927236; /* Color for box 4 */
+}
+
+.boxii:nth-child(10) {
+  background-color: #9834db; /* Color for box 4 */
+}
+
 .boxii h3 {
   margin: 0;
   margin-bottom: 5px;
   font-size: 18px;
   text-align: center;
-  margin-top: 17px;
 }
 
 .boxii p {
   margin: 0;
   font-size: 16px;
   text-align: center;
-  margin-top: 10px;
   color: white;
 }
 
@@ -141,6 +166,7 @@ html, body {
 .boxii:hover::after {
   height: 6px; /* Increase height on hover */
 }
+
 
 .content-row {
   display: flex;
@@ -265,26 +291,19 @@ html, body {
   margin-top: 40px;
 }
 
-/* Recently Added Institute Box */
 .institute-container {
   background-color: #e8daef; /* Light Purple */
   padding: 20px;
   border-radius: 8px;
   border: 2px solid #daacee; /* Purple Border */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent wrapping of child elements */
 }
-
-.institute-container:hover {
-  transform: translateY(-5px); /* Lift the box on hover */
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
-}
-
 
 .institute-row {
   display: flex;
   gap: 10px;
-  margin-top: 10px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Prevent wrapping to the next line */
 }
 
 .institute {
@@ -293,11 +312,21 @@ html, body {
   border-radius: 8px;
   border: 1px solid #ccc;
   text-align: center;
-  flex: 1 1 45%; /* Adjusts width based on available space */
+  flex: 0 0 auto; /* Prevent shrinking and growing */
+  min-width: 200px; /* Set a minimum width for each institute box */
+  max-width: 100%; /* Allow the width to adjust based on content */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis (...) for long names */
+  height: 120px;
 }
 
 .institute p {
-  margin: 20px 0;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap; /* Prevent text from wrapping */
+  text-align: center; /* Align text to the left for better readability */
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .view-button {
@@ -307,12 +336,12 @@ html, body {
   padding: 5px 10px;
   border-radius: 4px;
   cursor: pointer;
+  
 }
 
 .view-button:hover {
   background-color: #0056b3;
 }
-
 /* General Hover Effect */
 .box-shadow-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;

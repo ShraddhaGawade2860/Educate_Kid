@@ -1,0 +1,38 @@
+.user-data {
+    margin: 20px 15px;
+  }
+
+  .user-data h2{
+    margin-top: 40px;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .row p {
+    width: 48%; /* This will ensure two columns per row */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .status-message {
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .success {
+    color: green;
+    background-color: #e6f9e6; /* light green background for success */
+  }
+  
+  .error {
+    color: red;
+    background-color: #f9e6e6; /* light red background for error */
+  }
+  
