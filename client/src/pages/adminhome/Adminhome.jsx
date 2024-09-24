@@ -30,7 +30,7 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        const response = await fetch(`http://192.168.143.199:5000/api/admincount/state/${state}/counts`);
+        const response = await fetch(`http://localhost:5000/api/admincount/state/${state}/counts`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -55,7 +55,7 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchPendingForms = async () => {
       try {
-        const response = await axios.get(`http://192.168.143.199:5000/api/admincount/state/${state}?status=pending`);
+        const response = await axios.get(`http://localhost:5000/api/admincount/state/${state}?status=pending`);
         setPendingForms(response.data);
       } catch (error) {
         console.error('Error fetching pending forms:', error);
@@ -68,7 +68,7 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchScholarshipCount = async () => {
       try {
-        const response = await fetch('http://192.168.143.199:5000/api/scholarshipcount/count');
+        const response = await fetch('http://localhost:5000/api/scholarshipcount/count');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -85,7 +85,7 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchRecentInstitutes = async () => {
       try {
-        const response = await axios.get(`http://192.168.143.199:5000/api/admin/verification/requests`, {
+        const response = await axios.get(`http://localhost:5000/api/admin/verification/requests`, {
           params: { state, status: 'pending' }
         });
         const instituteData = response.data.map(institute => ({

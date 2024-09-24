@@ -29,9 +29,9 @@ const StudentList = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user && user.role === 2) { // Assuming role 2 is for state admin
           const stateEncoded = encodeURIComponent(user.state);
-          let url = `http://192.168.143.199:5000/api/forms/state/${stateEncoded}?status=${statusFilter}`;
+          let url = `http://localhost:5000/api/forms/state/${stateEncoded}?status=${statusFilter}`;
           if (toggle === 'other') {
-            url = `http://192.168.143.199:5000/api/forms/otherstate/${stateEncoded}?status=${statusFilter}`;
+            url = `http://localhost:5000/api/forms/otherstate/${stateEncoded}?status=${statusFilter}`;
           }
           const response = await axios.get(url);
           setUserForms(response.data);

@@ -15,7 +15,7 @@ const InstituteList = () => {
 
         const fetchInstituteList = async () => {
             try {
-                const response = await axios.get('http://192.168.143.199:5000/api/admin/institutes', {
+                const response = await axios.get('http://localhost:5000/api/admin/institutes', {
                     params: { state: state }
                 });
                 setInstituteList(response.data);
