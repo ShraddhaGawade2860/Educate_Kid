@@ -68,7 +68,7 @@ const Signup = () => {
         }
 
         try {
-            const url = 'http://192.168.143.199:5000/api/users/register';
+            const url = 'http://localhost:5000/api/users/register';
             const data = new FormData();
             Object.keys(formData).forEach((key) => {
                 data.append(key, formData[key]);

@@ -19,7 +19,7 @@ const StudentHistory = () => {
     const fetchForms = async () => {
       try {
         const stateEncoded = encodeURIComponent(user.state);
-        const response = await axios.get(`http://192.168.143.199:5000/api/studenthistory/state/${stateEncoded}`);
+        const response = await axios.get(`http://localhost:5000/api/studenthistory/state/${stateEncoded}`);
         setForms(response.data);
       } catch (error) {
         console.error('Error fetching forms:', error);

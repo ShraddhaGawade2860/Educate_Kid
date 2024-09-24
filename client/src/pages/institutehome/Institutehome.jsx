@@ -46,7 +46,7 @@ const InstituteHome = () => {
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        const response = await axios.get(`http://192.168.143.199:5000/api/institute/${encodeURIComponent(instituteName)}/counts`);
+        const response = await axios.get(`http://localhost:5000/api/institute/${encodeURIComponent(instituteName)}/counts`);
         setPendingCount(response.data.pending);
         setVerifiedCount(response.data.verified);
         setRejectedCount(response.data.rejected);
@@ -70,7 +70,7 @@ const InstituteHome = () => {
   useEffect(() => {
     const fetchPendingForms = async () => {
       try {
-        const response = await axios.get(`http://192.168.143.199:5000/api/forms/institute/${encodeURIComponent(instituteName)}`);
+        const response = await axios.get(`http://localhost:5000/api/forms/institute/${encodeURIComponent(instituteName)}`);
         setPendingForms(response.data.filter(form => form.instituteVerified === 0));
       } catch (error) {
         console.error('Error fetching pending forms:', error);
@@ -85,7 +85,7 @@ const InstituteHome = () => {
   useEffect(() => {
     const fetchVerificationDetails = async () => {
       try {
-        const response = await axios.get(`http://192.168.143.199:5000/api/institute/${encodeURIComponent(instituteName)}/verification-details`);
+        const response = await axios.get(`http://localhost:5000/api/institute/${encodeURIComponent(instituteName)}/verification-details`);
         setHomePendingStudents(response.data.homePending);
         setHomeApprovedStudents(response.data.homeApproved);
         setHomeRejectedStudents(response.data.homeRejected);
@@ -105,7 +105,7 @@ const InstituteHome = () => {
   useEffect(() => {
     const fetchScholarshipCount = async () => {
       try {
-        const response = await axios.get('http://192.168.143.199:5000/api/scholarshipcount/count');
+        const response = await axios.get('http://localhost:5000/api/scholarshipcount/count');
         setScholarshipCount(response.data.count);
       } catch (error) {
         console.error('Error fetching scholarship count:', error);

@@ -15,7 +15,7 @@ const InstituteVerification = () => {
 
         const fetchVerificationRequests = async () => {
             try {
-                const response = await axios.get('http://192.168.143.199:5000/api/admin/verification/requests', {
+                const response = await axios.get('http://localhost:5000/api/admin/verification/requests', {
                     params: { state: state }
                 });
                 setVerificationRequests(response.data);
@@ -38,7 +38,7 @@ const InstituteVerification = () => {
 
     const approveInstitute = async (id) => {
         try {
-            await axios.put(`http://192.168.143.199:5000/api/admin/approve/${id}`);
+            await axios.put(`http://localhost:5000/api/admin/approve/${id}`);
             alert('Institute approved successfully!');
             // Refresh verification requests list after approval
             setVerificationRequests((prevRequests) => prevRequests.filter(req => req._id !== id));
@@ -49,7 +49,7 @@ const InstituteVerification = () => {
 
     const rejectInstitute = async (id) => {
         try {
-            await axios.put(`http://192.168.143.199:5000/api/admin/reject/${id}`);
+            await axios.put(`http://localhost:5000/api/admin/reject/${id}`);
             alert('Institute rejected successfully!');
             // Refresh verification requests list after rejection
             setVerificationRequests((prevRequests) => prevRequests.filter(req => req._id !== id));
@@ -83,15 +83,15 @@ const InstituteVerification = () => {
                                 <p><strong>Institute Code:</strong> {req.institutecode}</p>
                                 <p>
                                     <strong>Institute Certificate:</strong> 
-                                    <a href={`http://192.168.143.199:5000/${req.instituteCertificate}`} target="_blank" rel="noopener noreferrer">View</a>
+                                    <a href={`http://localhost:5000/${req.instituteCertificate}`} target="_blank" rel="noopener noreferrer">View</a>
                                 </p>
                                 <p>
                                     <strong>Accreditation Certificate:</strong> 
-                                    <a href={`http://192.168.143.199:5000/${req.accreditationCertificate}`} target="_blank" rel="noopener noreferrer">View</a>
+                                    <a href={`http://localhost:5000/${req.accreditationCertificate}`} target="_blank" rel="noopener noreferrer">View</a>
                                 </p>
                                 <p>
                                     <strong>Affiliation Certificate:</strong> 
-                                    <a href={`http://192.168.143.199:5000/${req.affiliationCertificate}`} target="_blank" rel="noopener noreferrer">View</a>
+                                    <a href={`http://localhost:5000/${req.affiliationCertificate}`} target="_blank" rel="noopener noreferrer">View</a>
                                 </p>
                                 <button onClick={() => approveInstitute(req._id)}>Approve</button>
                                 <button onClick={() => rejectInstitute(req._id)}>Reject</button>
